@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import LoginSignupComp from "./component/LoginSignupComp";
 import VerifyEmail from "./pages/VerifyEmail";
+import ForgotPasword from "./pages/ForgotPassword";
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
         <Route path="/about" element={<About />} />
         <Route path="/loginSignup" element={<LoginSignupComp />} />
         <Route path="verify-email" element={<VerifyEmail />} />
+        <Route path="/forgot-password" element={<ForgotPasword />} />
       </Routes>
     </div>
   );

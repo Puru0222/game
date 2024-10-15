@@ -15,7 +15,7 @@ function VerifyEmail() {
 
   useEffect(() => {
     if (!signupData) {
-      navigate("/signup");
+      navigate("/loginSignup");
     }
   }, []);
 
@@ -70,7 +70,7 @@ function VerifyEmail() {
             </button>
           </form>
           <div className="mt-6 flex items-center justify-between">
-            <Link to="/signup">
+            <Link to="/loginSignup">
               <p className="text-richblack-5 flex items-center gap-x-2">
                 <BiArrowBack /> Back To Signup
               </p>

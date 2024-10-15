@@ -4,7 +4,7 @@ import pb from "../asset/pb1.jpg";
 import "./loginSignupComp.css";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { login, sendOtp } from "../services/authAPI";
 import { setSignupData } from "../slices/authSlice";
 
@@ -50,8 +50,8 @@ const LoginSignupComp = () => {
   const submitSignupForm = async (data) => {
     try {
       dispatch(setSignupData(data));
-      dispatch(sendOtp(data.email, navigate)); 
-      resetSignupForm(); 
+      dispatch(sendOtp(data.email, navigate));
+      resetSignupForm();
     } catch (error) {
       console.error("Error sending OTP:", error);
     }
@@ -61,11 +61,10 @@ const LoginSignupComp = () => {
     try {
       dispatch(login(data.loginEmail, data.loginPassword, navigate));
       resetLoginForm();
+    } catch (error) {
+      console.log("Error while login:", error);
     }
-    catch(error) {
-      console.log("Error while login:", error)
-    }
-  }
+  };
 
   return (
     <div
@@ -101,40 +100,52 @@ const LoginSignupComp = () => {
               <h1 className="styled-heading">Good to See You Again</h1>
               <h4 className="mb-4 text-xl font-semibold">Log In</h4>
               <form onSubmit={handleLoginSubmit(submitLoginForm)}>
-              <div className="mb-4 relative">
-                <input
-                  type="email"
-                  className="form-style"
-                  placeholder="Your Email"
-                  name="loginEmail"
+                <div className="mb-4 relative">
+                  <input
+                    type="email"
+                    className="form-style"
+                    placeholder="Your Email"
+                    name="loginEmail"
                     id="loginEmail"
                     {...loginRegister("loginEmail", {
                       required: "Enter your Email",
                     })}
-                />
-                <i className="input-icon uil uil-at text-yellow-300"></i>
-                {loginErrors.loginEmail && (
-                    <span className="text-red-500">{loginErrors.loginEmail.message}</span>
+                  />
+                  <i className="input-icon uil uil-at text-yellow-300"></i>
+                  {loginErrors.loginEmail && (
+                    <span className="text-red-500">
+                      {loginErrors.loginEmail.message}
+                    </span>
                   )}
-              </div>
-              <div className="mb-4 relative">
-                <input
-                  type="password"
-                  className="form-style"
-                  placeholder="Your Password"
-                  name="loginPassword"
+                </div>
+                <div className="mb-4 relative">
+                  <input
+                    type="password"
+                    className="form-style"
+                    placeholder="Your Password"
+                    name="loginPassword"
                     id="loginPassword"
                     {...loginRegister("loginPassword", {
                       required: "Password is required",
                     })}
-                />
-                <i className="input-icon uil uil-lock-alt text-yellow-300"></i>
-                {loginErrors.loginPassword && (
-                    <span className="text-red-500">{loginErrors.loginPassword.message}</span>
+                  />
+                  <i className="input-icon uil uil-lock-alt text-yellow-300"></i>
+                  {loginErrors.loginPassword && (
+                    <span className="text-red-500">
+                      {loginErrors.loginPassword.message}
+                    </span>
                   )}
-              </div>
-              <button className="btn">Submit</button>
+                </div>
+                <button className="btn">Submit</button>
               </form>
+              <div className="flex justify-between">
+                <Link to={"/"}>
+                  <p>Back</p>
+                </Link>
+                <Link to={"/forgot-password"}>
+                  <p>Forgot Password</p>
+                </Link>
+              </div>
             </div>
           </div>
 
@@ -176,7 +187,9 @@ const LoginSignupComp = () => {
                   />
                   <i className="input-icon uil uil-user text-yellow-300"></i>
                   {signupErrors.uid && (
-                    <span className="text-red-500">{signupErrors.uid.message}</span>
+                    <span className="text-red-500">
+                      {signupErrors.uid.message}
+                    </span>
                   )}
                 </div>
                 <div className="mb-1 relative">
@@ -198,7 +211,9 @@ const LoginSignupComp = () => {
                   />
                   <i className="input-icon uil uil-at text-yellow-300"></i>
                   {signupErrors.email && (
-                    <span className="text-red-500">{signupErrors.email.message}</span>
+                    <span className="text-red-500">
+                      {signupErrors.email.message}
+                    </span>
                   )}
                 </div>
                 <div className="mb-1 relative">
