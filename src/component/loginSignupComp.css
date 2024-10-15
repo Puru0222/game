@@ -1,0 +1,323 @@
+.auth-toggle-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 50px; /* Rounded buttons */
+  background: linear-gradient(
+    135deg,
+    #ffcc00,
+    #ff9900
+  ); /* Gradient background */
+  color: white;
+  font-family: "Poppins", sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out; /* Smooth transition for hover/active state */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+}
+
+.auth-toggle-btn:hover {
+  transform: translateY(-2px); /* Lift the button on hover */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3); /* Deepen the shadow on hover */
+}
+
+.active-btn {
+  background: linear-gradient(
+    135deg,
+    #ffcc00,
+    #ff9900
+  ); /* Active state gradient */
+  color: white; /* Active state color */
+  box-shadow: 0 8px 15px rgba(255, 153, 0, 0.4); /* Enhanced shadow for active button */
+}
+
+.inactive-btn {
+  background: #f0f0f0; /* Inactive button background */
+  color: #666; /* Inactive text color */
+  border: 2px solid #ddd; /* Border for inactive button */
+  box-shadow: none;
+}
+
+.inactive-btn:hover {
+  background: #e0e0e0; /* Subtle hover for inactive button */
+}
+
+.section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f0f0f0;
+}
+
+.container {
+  position: relative;
+  perspective: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.card-3d-wrap {
+  width: 100%;
+  max-width: 400px;
+  height: 500px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease-in-out;
+}
+
+.card-3d-wrap.rotate {
+  transform: rotateY(180deg);
+}
+
+.form-style {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+}
+
+.input-icon {
+  position: absolute;
+  left: 15px;
+  top: 15px;
+}
+
+/* .btn {
+    background-color: #ffcc00;
+    color: #333;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  } */
+
+.btn {
+  background: linear-gradient(
+    135deg,
+    #ffcc00,
+    #ff9900
+  ); /* Gradient background */
+  color: #333;
+  padding: 12px 20px; /* More padding for a substantial feel */
+  border-radius: 50px; /* Rounded button for a sleek look */
+  font-weight: bold; /* Bold text */
+  text-transform: uppercase; /* Capitalized letters for emphasis */
+  cursor: pointer;
+  transition: all 0.3s ease; /* Smooth transition for hover and active states */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Subtle shadow for depth */
+}
+
+.btn:hover {
+  background: linear-gradient(
+    135deg,
+    #ff9900,
+    #ffcc00
+  ); /* Slight change in gradient on hover */
+  color: #222; /* Darken text color on hover */
+  transform: translateY(-2px); /* Lift button on hover */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3); /* Deepen shadow on hover */
+}
+
+.btn:active {
+  transform: translateY(0); /* Slight depress effect when clicked */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Return to default shadow when clicked */
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+.section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f0f0f0;
+}
+
+.container {
+  position: relative;
+  perspective: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.card-3d-wrap {
+  width: 100%;
+  max-width: 400px;
+  height: 500px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease-in-out;
+}
+
+.card-3d-wrap.rotate {
+  transform: rotateY(180deg);
+}
+
+.form-style {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+}
+h4 {
+  font-size: 1rem; /* Slightly larger font */
+  font-weight: bold; /* Make it stand out */
+  text-align: center;
+  background: linear-gradient(
+    90deg,
+    #ffcc00,
+    #ff9900
+  ); /* Add a gradient background */
+  color: #fff; /* White text for contrast */
+  padding: 12px; /* Add some padding for spacing */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle shadow for depth */
+  transition: all 0.3s ease; /* Smooth transitions */
+}
+
+h4:hover {
+  background: linear-gradient(
+    90deg,
+    #ff9900,
+    #ffcc00
+  ); /* Reverse gradient on hover */
+  transform: translateY(-3px); /* Lift effect on hover */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Deepen shadow on hover */
+}
+
+.input-icon {
+  position: absolute;
+  left: 15px;
+  top: 15px;
+}
+
+.btn {
+  background-color: #ffcc00;
+  color: #333;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* .backface-hidden {
+    backface-visibility: hidden;
+  } */
+
+.backface-hidden {
+  backface-visibility: hidden; /* Keep the backface hidden */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Add a subtle shadow for depth */
+  position: absolute;
+  inset: 0;
+  transition: transform 0.6s ease-in-out, box-shadow 0.3s ease; /* Smooth transitions for both transform and shadow */
+}
+
+/* .backface-hidden.bg-gray-800 {
+    background: linear-gradient(180deg, rgba(50, 50, 50, 0.8), rgba(0, 0, 0, 0.8)); 
+  }
+   */
+/* .backface-hidden.p-8 {
+    padding: 20px; 
+  }
+  
+  .backface-hidden.p-5 {
+    padding: 15px; 
+  } */
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+.styled-heading {
+  background: linear-gradient(
+    135deg,
+    #ffcc00,
+    #ff9900
+  ); /* Gradient background */
+  margin-top: 10px;
+  margin-bottom: 25px;
+  font-size: 1.5rem;
+  color: white; /* Text color */
+  font-weight: bold;
+  padding: 20px; /* Space around the text */
+  border: 2px solid #ff9900; /* Add a border */
+  border-radius: 10px; /* Rounded corners */
+  text-align: center; /* Center the text */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+  font-family: "Poppins", sans-serif; /* Change font style */
+  text-transform: uppercase; /* Make text uppercase */
+  letter-spacing: 1px; /* Add spacing between letters */
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.styled-heading:hover {
+  transform: translateY(-5px); /* Subtle hover effect */
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3); /* Increase shadow on hover */
+}
+
+@media (min-width: 601px) {
+  .signup {
+    margin-bottom: 30px;
+    margin-top: 10px;
+    font-size: larger;
+    /* padding: 15px; */
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    perspective: 800px;
+  }
+
+  .card-3d-wrap {
+    max-width: 350px;
+    height: 500px;
+  }
+
+  .form-style {
+    padding: 12px;
+  }
+
+  .btn {
+    padding: 12px;
+    font-size: 15px;
+  }
+
+  .input-icon {
+    left: 5px;
+    top: 5px;
+  }
+  .styled-heading {
+    padding: 12px;
+    font-size: 1.7rem;
+    border-width: 1px;
+    letter-spacing: 1px;
+    margin-top: 0.9px;
+    margin-bottom: 25px;
+  }
+  .signup {
+    margin-bottom: 25px;
+    margin-top: 5px;
+    font-size: xx-large;
+  }
+  .auth-toggle-btn {
+    display: inline-block;
+    padding: 15px 30px;
+  }
+}
