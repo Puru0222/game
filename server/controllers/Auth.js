@@ -59,17 +59,9 @@ exports.login = async (req, res) => {
 
 exports.signup = async (req, res) => {
   try {
-    const { fullname, uid, email, password, confirmPassword, otp } =
-      req.body;
+    const { fullname, uid, email, password, confirmPassword, otp } = req.body;
 
-    if (
-      !fullname ||
-      !uid ||
-      !email ||
-      !password ||
-      !confirmPassword ||
-      !otp
-    ) {
+    if (!fullname || !uid || !email || !password || !confirmPassword || !otp) {
       return res.status(403).send({
         success: false,
         message: "All Fields are required",
@@ -201,3 +193,39 @@ exports.sendotp = async (req, res) => {
 //     });
 //   }
 // };
+
+exports.sendpasswordotp = async (req, res) => {
+  try {
+    const { email } = req.body;
+    const checkUserPresent = await User.findOne({ email });
+
+    if (!checkUserPresent) {
+      return res.status(401).json({
+        success: false,
+        message: `User is Not Registered`,
+      });
+    }
+    var otp = otpGenerator.generate(6, {
+      upperCaseAlphabets: false,
+      lowerCaseAlphabets: false,
+      specialChars: false,
+    });
+    const result = await OTP.findOne({ otp: otp });
+    while (result) {
+      otp = otpGenerator.generate(6, {
+        upperCaseAlphabets: false,
+      });
+    }
+    const otpPayload = { email, otp };
+    const otpBody = await OTP.create(otpPayload);
+    console.log("OTP Body", otpBody);
+    res.status(200).json({
+      success: true,
+      message: `OTP Sent Successfully`,
+      otp,
+    });
+  } catch (error) {
+    console.log(error.message);
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
