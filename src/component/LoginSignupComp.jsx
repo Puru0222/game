@@ -98,9 +98,10 @@ const LoginSignupComp = () => {
           <div className="backface-hidden absolute inset-0 bg-gray-800 text-white p-8">
             <div className="text-center">
               <h1 className="styled-heading">Good to See You Again</h1>
-              <h4 className="mb-4 text-xl font-semibold">Log In</h4>
+              {/* <h4 className="mb-4 text-xl font-semibold">Log In</h4> */}
               <form onSubmit={handleLoginSubmit(submitLoginForm)}>
                 <div className="mb-4 relative">
+                  <label htmlFor="email"> Enter Your Email</label>
                   <input
                     type="email"
                     className="form-style"
@@ -119,6 +120,7 @@ const LoginSignupComp = () => {
                   )}
                 </div>
                 <div className="mb-4 relative">
+                  <label htmlFor="password">Enter Password</label>
                   <input
                     type="password"
                     className="form-style"
@@ -136,14 +138,20 @@ const LoginSignupComp = () => {
                     </span>
                   )}
                 </div>
-                <button className="btn">Submit</button>
+                <button className="btn">Log in</button>
               </form>
-              <div className="flex justify-between">
-                <Link to={"/"}>
-                  <p>Back</p>
+              <div className="flex mt-5 justify-between items-center p-3 border border-gray-300 rounded-md bg-gradient-to-r from-gray-200 to-gray-300 transition-all duration-500">
+                <Link
+                  to={"/"}
+                  className="relative text-blue-500 hover:text-white px-3 py-2 rounded-md transition-all duration-500 ease-in-out hover:bg-gradient-to-r hover:from-blue-400 hover:to-blue-600"
+                >
+                  <p className="text-md font-semibold">Back</p>
                 </Link>
-                <Link to={"/forgot-password"}>
-                  <p>Forgot Password</p>
+                <Link
+                  to={"/forgot-password"}
+                  className="relative text-blue-500 hover:text-white py-2 px-3 rounded-md transition-all duration-500 ease-in-out hover:bg-gradient-to-r hover:from-blue-400 hover:to-blue-600"
+                >
+                  <p className="text-md font-semibold">Forgot Password</p>
                 </Link>
               </div>
             </div>

@@ -252,10 +252,10 @@ h4:hover {
   ); /* Gradient background */
   margin-top: 10px;
   margin-bottom: 25px;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   color: white; /* Text color */
   font-weight: bold;
-  padding: 20px; /* Space around the text */
+  padding: 10px; /* Space around the text */
   border: 2px solid #ff9900; /* Add a border */
   border-radius: 10px; /* Rounded corners */
   text-align: center; /* Center the text */
@@ -291,7 +291,7 @@ h4:hover {
   }
 
   .form-style {
-    padding: 12px;
+    padding: 10px;
   }
 
   .btn {
@@ -304,12 +304,12 @@ h4:hover {
     top: 5px;
   }
   .styled-heading {
-    padding: 12px;
-    font-size: 1.7rem;
+    padding: 7px;
+    font-size: 1.3rem;
     border-width: 1px;
-    letter-spacing: 1px;
+    letter-spacing:0.5px;
     margin-top: 0.9px;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
   }
   .signup {
     margin-bottom: 25px;

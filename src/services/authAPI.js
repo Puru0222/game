@@ -3,7 +3,13 @@ import { setLoading, setToken } from "../slices/authSlice";
 import { apiConnector } from "./apiConnector";
 import { endpoints } from "./apis";
 
-const { SENDOTP_API, SIGNUP_API, LOGIN_API, SENDPASSWORDOTP_API} = endpoints;
+const {
+  SENDOTP_API,
+  SIGNUP_API,
+  LOGIN_API,
+  SENDPASSWORDOTP_API,
+  UPDATEPASSWORD_API,
+} = endpoints;
 
 export function sendOtp(email, navigate) {
   return async (dispatch) => {
@@ -96,7 +102,7 @@ export function login(loginEmail, loginPassword, navigate) {
   };
 }
 
-export function sendPasswordOtp(email, navigate){
+export function sendPasswordOtp(email, navigate) {
   return async (dispatch) => {
     const toastId = toast.loading("Loading...");
     // dispatch(setLoading(true));
@@ -116,6 +122,27 @@ export function sendPasswordOtp(email, navigate){
       toast.error("Could Not Send OTP");
     }
     // dispatch(setLoading(false));
+    toast.dismiss(toastId);
+  };
+}
+export function updatePassword(email, otp, password, navigate) {
+  return async (dispatch) => {
+    const toastId = toast.loading("Loading...");
+    try {
+      const result = await apiConnector("PUT", UPDATEPASSWORD_API, {
+        email,
+        otp,
+        password,
+      });
+      if (!result.data.success) {
+        throw new Error(result.data.message);
+      }
+      toast.success("Password Updated Successfully");
+      navigate("/loginSignup");
+    } catch (error) {
+      console.error("Error updating password:", error);
+      toast.error("Failed to Update Password");
+    }
     toast.dismiss(toastId);
   };
 }
