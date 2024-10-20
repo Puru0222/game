@@ -9,6 +9,7 @@ import VerifyEmailPass from "./pages/VerifyEmailPass";
 import Dashboard from "./pages/Dashboard";
 import Join from "./pages/Join";
 import Create from "./pages/Create";
+import Profile from "./pages/Profile";
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
           <Route path="/dashboard/join" element={<Join />} />
           <Route path="/dashboard/create" element={<Create />} />
         </Route>
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </div>
   );

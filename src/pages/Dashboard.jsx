@@ -92,9 +92,13 @@ function Dashboard() {
               <p className="text-xl font-bold text-gray-100">
                 Balance: {balance}{" "}
               </p>
-              <button className="relative text-blue-300 font-bold hover:text-white p-2 rounded-md transition-all duration-500 ease-in-out hover:bg-gradient-to-r hover:from-blue-500 hover:to-blue-600">
+
+              <Link
+                to="/profile"
+                className="relative text-blue-300 font-bold hover:text-white p-2 rounded-md transition-all duration-500 ease-in-out hover:bg-gradient-to-r hover:from-blue-500 hover:to-blue-600"
+              >
                 Profile
-              </button>
+              </Link>
             </div>
           </div>
         ) : (

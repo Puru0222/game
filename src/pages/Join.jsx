@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-function JoinPage() {
+function Join() {
   const [scrollPosition, setScrollPosition] = useState(0);
   const navigate = useNavigate();
 
@@ -15,11 +15,17 @@ function JoinPage() {
   };
 
   return (
-    <div>
+    <div className="cards font-semibold text-xl">
       <h2>Join Page</h2>
-      <div className="cards">
-        {[1, 2, 3, 4].map(cardId => (
-          <div key={cardId} className="card" onClick={() => handleCardClick(cardId)}>
+      <div>
+        {[
+          1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+        ].map((cardId) => (
+          <div
+            key={cardId}
+            className="card m-10"
+            onClick={() => handleCardClick(cardId)}
+          >
             Card {cardId}
           </div>
         ))}
@@ -28,4 +34,4 @@ function JoinPage() {
   );
 }
 
-export default JoinPage;
+export default Join;
