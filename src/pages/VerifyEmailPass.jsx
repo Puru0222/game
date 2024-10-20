@@ -6,7 +6,7 @@ import { BiArrowBack } from "react-icons/bi";
 import { RxCountdownTimer } from "react-icons/rx";
 import { useForm } from "react-hook-form";
 import { updatePassword } from "../services/authAPI";
-import img from "../asset/verifyemail.webp"
+import img from "../asset/verifyemail.webp";
 
 function VerifyEmailPass() {
   const { emailData } = useSelector((state) => state.auth);
@@ -43,11 +43,8 @@ function VerifyEmailPass() {
       className="flex justify-center items-center h-screen w-full bg-cover bg-center bg-no-repeat"
       style={{ backgroundImage: `url(${img})` }}
     >
-      <div
-        className="bg-white bg-opacity-80 p-4 rounded-lg shadow-lg w-full max-w-80 sm:max-w-lg md:max-w-xl lg:max-w-2xl"
-      >
+      <div className="bg-white bg-opacity-80 p-4 rounded-lg shadow-lg w-full max-w-80 sm:max-w-lg md:max-w-xl lg:max-w-2xl transform transition-all hover:scale-105 hover:shadow-2xl hover:-translate-y-2">
         <div className="flex flex-col gap-y-5">
-
           {/* Form Section */}
           <div className="flex flex-col">
             <h1 className="text-2xl sm:text-3xl font-semibold text-gray-700 mb-4 text-center">
@@ -116,7 +113,9 @@ function VerifyEmailPass() {
                 placeholder="Enter OTP"
               />
               {errors.otp && (
-                <span className="text-red-500 text-sm">{errors.otp.message}</span>
+                <span className="text-red-500 text-sm">
+                  {errors.otp.message}
+                </span>
               )}
 
               {/* Submit Button */}
@@ -129,19 +128,20 @@ function VerifyEmailPass() {
             </form>
           </div>
           <div className="flex justify-between items-center">
-
-          {/* Back Link */}
-          <Link to="/loginSignup" className="relative text-blue-500 hover:text-white p-2 rounded-md transition-all duration-500 ease-in-out hover:bg-gradient-to-r hover:from-blue-400 hover:to-blue-600"
-                >
-            <p className="text-richblack-5 flex items-center gap-x-2">
-              <BiArrowBack /> Back To Signup
-            </p>
-          </Link>
-          {/* Resend OTP */}
-          <button className="flex items-center gap-x-2 text-blue-500 hover:text-white p-2 rounded-md transition-all duration-500 ease-in-out hover:bg-gradient-to-r hover:from-blue-400 hover:to-blue-600">
-            <RxCountdownTimer /> Resend Otp
-          </button>
-            </div>
+            {/* Back Link */}
+            <Link
+              to="/loginSignup"
+              className="relative text-blue-500 hover:text-white p-2 rounded-md transition-all duration-500 ease-in-out hover:bg-gradient-to-r hover:from-blue-400 hover:to-blue-600"
+            >
+              <p className="text-richblack-5 flex items-center gap-x-2">
+                <BiArrowBack /> Back To Signup
+              </p>
+            </Link>
+            {/* Resend OTP */}
+            <button className="flex items-center gap-x-2 text-blue-500 hover:text-white p-2 rounded-md transition-all duration-500 ease-in-out hover:bg-gradient-to-r hover:from-blue-400 hover:to-blue-600">
+              <RxCountdownTimer /> Resend Otp
+            </button>
+          </div>
         </div>
       </div>
     </div>

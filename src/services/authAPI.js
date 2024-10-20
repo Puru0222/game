@@ -1,5 +1,5 @@
 import { toast } from "react-hot-toast";
-import { setLoading, setToken } from "../slices/authSlice";
+import { setLoading, setToken, setUser} from "../slices/authSlice";
 import { apiConnector } from "./apiConnector";
 import { endpoints } from "./apis";
 
@@ -62,11 +62,11 @@ export function signUp(
         throw new Error(response.data.message);
       }
       toast.success("Signup Successful");
-      navigate("/login");
+      navigate("/loginSignup");
     } catch (error) {
       console.log("SIGNUP API ERROR............", error);
       toast.error("Signup Failed");
-      navigate("/signup");
+      navigate("/loginSignup");
     }
     toast.dismiss(toastId);
   };
@@ -90,10 +90,10 @@ export function login(loginEmail, loginPassword, navigate) {
 
       toast.success("Login Successful");
       dispatch(setToken(response.data.token));
-      //dispatch(setUser({ ...response.data.user, image: userImage }));
+      dispatch(setUser(response.data.user));
       localStorage.setItem("token", JSON.stringify(response.data.token));
-      navigate("/");
-    } catch (error) {
+      navigate("/dashboard/join");
+      } catch (error) {
       console.log("LOGIN API ERROR............", error);
       toast.error("Login Failed");
     }

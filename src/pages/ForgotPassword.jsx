@@ -33,7 +33,7 @@ const ForgotPassword = () => {
       style={{ backgroundImage: `url(${img})` }}
     >
       <div
-        className="bg-white bg-opacity-80 p-8 sm:p-10 rounded-lg shadow-lg w-full
+        className="bg-white bg-opacity-80 p-8 sm:p-10 rounded-lg shadow-lg w-full transform transition-all hover:scale-105 hover:shadow-2xl hover:-translate-y-2
                    max-w-80 sm:max-w-lg md:max-w-xl lg:max-w-2xl"
       >
         <h1 className="text-4xl font-semibold text-gray-700 mb-4 text-center">

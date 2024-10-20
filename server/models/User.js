@@ -14,6 +14,10 @@ const userSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
+    balance: {
+      type: Number,
+      default: 0,
+    },
     // gameId: {
     //   type: String,
     //   required: true,
