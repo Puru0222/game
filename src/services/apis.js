@@ -9,3 +9,9 @@ export const endpoints = {
   FORGOTPASSWORD_API: BASE_URL + "/auth/forgotpassword",
   UPDATEPASSWORD_API: BASE_URL + "/auth/updatepassword",
 };
+
+export const updateDataEndpoint = {
+  
+  GETUSER_API: BASE_URL + "/update/getuser",
+  UPDATEBALANCE_API: BASE_URL + "/update/updatebalance"
+};

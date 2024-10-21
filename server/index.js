@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const userRoutes = require("./routes/user");
+const balanceRoutes = require("./routes/balance")
 const database = require("./config/database");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
@@ -31,6 +32,7 @@ app.use(
 cloudinaryConnect();
 
 app.use("/api/v1/auth", userRoutes);
+app.use("/api/v1/update", balanceRoutes);
 
 // Deafult Route
 app.get("/", (req, res) => {

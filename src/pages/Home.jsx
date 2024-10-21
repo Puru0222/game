@@ -28,6 +28,11 @@ const Home = () => {
               Get Started
             </button>
           </Link>
+          <Link to={"/updateData"}>
+            <button className="px-6 py-3 lg:mt-4 sm:mt-3 bg-yellow-500 text-yellow-50 font-bold rounded-full shadow-lg hover:bg-yellow-700 transition duration-300">
+              update
+            </button>
+          </Link>
         </div>
       </div>
     </div>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes, Navigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import LoginSignupComp from "./component/LoginSignupComp";
@@ -10,6 +10,7 @@ import Dashboard from "./pages/Dashboard";
 import Join from "./pages/Join";
 import Create from "./pages/Create";
 import Profile from "./pages/Profile";
+import UpdateData from "./pages/UpdateData";
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
           <Route path="/dashboard/create" element={<Create />} />
         </Route>
         <Route path="/profile" element={<Profile />} />
+        <Route path="/updateData" element={<UpdateData />} />
       </Routes>
     </div>
   );
