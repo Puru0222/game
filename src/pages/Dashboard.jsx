@@ -1,28 +1,31 @@
 import React from "react";
 import { Outlet, Link, useLocation } from "react-router-dom";
-import img1 from "../asset/ffdash.jpeg";
-import img2 from "../asset/pdash.webp";
+// import img1 from "../asset/ffdash.jpeg";
+// import img2 from "../asset/pdash.webp";
+import img from "../asset/verifysignup.webp";
 import { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
+import { Meteors } from "./Meteors";
+
 
 function Dashboard() {
   const { fullname, balance, uid } = useSelector((state) => state.auth);
-  const [backgroundImage, setBackgroundImage] = useState(`url(${img1})`);
+  // const [backgroundImage, setBackgroundImage] = useState(`url(${img1})`);
   const location = useLocation();
-  useEffect(() => {
-    // Array of background image URLs
-    const images = [`url(${img1})`, `url(${img2})`];
+  // useEffect(() => {
+  //   // Array of background image URLs
+  //   const images = [`url(${img1})`, `url(${img2})`];
 
-    let index = 0;
-    const changeBackground = () => {
-      index = (index + 1) % images.length;
-      setBackgroundImage(images[index]);
-    };
+  //   let index = 0;
+  //   const changeBackground = () => {
+  //     index = (index + 1) % images.length;
+  //     setBackgroundImage(images[index]);
+  //   };
 
-    const intervalId = setInterval(changeBackground, 5000);
+  //   const intervalId = setInterval(changeBackground, 5000);
 
-    return () => clearInterval(intervalId);
-  }, []);
+  //   return () => clearInterval(intervalId);
+  // }, []);
 
   const [isVisible, setIsVisible] = useState(true);
   const containerRef = useRef(null);
@@ -62,12 +65,10 @@ function Dashboard() {
   return (
     <div
       className="flex flex-col items-center overflow-hidden bg-cover bg-center bg-fixed h-screen"
-      style={{
-        backgroundImage: backgroundImage,
-        transition: "background-image 1s ease-in-out",
-      }}
+      style={{ backgroundImage: `url(${img})` }}
     >
       {/* Main Card */}
+      <Meteors number={70} />
       <div
         ref={containerRef}
         className="transition-all duration-300 w-full max-w-xs sm:max-w-md md:max-w-xl lg:max-w-2xl"
@@ -111,7 +112,8 @@ function Dashboard() {
         )}
         {/* Navigation Section */}
       </div>
-      <div className="flex sticky top-0 z-10 shadow-md bg-white justify-between w-full max-w-xs sm:max-w-md md:max-w-xl lg:max-w-2xl p-4 px-7 rounded-lg bg-opacity-80 transition-transform transform hover:scale-105 hover:shadow-3xl mb-4 ">
+
+      <div className="flex sticky top-0 z-10 shadow-md bg-black justify-between w-full max-w-xs sm:max-w-md md:max-w-xl lg:max-w-2xl p-4 px-7 rounded-lg bg-opacity-60 transition-transform transform hover:scale-105 hover:shadow-3xl">
         <Link
           to="/dashboard/join"
           className={`px-4 py-2 rounded-md transition-colors ${
@@ -134,13 +136,14 @@ function Dashboard() {
         </Link>
       </div>
 
+      
       <div className="flex-1 w-full max-w-xs sm:max-w-md md:max-w-xl lg:max-w-2xl mt-2 overflow-y-auto">
         {" "}
         {/* Add margin-top to push content down */}
         {/* Your main content goes here */}
         <Outlet />
       </div>
-    </div>
+      </div>
   );
 }
 

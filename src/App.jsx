@@ -11,6 +11,9 @@ import Join from "./pages/Join";
 import Create from "./pages/Create";
 import Profile from "./pages/Profile";
 import UpdateData from "./pages/UpdateData";
+import BgmiChallange from "./pages/games/bgmi/BgmiChallange";
+import FreeChallange from "./pages/games/bgmi/FreeChallange";
+import CodChallange from "./pages/games/bgmi/CodChallange";
 
 const App = () => {
   return (
@@ -22,13 +25,17 @@ const App = () => {
         <Route path="/verify-email" element={<VerifyEmail />} />
         <Route path="/forgot-password" element={<ForgotPasword />} />
         <Route path="/verify-email-password" element={<VerifyEmailPass />} />
-        <Route  element={<Dashboard />} > 
+        <Route element={<Dashboard />}>
           {/* <Route index element={<Navigate to="/join" />} /> */}
           <Route path="/dashboard/join" element={<Join />} />
           <Route path="/dashboard/create" element={<Create />} />
         </Route>
         <Route path="/profile" element={<Profile />} />
         <Route path="/updateData" element={<UpdateData />} />
+        <Route path="/bgmichallange" element={<BgmiChallange />} />
+        <Route path="/ffchallange" element={<FreeChallange />} />
+        <Route path="/codchallange" element={<CodChallange />} />
+        
       </Routes>
     </div>
   );

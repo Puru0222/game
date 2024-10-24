@@ -11,7 +11,10 @@ export const endpoints = {
 };
 
 export const updateDataEndpoint = {
-  
   GETUSER_API: BASE_URL + "/update/getuser",
-  UPDATEBALANCE_API: BASE_URL + "/update/updatebalance"
+  UPDATEBALANCE_API: BASE_URL + "/update/updatebalance",
+};
+
+export const bgmiendpoint = {
+  CREATEBGMICHALLANGE_API: BASE_URL + "/challange/create",
 };
