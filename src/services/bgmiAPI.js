@@ -2,7 +2,7 @@ import { toast } from "react-hot-toast";
 import { apiConnector } from "./apiConnector";
 import { bgmiendpoint } from "./apis";
 
-const { CREATEBGMICHALLANGE_API } = bgmiendpoint;
+const { CREATEBGMICHALLANGE_API, GETALLCHALLANGE_API } = bgmiendpoint;
 
 export function createBgmiChallange(
   uid,

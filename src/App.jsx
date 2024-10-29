@@ -14,6 +14,7 @@ import UpdateData from "./pages/UpdateData";
 import BgmiChallange from "./pages/games/bgmi/BgmiChallange";
 import FreeChallange from "./pages/games/bgmi/FreeChallange";
 import CodChallange from "./pages/games/bgmi/CodChallange";
+import Challenge from "./pages/games/Challenge";
 
 const App = () => {
   return (
@@ -35,7 +36,7 @@ const App = () => {
         <Route path="/bgmichallange" element={<BgmiChallange />} />
         <Route path="/ffchallange" element={<FreeChallange />} />
         <Route path="/codchallange" element={<CodChallange />} />
-        
+        <Route path="/challenge/:uniqueSerialNumber" element={<Challenge/>}/>
       </Routes>
     </div>
   );
