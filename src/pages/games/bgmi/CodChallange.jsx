@@ -40,7 +40,6 @@ const CodChallange = () => {
           data.teamMode,
           data.map,
           data.price,
-          data.players,
           fullname,
           uniqueSerialNumber,
           gname,
@@ -60,9 +59,9 @@ const CodChallange = () => {
     >
       {/* <div className="absolute inset-0 bg-black bg-opacity-20"></div> */}
       <div className="relative z-10 p-8 sm:p-10 rounded-lg shadow-lg w-full max-w-80 sm:max-w-lg md:max-w-xl lg:max-w-2xl">
-  <div className="absolute inset-0 bg-gradient-to-r from-gray-500 via-slate-300 to-gray-500 opacity-80 rounded-lg"></div>
-  <div className="relative z-20">
-    <h1 className="text-2xl font-bold mb-4 text-black">    
+        <div className="absolute inset-0 bg-gradient-to-r from-gray-500 via-slate-300 to-gray-500 opacity-80 rounded-lg"></div>
+        <div className="relative z-20">
+          <h1 className="text-2xl font-bold mb-4 text-black">
             Create Call of Duty Challenge
           </h1>
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -135,10 +134,16 @@ const CodChallange = () => {
                   {...register("map", { required: "Map is required" })}
                 >
                   <option value="">Select Map</option>
-                  <option value="erangel">Erangel</option>
-                  <option value="miramar">Miramar</option>
-                  <option value="shanhok">Sanhok</option>
-                  <option value="livik">Livik</option>
+                  <option value="Warzone">Warzone</option>
+                  <option value="Modern Warfare III">Modern Warfare III</option>
+                  <option value="Verdansk">Verdansk</option>
+                  <option value="Caldera">Caldera</option>
+                  <option value="Al Mazrah">Al Mazrah</option>
+                  <option value="Ashika Island">Ashika Island</option>
+                  <option value="Shipment">Shipment</option>
+                  <option value="Stadium">Stadium</option>
+                  <option value="Ghost Ship">Ghost Ship</option>
+                  <option value="Bit-ment">Bit-ment</option>
                 </select>
                 {errors.map && (
                   <p className="text-red-500 text-sm">{errors.map.message}</p>
@@ -157,13 +162,17 @@ const CodChallange = () => {
                   type="text"
                   {...register("price", {
                     required: "Room entry price is required",
+                    pattern: {
+                      value: /^\d+$/,
+                      message: "Entry Price must be a number",
+                    },
                   })}
                 />
                 {errors.price && (
                   <p className="text-red-500 text-sm">{errors.price.message}</p>
                 )}
               </div>
-              <div className="mb-4">
+              {/* <div className="mb-4">
                 <label className="text-sm font-medium text-black">
                   Players
                 </label>
@@ -179,19 +188,17 @@ const CodChallange = () => {
                     {errors.players.message}
                   </p>
                 )}
-              </div>
+              </div> */}
             </div>
-            
-              <div className="mb-4">
-                <label className="text-sm font-medium text-black">
-                  Note
-                </label>
-                <input
-                  className="border border-gray-600 bg-gray-800 bg-opacity-60 p-2 w-full rounded text-yellow-100"
-                  type="text"
-                  {...register("note")}
-                />
-              </div>
+
+            <div className="mb-4">
+              <label className="text-sm font-medium text-black">Note</label>
+              <input
+                className="border border-gray-600 bg-gray-800 bg-opacity-60 p-2 w-full rounded text-yellow-100"
+                type="text"
+                {...register("note")}
+              />
+            </div>
 
             {/* Submit Button */}
             <div>

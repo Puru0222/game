@@ -22,12 +22,12 @@ const ChallangeSchema = new mongoose.Schema({
     required: true,
   },
   price: {
-    type: String,
+    type: Number,
     required: true,
   },
   players: {
-    type: String,
-    required: true,
+    type: Number,
+    default: 0,
   },
   fullname: {
     type: String,
@@ -43,6 +43,11 @@ const ChallangeSchema = new mongoose.Schema({
   },
   note: {
     type: String,
+  },
+  status: {
+    type: String,
+    enum: ["pending", "started", "completed"],
+    default: "pending",
   },
   createdAt: {
     type: Date,

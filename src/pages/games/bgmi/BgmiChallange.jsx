@@ -40,7 +40,6 @@ const BgmiChallange = () => {
           data.teamMode,
           data.map,
           data.price,
-          data.players,
           fullname,
           uniqueSerialNumber,
           gname,
@@ -135,10 +134,19 @@ const BgmiChallange = () => {
                   {...register("map", { required: "Map is required" })}
                 >
                   <option value="">Select Map</option>
-                  <option value="erangel">Erangel</option>
-                  <option value="miramar">Miramar</option>
-                  <option value="shanhok">Sanhok</option>
-                  <option value="livik">Livik</option>
+                  <option value="Erangel">Erangel</option>
+                  <option value="Miramar">Miramar</option>
+                  <option value="Sanhok">Sanhok</option>
+                  <option value="Livik">Livik</option>
+                  <option value="Team Deathmatch">Team Deathmatch</option>
+                  <option value="Rondo">Rondo</option>
+                  <option value="Vikendi">Vikendi</option>
+                  <option value="Karakin">Karakin</option>
+                  <option value="Intense Battle Royale">
+                    Intense Battle Royale
+                  </option>
+                  <option value="Classic Mode">Classic Mode</option>
+                  <option value="Sandbox Mode">Sandbox Mode</option>
                 </select>
                 {errors.map && (
                   <p className="text-red-500 text-sm">{errors.map.message}</p>
@@ -157,13 +165,17 @@ const BgmiChallange = () => {
                   type="text"
                   {...register("price", {
                     required: "Room entry price is required",
+                    pattern: {
+                      value: /^\d+$/,
+                      message: "Entry Price must be a number",
+                    },
                   })}
                 />
                 {errors.price && (
                   <p className="text-red-500 text-sm">{errors.price.message}</p>
                 )}
               </div>
-              <div className="mb-4">
+              {/* <div className="mb-4">
                 <label className="text-sm font-medium text-gray-300">
                   Players
                 </label>
@@ -179,7 +191,7 @@ const BgmiChallange = () => {
                     {errors.players.message}
                   </p>
                 )}
-              </div>
+              </div> */}
             </div>
             <div className="flex">
               <div className="mb-4">

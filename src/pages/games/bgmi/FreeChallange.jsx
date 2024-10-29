@@ -40,7 +40,6 @@ const FreeChallange = () => {
           data.teamMode,
           data.map,
           data.price,
-          data.players,
           fullname,
           uniqueSerialNumber,
           gname,
@@ -135,10 +134,13 @@ const FreeChallange = () => {
                   {...register("map", { required: "Map is required" })}
                 >
                   <option value="">Select Map</option>
-                  <option value="erangel">Erangel</option>
-                  <option value="miramar">Miramar</option>
-                  <option value="shanhok">Sanhok</option>
-                  <option value="livik">Livik</option>
+                  <option value="Battle Royale">Battle Royale</option>
+                  <option value="Team Deathmatch">Team Deathmatch</option>
+                  <option value="Custom Mode">Custom Mode</option>
+                  <option value="Bermuda">Bermuda</option>
+                  <option value="Purgatory">Purgatory</option>
+                  <option value="Kalahari">Kalahari</option>
+                  <option value="Snow Map">Snow Map</option>
                 </select>
                 {errors.map && (
                   <p className="text-red-500 text-sm">{errors.map.message}</p>
@@ -157,13 +159,17 @@ const FreeChallange = () => {
                   type="text"
                   {...register("price", {
                     required: "Room entry price is required",
+                    pattern: {
+                      value: /^\d+$/,
+                      message: "Entry Price must be a number",
+                    },
                   })}
                 />
                 {errors.price && (
                   <p className="text-red-500 text-sm">{errors.price.message}</p>
                 )}
               </div>
-              <div className="mb-4">
+              {/* <div className="mb-4">
                 <label className="text-sm font-medium text-gray-300">
                   Players
                 </label>
@@ -179,7 +185,7 @@ const FreeChallange = () => {
                     {errors.players.message}
                   </p>
                 )}
-              </div>
+              </div> */}
             </div>
             <div className="flex">
               <div className="mb-4">
@@ -205,8 +211,8 @@ const FreeChallange = () => {
             </div>
           </form>
         </div>
-        </div>
       </div>
+    </div>
   );
 };
 

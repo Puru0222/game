@@ -9,7 +9,6 @@ exports.create = async (req, res) => {
       teamMode,
       map,
       price,
-      players,
       fullname,
       uniqueSerialNumber,
       gname,
@@ -23,7 +22,6 @@ exports.create = async (req, res) => {
       !teamMode ||
       !map ||
       !price ||
-      !players ||
       !fullname ||
       !uniqueSerialNumber ||
       !gname
@@ -41,7 +39,6 @@ exports.create = async (req, res) => {
       teamMode,
       map,
       price,
-      players,
       fullname,
       uniqueSerialNumber,
       gname,

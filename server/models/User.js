@@ -18,11 +18,6 @@ const userSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
-    // gameId: {
-    //   type: String,
-    //   required: true,
-    //   trim: true,
-    // },
     password: {
       type: String,
       required: true,
@@ -31,17 +26,18 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: true,
     },
-    // additionalDetails: {
-    //   type: mongoose.Schema.Types.ObjectId,
-    //   required: true,
-    //   ref: "Profile",
-    // },
-    // contest: [
-    //   {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: "Course",
-    //   },
-    // ],
+    joinChallenge: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Challange",
+      },
+    ],
+    createChallenge: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Challange",
+      },
+    ],
     token: {
       type: String,
     },
