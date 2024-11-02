@@ -8,11 +8,13 @@ const userSchema = new mongoose.Schema(
     uid: {
       type: String,
       trim: true,
+      unique: true
     },
     email: {
       type: String,
       required: true,
       trim: true,
+      unique: true,
     },
     balance: {
       type: Number,

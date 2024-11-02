@@ -140,7 +140,6 @@ const FreeChallange = () => {
                   <option value="Bermuda">Bermuda</option>
                   <option value="Purgatory">Purgatory</option>
                   <option value="Kalahari">Kalahari</option>
-                  <option value="Snow Map">Snow Map</option>
                 </select>
                 {errors.map && (
                   <p className="text-red-500 text-sm">{errors.map.message}</p>

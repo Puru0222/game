@@ -6,6 +6,8 @@ const initialState = {
     ? JSON.parse(localStorage.getItem("token"))
     : null,
   emailData: null,
+  createChallenge: [],
+  joinChallenge: [],
 };
 
 const authSlice = createSlice({
@@ -25,11 +27,22 @@ const authSlice = createSlice({
       state.emailData = value.payload;
     },
     setUser(state, value) {
-      const { fullname, uid, balance, email } = value.payload;
+      const {
+        _id,
+        fullname,
+        uid,
+        balance,
+        email,
+        createChallenge,
+        joinChallenge,
+      } = value.payload;
+      state.id = _id;
       state.fullname = fullname;
       state.uid = uid;
       state.balance = balance;
       state.email = email;
+      state.createChallenge = createChallenge || [];
+      state.joinChallenge = joinChallenge || [];
     },
   },
 });

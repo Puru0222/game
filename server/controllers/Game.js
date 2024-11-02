@@ -1,4 +1,6 @@
 const Challange = require("../models/Challange");
+const User = require("../models/User");
+const mongoose = require("mongoose");
 
 exports.create = async (req, res) => {
   try {
@@ -44,6 +46,14 @@ exports.create = async (req, res) => {
       gname,
       note,
     });
+
+    const user = await User.findOneAndUpdate(
+      { uid },
+      { $push: { createChallenge: challange._id } },
+      { new: true }
+    ).populate("createChallenge");
+    console.log(user);
+
     return res.status(200).json({
       success: true,
       message: "Challange Created successfully",
@@ -59,7 +69,10 @@ exports.create = async (req, res) => {
 
 exports.getChallenges = async (req, res) => {
   try {
-    const challenges = await Challange.find();
+    const challenges = await Challange.find().populate({
+      path: "users",
+      select: "fullname",
+    });
 
     res.status(200).json({ success: true, challenges });
   } catch (error) {
@@ -69,7 +82,7 @@ exports.getChallenges = async (req, res) => {
 
 exports.updatePlayer = async (req, res) => {
   try {
-    const { uniqueSerialNumber } = req.body;
+    const { id, uniqueSerialNumber, uid, newBalance, price } = req.body;
     const challenge = await Challange.findOne({ uniqueSerialNumber });
 
     if (!challenge) {
@@ -78,9 +91,38 @@ exports.updatePlayer = async (req, res) => {
         message: "Challenge not found",
       });
     }
+    if (newBalance < 0) {
+      return res.status(500).json({
+        sucess: false,
+        message: "Insufficent Money",
+      });
+    }
+    const user = await User.findById(id);
+    console.log(user);
+    for (let i = 0; i < user.joinChallenge.length; i++) {
+      if (user.joinChallenge[i].equals(challenge._id)) {
+        return res.status(200).json({
+          success: true,
+          message: "Already registered",
+        });
+      }
+    }
 
     challenge.players += 1;
-    const updatedPlayerDetail = await challenge.save();
+    challenge.balance += price;
+    challenge.users.push(new mongoose.Types.ObjectId(id));
+    await challenge.save();
+
+    const updatedUserDetails = await User.findOneAndUpdate(
+      { uid },
+      { balance: newBalance },
+      { new: true }
+    ).populate("joinChallenge");
+    updatedUserDetails.joinChallenge.push(
+      new mongoose.Types.ObjectId(challenge._id)
+    );
+    await updatedUserDetails.save();
+    //console.log(updatedUserDetails);
 
     return res.status(200).json({
       success: true,
@@ -94,6 +136,66 @@ exports.updatePlayer = async (req, res) => {
       message:
         "An error occurred while updating the Challenge. Please try again.",
       error: error.message,
+    });
+  }
+};
+
+exports.updateChallenge = async (req, res) => {
+  try {
+    const { balance, users, challengeId, id: creatorId } = req.body;
+    if (!balance || users.length === 0 || !challengeId) {
+      return res.status(400).json({
+        success: false,
+        message: "Missing required data: balance, users, or challengeId.",
+      });
+    }
+    const challenge = await Challange.findById(challengeId);
+    if (!challenge) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Challenge not found." });
+    }
+    if (challenge.status === "completed") {
+      return res
+        .status(400)
+        .json({ success: false, message: "Challenge is already completed." });
+    }
+    const adminId = "6725c16abbcb52a1f24db7d5";
+    const winnerShare = balance * 0.8;
+    const creatorShare = balance * 0.15;
+    const adminShare = balance * 0.05;
+    const rewardPerUser = winnerShare / users.length;
+    const updateUserBalances = users.map(async (userId) => {
+      return await User.findByIdAndUpdate(
+        userId,
+        { $inc: { balance: rewardPerUser } },
+        { new: true }
+      );
+    });
+    await Promise.all(updateUserBalances);
+    await User.findByIdAndUpdate(
+      creatorId,
+      { $inc: { balance: creatorShare } },
+      { new: true }
+    );
+    await User.findByIdAndUpdate(
+      adminId,
+      { $inc: { balance: adminShare } },
+      { new: true }
+    );
+    challenge.status = "completed";
+    await challenge.save();
+    return res.status(200).json({
+      success: true,
+      message: "Challenge updated successfully",
+      rewardPerUser,
+      updatedChallenge: challenge,
+    });
+  } catch (error) {
+    console.error("Error updating challenge:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Server error. Please try again later.",
     });
   }
 };

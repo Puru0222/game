@@ -89,6 +89,7 @@ export function login(loginEmail, loginPassword, navigate) {
       }
 
       toast.success("Login Successful");
+      console.log(response.data.user);
       dispatch(setToken(response.data.token));
       dispatch(setUser(response.data.user));
       localStorage.setItem("token", JSON.stringify(response.data.token));

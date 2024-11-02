@@ -49,6 +49,16 @@ const ChallangeSchema = new mongoose.Schema({
     enum: ["pending", "started", "completed"],
     default: "pending",
   },
+  users: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "user",
+    },
+  ],
+  balance: {
+    type: Number,
+    default: 0,
+  },
   createdAt: {
     type: Date,
     default: Date.now,

@@ -83,9 +83,11 @@ function Dashboard() {
                 </span>{" "}
                 <span> {fullname}</span>
               </p>
-              <button className="px-4 py-2 text-red-500 font-bold hover:text-white p-2 rounded-md transition-all duration-500 ease-in-out hover:bg-gradient-to-r hover:from-red-400 hover:to-red-600">
-                LogOut
-              </button>
+              <Link 
+              to="/mychallenge"
+              className="px-4 py-2 text-red-500 font-bold hover:text-white p-2 rounded-md transition-all duration-500 ease-in-out hover:bg-gradient-to-r hover:from-red-400 hover:to-red-600">
+                Challenge
+              </Link>
             </div>
 
             {/* Stats Section */}

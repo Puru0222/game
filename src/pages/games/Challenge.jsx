@@ -10,6 +10,7 @@ const Challenge = () => {
   const { uniqueSerialNumber } = useParams();
   const [challenge, setChallenge] = useState(null);
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const { id, balance, uid } = useSelector((state) => state.auth);
 
   const storedChallenge = useSelector((state) =>
     state.challenge.challenges.find(
@@ -29,18 +30,34 @@ const Challenge = () => {
 
   const handleJoin = async () => {
     const toastId = toast.loading("Loading...");
+    const newBalance = balance - challenge.price;
+    const price = challenge.price;
+
+    const dataToSend = {
+      id,
+      uniqueSerialNumber,
+      uid,
+      newBalance,
+      price,
+    };
     try {
-      const result = await apiConnector("PUT", bgmiendpoint.UPDATE_PLAYER, {
-        uniqueSerialNumber,
-      });
+      const result = await apiConnector(
+        "PUT",
+        bgmiendpoint.UPDATE_PLAYER,
+        dataToSend
+      );
       if (!result.data.success) {
-        toast.error("Challenge has ended");
+        toast.error(result.message);
       } else {
-        toast.success("Welcome to another Challenge!");
+        if (result.data.message === "Already registered") {
+          toast.success("Already registered");
+        } else {
+          toast.success("Welcome to another Challenge!");
+        }
       }
     } catch (error) {
       console.error("Error updating Player:", error);
-      toast.error("Failed to join Challenge");
+      toast.error("Insufficent Balance");
     } finally {
       toast.dismiss(toastId);
     }

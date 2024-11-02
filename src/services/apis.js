@@ -19,4 +19,5 @@ export const bgmiendpoint = {
   CREATEBGMICHALLANGE_API: BASE_URL + "/challange/create",
   GET_CHALLANGES: BASE_URL + "/challange/getChallenges",
   UPDATE_PLAYER : BASE_URL + "/challange/updateplayer",
+  SELECT_WINNER : BASE_URL + "/challange/updateChallenge"
 };
