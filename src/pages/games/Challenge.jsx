@@ -5,6 +5,7 @@ import SlideButton from "react-slide-button";
 import toast from "react-hot-toast";
 import { bgmiendpoint } from "../../services/apis";
 import { apiConnector } from "../../services/apiConnector";
+import img from "../../asset/challenge.webp";
 
 const Challenge = () => {
   const { uniqueSerialNumber } = useParams();
@@ -64,52 +65,54 @@ const Challenge = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen w-full bg-cover bg-center bg-gradient-to-r from-blue-500 to-purple-500 relative">
-      <div className="bg-white bg-opacity-80 p-4 w-full max-w-80 sm:max-w-lg md:max-w-xl lg:max-w-2xl rounded-lg shadow-lg">
+    <div
+      className="flex justify-center items-center h-screen w-full bg-cover bg-center"
+      style={{ backgroundImage: `url(${img})` }}
+    >
+      <div className="bg-white bg-opacity-70 p-4 w-full max-w-80 sm:max-w-lg md:max-w-xl lg:max-w-2xl rounded-lg shadow-lg">
         <div className="text-center mb-4">
-          <h1 className="text-2xl font-extrabold text-gray-800">
-            Accept Challenge
-          </h1>
-          <h2 className="text-xl font-semibold text-gray-700">
+          <h1 className="text-2xl font-extrabold">Accept Challenge</h1>
+          <h2 className="text-xl font-semibold text-gray-900">
             {challenge.gname}
           </h2>
         </div>
-        <div className="flex justify-between my-2 p-2 bg-gray-100 rounded-md">
-          <p className="text-md text-gray-600">Room Id :</p>
-          <p className="text-sm font-semibold text-gray-800">
+        <div className="flex justify-between my-2 p-3 bg-gray-100 bg-opacity-90 rounded-md font-medium">
+          <p className="text-md ">Room Id :</p>
+          <p className="text-sm font-semibold text-gray-900">
             {challenge.roomId}
           </p>
         </div>
-        <div className="flex justify-between my-2 p-2 bg-gray-100 rounded-md">
-          <p className="text-md text-gray-600">Room Password:</p>
-          <p className="text-sm font-semibold text-gray-800">
+        <div className="flex justify-between my-2 p-3 bg-gray-100 bg-opacity-90 rounded-md font-medium">
+          <p className="text-md ">Room Password:</p>
+          <p className="text-sm font-semibold text-gray-900">
             {passwordVisible ? challenge.roomPassword : "******"}
           </p>
         </div>
-        <div className="flex justify-between my-2 p-2 bg-gray-100 rounded-md">
-          <p className="text-md text-gray-600">Entry Price:</p>
-          <p className="text-sm font-semibold text-gray-800">
+        <div className="flex justify-between my-2 p-3 bg-gray-100 bg-opacity-90 rounded-md font-medium">
+          <p className="text-md ">Entry Price:</p>
+          <p className="text-sm font-semibold text-gray-900">
             {challenge.price}
           </p>
         </div>
-        <div className="flex justify-between my-2 p-2 bg-gray-100 rounded-md">
-          <p className="text-md text-gray-600">Map:</p>
-          <p className="text-sm font-semibold text-gray-800">{challenge.map}</p>
+        <div className="flex justify-between my-2 p-3 bg-gray-100 bg-opacity-90 shadow-md rounded-md font-medium">
+          <p className="text-md ">Map:</p>
+          <p className="text-sm font-semibold text-gray-900">{challenge.map}</p>
         </div>
-        <div className="flex justify-between my-2 p-2 bg-gray-100 rounded-md">
-          <p className="text-md text-gray-600">Team Mode:</p>
-          <p className="text-sm font-semibold text-gray-800">
+        <div className="flex justify-between my-2 p-3 bg-gray-100 bg-opacity-90 shadow-md rounded-md font-medium">
+          <p className="text-md ">Team Mode:</p>
+          <p className="text-sm font-semibold text-gray-900">
             {challenge.teamMode}
           </p>
         </div>
-        <div className="flex justify-between my-2 p-2 bg-gray-100 rounded-md">
-          <p className="text-md text-gray-600">Note:</p>
-          <p className="text-sm font-semibold text-gray-800">
+        <div className="flex justify-between my-2 p-3 bg-gray-100 bg-opacity-90 shadow-md rounded-md font-medium">
+          <p className="text-md ">Note:</p>
+          <p className="text-sm font-semibold text-gray-900">
             {challenge.note}
           </p>
         </div>
         <SlideButton
           mainText="Slide to Join"
+          className="w-full text-lg font-semibold text-white bg-blue-600 rounded-full py-3 transition duration-300 hover:bg-blue-700"
           onSlideDone={() => {
             handleJoin();
             setPasswordVisible(true);

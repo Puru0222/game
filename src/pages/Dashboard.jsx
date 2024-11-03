@@ -7,7 +7,6 @@ import { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { Meteors } from "./Meteors";
 
-
 function Dashboard() {
   const { fullname, balance, uid } = useSelector((state) => state.auth);
   // const [backgroundImage, setBackgroundImage] = useState(`url(${img1})`);
@@ -34,13 +33,12 @@ function Dashboard() {
     // Automatically collapse after 1 minute
     const timer = setTimeout(() => {
       setIsVisible(false);
-    }, 60000); // 1 minute in milliseconds
+    }, 60000);
 
-    return () => clearTimeout(timer); // Clean up the timer on unmount
+    return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
-    // Function to handle clicks outside the component
     const handleClickOutside = (event) => {
       if (
         containerRef.current &&
@@ -49,10 +47,7 @@ function Dashboard() {
         setIsVisible(false);
       }
     };
-
-    // Add event listener for clicks
     document.addEventListener("mousedown", handleClickOutside);
-
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
@@ -74,7 +69,9 @@ function Dashboard() {
         className="transition-all duration-300 w-full max-w-xs sm:max-w-md md:max-w-xl lg:max-w-2xl"
       >
         {isVisible ? (
-          <div className="p-4 mt-4 mb-4 px-6 bg-teal-900 bg-opacity-75 rounded-lg shadow-2xl  transition-transform transform hover:scale-105 hover:shadow-3xl ">
+          <div
+            className="p-4 mt-4 mb-4 px-6 bg-gradient-to-r from-zinc-800 via-purple-900 to-gray-800 rounded-lg shadow-2xl transition-transform transform hover:scale-105 hover:shadow-2xl "
+          >
             {/* User Info Section */}
             <div className="flex justify-between items-center mb-4">
               <p className="text-gray-100 font-bold text-xl">
@@ -83,9 +80,10 @@ function Dashboard() {
                 </span>{" "}
                 <span> {fullname}</span>
               </p>
-              <Link 
-              to="/mychallenge"
-              className="px-4 py-2 text-red-500 font-bold hover:text-white p-2 rounded-md transition-all duration-500 ease-in-out hover:bg-gradient-to-r hover:from-red-400 hover:to-red-600">
+              <Link
+                to="/mychallenge"
+                className="px-4 py-2 text-red-500 font-bold hover:text-white p-2 rounded-md transition-all duration-500 ease-in-out hover:bg-gradient-to-r hover:from-red-400 hover:to-red-600"
+              >
                 Challenge
               </Link>
             </div>
@@ -107,15 +105,28 @@ function Dashboard() {
         ) : (
           <button
             onClick={toggleVisibility}
-            className="bg-blue-500 text-white py-2 px-4 rounded m-2"
+            className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-2 px-4 rounded-lg m-2 flex items-center space-x-2 shadow-md transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
           >
-            {fullname}
+            {/* Person Icon */}
+
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              className="text-white"
+            >
+              <circle cx="12" cy="8" r="4" />
+              <path d="M14 14H10c-4 0-6 2-6 6h16c0-4-2-6-6-6z" />
+            </svg>
+
+            {/* Fullname */}
           </button>
         )}
         {/* Navigation Section */}
       </div>
 
-      <div className="flex sticky top-0 z-10 shadow-md bg-black justify-between w-full max-w-xs sm:max-w-md md:max-w-xl lg:max-w-2xl p-4 px-7 rounded-lg bg-opacity-60 transition-transform transform hover:scale-105 hover:shadow-3xl">
+      <div className="flex sticky top-0 z-10 shadow-md bg-black justify-between w-full max-w-xs sm:max-w-md md:max-w-xl lg:max-w-2xl p-4 px-7 rounded-lg bg-opacity-60 hover:shadow-3xl">
         <Link
           to="/dashboard/join"
           className={`px-4 py-2 rounded-md transition-colors ${
@@ -138,14 +149,13 @@ function Dashboard() {
         </Link>
       </div>
 
-      
       <div className="flex-1 w-full max-w-xs sm:max-w-md md:max-w-xl lg:max-w-2xl mt-2 overflow-y-auto">
         {" "}
         {/* Add margin-top to push content down */}
         {/* Your main content goes here */}
         <Outlet />
       </div>
-      </div>
+    </div>
   );
 }
 
