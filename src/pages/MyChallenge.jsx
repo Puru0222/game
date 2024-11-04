@@ -90,7 +90,7 @@ const MyChallenge = () => {
                     <strong>Room ID:</strong> {challenge.roomId}
                   </h3>
                   <p className="text-lg">
-                    <strong>Balance:</strong> {challenge.balance}
+                    <strong>Pool:</strong> {challenge.balance}
                   </p>
                   <p className="text-lg">
                     <strong>Players Count:</strong> {challenge.users.length}

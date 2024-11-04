@@ -126,7 +126,7 @@ function Dashboard() {
         {/* Navigation Section */}
       </div>
 
-      <div className="flex sticky top-0 z-10 shadow-md bg-black justify-between w-full max-w-xs sm:max-w-md md:max-w-xl lg:max-w-2xl p-4 px-7 rounded-lg bg-opacity-60 hover:shadow-3xl">
+      <div className="flex sticky top-0 z-10 shadow-md bg-black justify-between w-full max-w-xs sm:max-w-md md:max-w-xl lg:max-w-2xl p-4 px-7 rounded-lg bg-opacity-60 hover:shadow-3xl mt-3 animate-bounce">
         <Link
           to="/dashboard/join"
           className={`px-4 py-2 rounded-md transition-colors ${
@@ -149,7 +149,7 @@ function Dashboard() {
         </Link>
       </div>
 
-      <div className="flex-1 w-full max-w-xs sm:max-w-md md:max-w-xl lg:max-w-2xl mt-2 overflow-y-auto">
+      <div className="flex-1 w-full max-w-xs sm:max-w-md md:max-w-xl lg:max-w-2xl overflow-y-auto">
         {" "}
         {/* Add margin-top to push content down */}
         {/* Your main content goes here */}

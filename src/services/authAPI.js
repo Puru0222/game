@@ -1,5 +1,5 @@
 import { toast } from "react-hot-toast";
-import { setLoading, setToken, setUser} from "../slices/authSlice";
+import { setLoading, setToken, setUser } from "../slices/authSlice";
 import { apiConnector } from "./apiConnector";
 import { endpoints } from "./apis";
 
@@ -14,7 +14,7 @@ const {
 export function sendOtp(email, navigate) {
   return async (dispatch) => {
     const toastId = toast.loading("Loading...");
-    dispatch(setLoading(true));
+    // dispatch(setLoading(true));
     try {
       const response = await apiConnector("POST", SENDOTP_API, {
         email,
@@ -31,7 +31,7 @@ export function sendOtp(email, navigate) {
       console.log("SENDOTP API ERROR............", error);
       toast.error("Could Not Send OTP");
     }
-    dispatch(setLoading(false));
+    // dispatch(setLoading(false));
     toast.dismiss(toastId);
   };
 }
@@ -47,7 +47,7 @@ export function signUp(
 ) {
   return async (dispatch) => {
     const toastId = toast.loading("Loading...");
-    dispatch(setLoading(true));
+    // dispatch(setLoading(true));
     try {
       const response = await apiConnector("POST", SIGNUP_API, {
         fullname,
@@ -75,7 +75,7 @@ export function signUp(
 export function login(loginEmail, loginPassword, navigate) {
   return async (dispatch) => {
     const toastId = toast.loading("Loading...");
-    dispatch(setLoading(true));
+    // dispatch(setLoading(true));
     try {
       const response = await apiConnector("POST", LOGIN_API, {
         email: loginEmail,
@@ -89,16 +89,17 @@ export function login(loginEmail, loginPassword, navigate) {
       }
 
       toast.success("Login Successful");
-      console.log(response.data.user);
+      // console.log(response.data.user);
+       console.log(response.data.token);
       dispatch(setToken(response.data.token));
       dispatch(setUser(response.data.user));
       localStorage.setItem("token", JSON.stringify(response.data.token));
       navigate("/dashboard/join");
-      } catch (error) {
+    } catch (error) {
       console.log("LOGIN API ERROR............", error);
       toast.error("Login Failed");
     }
-    dispatch(setLoading(false));
+    // dispatch(setLoading(false));
     toast.dismiss(toastId);
   };
 }

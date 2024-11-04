@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import ff from "../asset/ff1.jpg";
-import pb from "../asset/pb1.jpg";
+import ff from "../asset/3.jpg";
+import pb from "../asset/2.jpg";
+import cd from "../asset/1.jpg"
 import "./loginSignupComp.css";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
@@ -13,16 +14,13 @@ const LoginSignupComp = () => {
   const [backgroundImage, setBackgroundImage] = useState(`url(${ff})`);
   useEffect(() => {
     // Array of background image URLs
-    const images = [`url(${pb})`, `url(${ff})`];
-
+    const images = [`url(${pb})`, `url(${ff})` , `url(${cd})`];
     let index = 0;
     const changeBackground = () => {
       index = (index + 1) % images.length;
       setBackgroundImage(images[index]);
     };
-
-    const intervalId = setInterval(changeBackground, 5000);
-
+    const intervalId = setInterval(changeBackground, 4000);
     return () => clearInterval(intervalId);
   }, []);
 
@@ -68,10 +66,10 @@ const LoginSignupComp = () => {
 
   return (
     <div
-      className="section flex items-center justify-center relative w-full h-full min-h-screen bg-cover bg-center"
+      className="section flex items-center justify-center relative w-full h-full min-h-screen bg-cover bg-center transition-all duration-300"
       style={{
         backgroundImage: backgroundImage,
-        transition: "background-image 1s ease-in-out",
+        transition: "background-image  ease-in-out",
       }}
     >
       <div className="container">
@@ -97,7 +95,7 @@ const LoginSignupComp = () => {
           {/* Log In Form */}
           <div className="backface-hidden absolute inset-0 bg-gray-800 text-white p-8">
             <div className="text-center">
-              <h1 className="styled-heading">Good to See You Again</h1>
+              <h1 className="styled-heading animate-bounce">Good to See You Again</h1>
               {/* <h4 className="mb-4 text-xl font-semibold">Log In</h4> */}
               <form onSubmit={handleLoginSubmit(submitLoginForm)}>
                 <div className="mb-4 relative">
@@ -138,7 +136,7 @@ const LoginSignupComp = () => {
                     </span>
                   )}
                 </div>
-                <button className="btn">Log in</button>
+                <button className="btn animate-breathe">Log in</button>
               </form>
               <div className="flex mt-5 justify-between items-center p-3 border border-gray-300 rounded-md bg-gradient-to-r from-gray-200 to-gray-300 transition-all duration-500">
                 <Link
@@ -160,7 +158,7 @@ const LoginSignupComp = () => {
           {/* Sign Up Form */}
           <div className="backface-hidden absolute inset-0 bg-gray-800 text-white p-5 rotate-y-180">
             <div className="text-center">
-              <h4 className="mb-2 signup p-2 text-2xl font-bold">Sign Up</h4>
+              <h4 className="mb-2 signup p-2 text-2xl font-bold animate-bounce">Sign Up</h4>
               <form onSubmit={handleSignupSubmit(submitSignupForm)}>
                 <div className="mb-1 relative">
                   <input
@@ -267,8 +265,8 @@ const LoginSignupComp = () => {
                     </span>
                   )}
                 </div>
-                <button type="submit" className="btn">
-                  Sent Email
+                <button type="submit" className="btn animate-breathe">
+                  Send OTP
                 </button>
               </form>
             </div>

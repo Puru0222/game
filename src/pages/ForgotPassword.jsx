@@ -36,17 +36,17 @@ const ForgotPassword = () => {
         className="bg-white bg-opacity-80 p-8 sm:p-10 rounded-lg shadow-lg w-full transform transition-all hover:scale-105 hover:shadow-2xl hover:-translate-y-2
                    max-w-80 sm:max-w-lg md:max-w-xl lg:max-w-2xl"
       >
-        <h1 className="text-4xl font-semibold text-gray-700 mb-4 text-center">
+        <h1 className="text-4xl font-semibold text-gray-900 mb-4 text-center">
           Forgotten Password? Don’t Worry
         </h1>
-        <p className="text-gray-500 text-center mb-6">Enter your email below</p>
+        <p className="text-gray-900 font-normal text-center mb-6">Enter your email below</p>
 
         <form
           className="flex flex-col gap-6"
           onSubmit={handleSubmit(submitEmailForm)}
         >
           <div className="flex flex-col">
-            <label htmlFor="email" className="text-gray-600 mb-2 font-medium">
+            <label htmlFor="email" className="text-gray-900 mb-2 font-medium">
               Email
             </label>
             <input
@@ -59,15 +59,15 @@ const ForgotPassword = () => {
             />
             {errors.email && (
               <span className="text-red-500 text-sm mt-1">
-                Please enter your email.
+                Please enter your Email.
               </span>
             )}
           </div>
           <button
             type="submit"
-            className="w-full bg-yellow-400 text-white py-5 rounded-md hover:bg-yellow-500 transition-all duration-300 font-medium"
+            className="w-full bg-yellow-400 text-white py-4 rounded-md hover:bg-yellow-500 transition-all duration-300 font-bold text-xl"
           >
-            Send OTP
+            SEND OTP
           </button>
         </form>
       </div>

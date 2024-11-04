@@ -72,7 +72,7 @@ const Navbar = () => {
             About
           </Link>
           <Link
-            to="/how-to-use"
+            to="/howtouse"
             className="block px-3 py-2 text-base font-normal hover:bg-gray-700"
           >
             How to Use

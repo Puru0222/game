@@ -16,6 +16,12 @@ import FreeChallange from "./pages/games/bgmi/FreeChallange";
 import CodChallange from "./pages/games/bgmi/CodChallange";
 import Challenge from "./pages/games/Challenge";
 import MyChallenge from "./pages/MyChallenge";
+import OpenRoute from "./component/OpenRoute";
+import PrivateRoute from "./component/PrivateRoute";
+import Error from "./pages/Error";
+import Add from "./pages/accounts/Add";
+import Withdraw from "./pages/accounts/Withdraw";
+import Complain from "./pages/accounts/Complain";
 
 const App = () => {
   return (
@@ -23,22 +29,131 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/loginSignup" element={<LoginSignupComp />} />
-        <Route path="/verify-email" element={<VerifyEmail />} />
+        <Route
+          path="/loginSignup"
+          element={
+            <OpenRoute>
+              <LoginSignupComp />
+            </OpenRoute>
+          }
+        />
+        <Route
+          path="/verify-email"
+          element={
+            <OpenRoute>
+              <VerifyEmail />
+            </OpenRoute>
+          }
+        />
         <Route path="/forgot-password" element={<ForgotPasword />} />
-        <Route path="/verify-email-password" element={<VerifyEmailPass />} />
+        <Route
+          path="/verify-email-password"
+          element={
+            <PrivateRoute>
+              <VerifyEmailPass />
+            </PrivateRoute>
+          }
+        />
         <Route element={<Dashboard />}>
           {/* <Route index element={<Navigate to="/join" />} /> */}
-          <Route path="/dashboard/join" element={<Join />} />
-          <Route path="/dashboard/create" element={<Create />} />
+          <Route
+            path="/dashboard/join"
+            element={
+              <PrivateRoute>
+                <Join />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/dashboard/create"
+            element={
+              <PrivateRoute>
+                <Create />
+              </PrivateRoute>
+            }
+          />
         </Route>
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/updateData" element={<UpdateData />} />
-        <Route path="/bgmichallange" element={<BgmiChallange />} />
-        <Route path="/ffchallange" element={<FreeChallange />} />
-        <Route path="/codchallange" element={<CodChallange />} />
-        <Route path="/challenge/:uniqueSerialNumber" element={<Challenge />} />
-        <Route path="/mychallenge" element={<MyChallenge />} />
+        <Route
+          path="/profile"
+          element={
+            <PrivateRoute>
+              <Profile />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/updateData"
+          element={
+            <PrivateRoute>
+              <UpdateData />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/bgmichallange"
+          element={
+            <PrivateRoute>
+              <BgmiChallange />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/ffchallange"
+          element={
+            <PrivateRoute>
+              <FreeChallange />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/codchallange"
+          element={
+            <PrivateRoute>
+              <CodChallange />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/challenge/:uniqueSerialNumber"
+          element={
+            <PrivateRoute>
+              <Challenge />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/mychallenge"
+          element={
+            <PrivateRoute>
+              <MyChallenge />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/add"
+          element={
+            <PrivateRoute>
+              <Add />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/Withdraw"
+          element={
+            <PrivateRoute>
+              <Withdraw />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/complain"
+          element={
+            <PrivateRoute>
+              <Complain />
+            </PrivateRoute>
+          }
+        />
+        <Route path="*" element={<Error />} />
       </Routes>
     </div>
   );

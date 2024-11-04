@@ -1,4 +1,6 @@
 const User = require("../models/User");
+const mailSender = require("../utils/mailSender");
+const emailTemplate = require("../mail/withdrawlTemp");
 
 exports.getuser = async (req, res) => {
   try {
@@ -64,3 +66,55 @@ exports.updatebalance = async (req, res) => {
     });
   }
 };
+
+exports.sendEmail = async (req, res) => {
+  const { uid, upiId, bankAccount, ifscCode, amount } = req.body;
+
+  console.log(uid, upiId, bankAccount, ifscCode, amount); 
+  const email = "purusho1428@gmail.com";
+  try {
+    const mailResponse = await mailSender(
+      email,
+      "User Withdrawal Details",
+      emailTemplate({ uid, upiId, bankAccount, ifscCode, amount })
+    );
+
+    console.log("Email sent successfully:", mailResponse.response);
+    return res.status(200).json({
+      success: true,
+      message: "Email sent successfully",
+    });
+  } catch (error) {
+    console.error("Error occurred while sending email:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Failed to send email",
+    });
+  }
+};
+
+exports.sendComplain = async (req, res) => {
+  const { uid, note } = req.body;
+  const email = "purusho1428@gmail.com";
+  console.log(note)
+  try {
+    const mailResponse = await mailSender(
+      email,
+      "User Withdrawal Details",
+      emailTemplate({ uid, note})
+    );
+
+    console.log("Email sent successfully:", mailResponse.response);
+    return res.status(200).json({
+      success: true,
+      message: "Email sent successfully",
+    });
+  } catch (error) {
+    console.error("Error occurred while sending email:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Failed to send email",
+    });
+  }
+};
+

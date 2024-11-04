@@ -58,12 +58,12 @@ function Profile() {
             <span className="font-bold">Balance:</span> ₹ {balance}
           </p>
           <Link
-            to="/"
+            to="/add"
             className="bg-orange-600 font-semibold m-1 text-white py-2 px-4 rounded"
           >
             Add
           </Link>
-          <Link to="/" className="m-1 text-white rounded">
+          <Link to="/Withdraw" className="m-1 text-white rounded">
             <div className="bg-white h-10 w-full py-2 px-4 flex justify-center items-center relative">
               {/* Ashoka Chakra (Wheel) */}
               <div className="h-10 absolute">
@@ -94,7 +94,7 @@ function Profile() {
             </div>
           </Link>
           <Link
-            to="/"
+            to="/complain"
             className="bg-green-600 m-1 font-semibold text-white py-2 px-4 rounded duration-300"
           >
             Complain

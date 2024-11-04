@@ -13,6 +13,8 @@ export const endpoints = {
 export const updateDataEndpoint = {
   GETUSER_API: BASE_URL + "/update/getuser",
   UPDATEBALANCE_API: BASE_URL + "/update/updatebalance",
+  SENT_EMAIL : BASE_URL + "/update/sendemail",
+  SENT_COMP : BASE_URL + "/update/sendcomp"
 };
 
 export const bgmiendpoint = {
