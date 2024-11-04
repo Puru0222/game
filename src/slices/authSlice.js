@@ -2,9 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   signupData: null,
-  token: localStorage.getItem("token")
-    ? JSON.parse(localStorage.getItem("token"))
-    : null,
+  token: null,
   emailData: null,
   createChallenge: [],
   joinChallenge: [],
@@ -14,19 +12,19 @@ const authSlice = createSlice({
   name: "auth",
   initialState: initialState,
   reducers: {
-    setSignupData(state, value) {
-      state.signupData = value.payload;
+    setSignupData(state, action) {
+      state.signupData = action.payload;
     },
-    setLoading(state, value) {
-      state.loading = value.payload;
+    setLoading(state, action) {
+      state.loading = action.payload;
     },
-    setToken(state, value) {
-      state.token = value.payload;
+    setToken(state, action) {
+      state.token = action.payload;
     },
-    setEmail(state, value) {
-      state.emailData = value.payload;
+    setEmail(state, action) {
+      state.emailData = action.payload;
     },
-    setUser(state, value) {
+    setUser(state, action) {
       const {
         _id,
         fullname,
@@ -35,7 +33,7 @@ const authSlice = createSlice({
         email,
         createChallenge,
         joinChallenge,
-      } = value.payload;
+      } = action.payload;
       state.id = _id;
       state.fullname = fullname;
       state.uid = uid;
@@ -44,9 +42,19 @@ const authSlice = createSlice({
       state.createChallenge = createChallenge || [];
       state.joinChallenge = joinChallenge || [];
     },
+    logout(state) {
+      // Reset all fields to initial state on logout
+      Object.assign(state, initialState);
+    },
   },
 });
 
-export const { setSignupData, setLoading, setToken, setEmail, setUser } =
-  authSlice.actions;
+export const {
+  setSignupData,
+  setLoading,
+  setToken,
+  setEmail,
+  setUser,
+  logout,
+} = authSlice.actions;
 export default authSlice.reducer;
