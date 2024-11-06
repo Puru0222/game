@@ -48,7 +48,7 @@ const LoginSignupComp = () => {
   const submitSignupForm = async (data) => {
     try {
       dispatch(setSignupData(data));
-      dispatch(sendOtp(data.email, navigate));
+      dispatch(sendOtp(data.email, data.uid,navigate));
       resetSignupForm();
     } catch (error) {
       console.error("Error sending OTP:", error);
@@ -72,7 +72,7 @@ const LoginSignupComp = () => {
         transition: "background-image  ease-in-out",
       }}
     >
-      <div className="container">
+      <div className="container mb-10">
         <div className="flex justify-center space-x-4 my-4">
           <span
             className={`auth-toggle-btn ${
@@ -103,7 +103,7 @@ const LoginSignupComp = () => {
                   <input
                     type="email"
                     className="form-style"
-                    placeholder="Your Email"
+                    placeholder="Email"
                     name="loginEmail"
                     id="loginEmail"
                     {...loginRegister("loginEmail", {
@@ -122,7 +122,7 @@ const LoginSignupComp = () => {
                   <input
                     type="password"
                     className="form-style"
-                    placeholder="Your Password"
+                    placeholder="Password"
                     name="loginPassword"
                     id="loginPassword"
                     {...loginRegister("loginPassword", {
@@ -168,7 +168,7 @@ const LoginSignupComp = () => {
                     }`}
                     name="fullname"
                     id="fullname"
-                    placeholder="Your Full Name"
+                    placeholder="In Game Name"
                     {...signupRegister("fullname", {
                       required: "Full name is required",
                     })}
@@ -188,7 +188,7 @@ const LoginSignupComp = () => {
                     }`}
                     name="uid"
                     id="uid"
-                    placeholder="Your U-ID"
+                    placeholder="UID No."
                     {...signupRegister("uid", { required: "U-ID is required" })}
                   />
                   <i className="input-icon uil uil-user text-yellow-300"></i>
@@ -206,7 +206,7 @@ const LoginSignupComp = () => {
                     }`}
                     name="email"
                     id="email"
-                    placeholder="Your Email"
+                    placeholder="Email"
                     {...signupRegister("email", {
                       required: "Email is required",
                       pattern: {
@@ -230,7 +230,7 @@ const LoginSignupComp = () => {
                     }`}
                     name="password"
                     id="password"
-                    placeholder="Your Password"
+                    placeholder="Password"
                     {...signupRegister("password", {
                       required: "Password is required",
                     })}

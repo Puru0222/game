@@ -134,19 +134,14 @@ const BgmiChallange = () => {
                   {...register("map", { required: "Map is required" })}
                 >
                   <option value="">Select Map</option>
+                  <option value="Team Deathmatch">Team Deathmatch</option>
                   <option value="Erangel">Erangel</option>
                   <option value="Miramar">Miramar</option>
                   <option value="Sanhok">Sanhok</option>
                   <option value="Livik">Livik</option>
-                  <option value="Team Deathmatch">Team Deathmatch</option>
-                  <option value="Rondo">Rondo</option>
                   <option value="Vikendi">Vikendi</option>
-                  <option value="Karakin">Karakin</option>
-                  <option value="Intense Battle Royale">
-                    Intense Battle Royale
-                  </option>
-                  <option value="Classic Mode">Classic Mode</option>
-                  <option value="Sandbox Mode">Sandbox Mode</option>
+                  <option value="Gun Game">Gun Game</option>
+                  <option value="Arcade">Arcade</option>
                 </select>
                 {errors.map && (
                   <p className="text-red-500 text-sm">{errors.map.message}</p>

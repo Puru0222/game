@@ -53,6 +53,7 @@ const Challenge = () => {
         if (result.data.message === "Already registered") {
           toast.success("Already registered");
         } else {
+          setPasswordVisible(true);
           toast.success("Welcome to another Challenge!");
         }
       }
@@ -115,7 +116,7 @@ const Challenge = () => {
           className="w-full text-lg font-semibold text-white bg-blue-600 rounded-full py-3 transition duration-300 hover:bg-blue-700"
           onSlideDone={() => {
             handleJoin();
-            setPasswordVisible(true);
+            // setPasswordVisible(true);
           }}
         />
       </div>

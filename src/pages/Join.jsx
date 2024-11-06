@@ -1,33 +1,34 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { apiConnector } from "../services/apiConnector";
-import { bgmiendpoint } from "../services/apis";
-import { saveChallenges } from "../slices/gameslices/challengeSlice";
+import {
+  resetChallenges,
+  saveChallenges,
+} from "../slices/gameslices/challengeSlice";
 import { useSelector } from "react-redux";
+import { fetchChallenges } from "../services/bgmiAPI";
 
 function Join() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const { challenges } = useSelector((state) => state.challenge);
 
   useEffect(() => {
-    const fetchChallenges = async () => {
+    const loadChallenges = async () => {
       setLoading(true);
       try {
-        const response = await apiConnector("GET", bgmiendpoint.GET_CHALLANGES);
-        if (response.data.challenges && response.data.challenges.length > 0) {
-          dispatch(saveChallenges(response.data.challenges));
-        }
+        const challengesData = await fetchChallenges();
+        dispatch(resetChallenges());
+        dispatch(saveChallenges(challengesData));
       } catch (error) {
-        console.error("Failed to fetch challenges:", error);
+        console.error("Failed to load challenges:", error);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     };
-    fetchChallenges();
+    loadChallenges();
   }, [dispatch]);
-
-  const { challenges } = useSelector((state) => state.challenge);
 
   const onClickHandle = (uniqueSerialNumber) => {
     navigate(`/challenge/${uniqueSerialNumber}`);
@@ -36,15 +37,20 @@ function Join() {
   return (
     <div className="flex flex-col gap-6 p-4">
       {loading ? (
-        <p className="text-center">Loading...</p>
+        <div className="flex justify-center items-center bg-black bg-opacity-70 rounded-lg shadow-md p-6">
+          <p className="text-center text-gray-50 text-lg font-semibold">
+            Loading .....
+          </p>
+        </div>
       ) : challenges.length > 0 ? (
         challenges.map((challenge) => (
           <div
             key={challenge.uniqueSerialNumber}
             className="bg-gray-900 w-full bg-opacity-90 p-4 rounded-lg shadow-md"
           >
-            <div className="text-xl text-center mb-2 font-bold text-white">
-              {challenge.gname}
+            <div className="text-xl flex justify-evenly mb-2 font-bold text-white">
+              <div>{challenge.gname}</div>
+              <div>{challenge.fullname}</div>
             </div>
             <div className="flex justify-between">
               <div className="text-sm text-gray-100 font-medium">

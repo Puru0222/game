@@ -55,6 +55,12 @@ const ChallangeSchema = new mongoose.Schema({
       ref: "user",
     },
   ],
+  winners: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "user",
+    },
+  ],
   balance: {
     type: Number,
     default: 0,

@@ -8,6 +8,7 @@ export const endpoints = {
   SENDPASSWORDOTP_API: BASE_URL + "/auth/sendpasswordotp",
   FORGOTPASSWORD_API: BASE_URL + "/auth/forgotpassword",
   UPDATEPASSWORD_API: BASE_URL + "/auth/updatepassword",
+  USER_DATA : BASE_URL + "/auth/fetchuser",
 };
 
 export const updateDataEndpoint = {

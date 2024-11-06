@@ -6,6 +6,9 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import { useState } from "react";
 import { FaRegCopy } from "react-icons/fa6";
 import { toast } from "react-hot-toast";
+import { resetChallenges } from "../slices/gameslices/challengeSlice";
+import { logout } from "../slices/authSlice";
+import { useDispatch } from "react-redux";
 
 function Profile() {
   const [copied, setCopied] = useState(false);
@@ -14,23 +17,27 @@ function Profile() {
     toast.success("Copied to clipboard!");
   };
 
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(logout());
+    dispatch(resetChallenges());
+  };
+
   return (
     <div
       className="flex justify-center items-center h-screen w-full bg-cover bg-center bg-no-repeat "
       style={{ backgroundImage: `url(${img})` }}
     >
-      <div
-        className="bg-white bg-opacity-80 p-8 sm:p-10 rounded-lg shadow-lg w-full transform transition-all hover:scale-105 hover:shadow-2xl hover:-translate-y-2
-                   max-w-80 sm:max-w-lg md:max-w-xl lg:max-w-2xl"
-      >
+      <div className="bg-white bg-opacity-80 p-8 sm:p-10 rounded-lg shadow-lg transform transition-all w-11/12">
         <div className="flex justify-between items-center mb-4">
           <h1 className="text-2xl font-bold text-gray-900">Profile</h1>
-          <Link
+          <button onClick={handleLogout}
             to="/dashboard/join"
-            className="relative text-blue-500 font-bold hover:text-white p-2 rounded-md transition-all duration-500 ease-in-out hover:bg-gradient-to-r hover:from-blue-500 hover:to-blue-600"
+            className="px-4 py-2 text-red-500 font-bold hover:text-white p-2 rounded-md transition-all duration-500 ease-in-out hover:bg-gradient-to-r hover:from-red-400 hover:to-red-600"
           >
-            Back
-          </Link>
+            LogOut
+          </button>
         </div>
 
         <div className="flex flex-col mb-2">
@@ -87,7 +94,7 @@ function Profile() {
                     />
                   ))}
                 </svg>
-                <p className="text-center text-lg text-blue-800 font-bold absolute top-0 w-full -left-24 sm:-left-44 md:-left-52 lg:-left-64 mt-2">
+                <p className="text-center text-lg text-blue-800 font-bold absolute top-0 w-11/12 -left-24 sm:-left-64 md:-left-80 lg:-left-96 mt-2">
                   Withdraw
                 </p>
               </div>

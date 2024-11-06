@@ -79,9 +79,9 @@ exports.signup = async (req, res) => {
     }
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      return res.status(400).json({
-        success: false,
-        message: "User already exists. Please sign in to continue.",
+      return res.status(200).json({
+        success: true,
+        message: "User already exists. Please Login to continue.",
       });
     }
     const response = await OTP.find({ email }).sort({ createdAt: -1 }).limit(1);
@@ -104,8 +104,6 @@ exports.signup = async (req, res) => {
       uid,
       email,
       password: hashedPassword,
-      // additionalDetails: profileDetails._id,
-      // image: `https://api.dicebear.com/5.x/initials/svg?seed=${firstName} ${lastName}`,
     });
     return res.status(200).json({
       success: true,
@@ -123,13 +121,21 @@ exports.signup = async (req, res) => {
 
 exports.sendotp = async (req, res) => {
   try {
-    const { email } = req.body;
-    const checkUserPresent = await User.findOne({ email });
+    const { email, uid } = req.body;
+    const checkUserPresent = await User.findOne({ uid });
 
     if (checkUserPresent) {
       return res.status(401).json({
         success: false,
-        message: `User is Already Registered`,
+        message: `Uid is Already Registered`,
+      });
+    }
+    const checkEmailPresent = await User.findOne({ email });
+
+    if (checkEmailPresent) {
+      return res.status(401).json({
+        success: false,
+        message: `Email is Already Registered`,
       });
     }
     var otp = otpGenerator.generate(6, {
@@ -251,6 +257,39 @@ exports.updatepassword = async (req, res) => {
       message:
         "An error occurred while updating the password. Please try again.",
       error: error.message,
+    });
+  }
+};
+
+exports.fetchUser = async (req, res) => {
+  try {
+    // Extract token from authorization header
+    const token = req.headers.authorization?.split(" ")[1];
+    if (!token) {
+      return res.status(401).json({
+        success: false,
+        message: "Token missing. Authorization denied.",
+      });
+    }
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const userId = decoded.id;
+    // console.log(userId)
+    const user = await User.findById(userId).select("-password -token");
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+    res.status(200).json({
+      success: true,
+      user,
+    });
+  } catch (error) {
+    console.error("Error in fetching user:", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch user. Please try again later.",
     });
   }
 };

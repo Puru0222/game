@@ -9,19 +9,21 @@ const {
   LOGIN_API,
   SENDPASSWORDOTP_API,
   UPDATEPASSWORD_API,
+  USER_DATA,
 } = endpoints;
 
-export function sendOtp(email, navigate) {
+export function sendOtp(email, uid, navigate) {
   return async (dispatch) => {
     const toastId = toast.loading("Loading...");
     // dispatch(setLoading(true));
     try {
       const response = await apiConnector("POST", SENDOTP_API, {
         email,
+        uid,
         checkUserPresent: true,
       });
-
       if (!response.data.success) {
+        toast.error(response.data.message);
         throw new Error(response.data.message);
       }
 
@@ -29,7 +31,9 @@ export function sendOtp(email, navigate) {
       navigate("/verify-email");
     } catch (error) {
       console.log("SENDOTP API ERROR............", error);
-      toast.error("Could Not Send OTP");
+      const errorMessage =
+        error.response?.data?.message || "Failed to send OTP";
+      toast.error(errorMessage);
     }
     // dispatch(setLoading(false));
     toast.dismiss(toastId);
@@ -89,8 +93,6 @@ export function login(loginEmail, loginPassword, navigate) {
       }
 
       toast.success("Login Successful");
-      // console.log(response.data.user);
-       console.log(response.data.token);
       dispatch(setToken(response.data.token));
       dispatch(setUser(response.data.user));
       localStorage.setItem("token", JSON.stringify(response.data.token));
@@ -140,7 +142,7 @@ export function updatePassword(email, otp, password, navigate) {
         throw new Error(result.data.message);
       }
       toast.success("Password Updated Successfully");
-      navigate("/loginSignup");
+      navigate("/verify-email-password");
     } catch (error) {
       console.error("Error updating password:", error);
       toast.error("Failed to Update Password");
@@ -155,5 +157,28 @@ export function logout(navigate) {
     localStorage.removeItem("token");
     toast.success("Logged Out");
     navigate("/");
+  };
+}
+
+export function fetchUserAndChallenges(token) {
+  return async (dispatch) => {
+    // const toastId = toast.loading("Fetching data...");
+    try {
+      const userResult = await apiConnector("GET", USER_DATA, null, {
+        Authorization: `Bearer ${token}`,
+      });
+      if (userResult.data.success) {
+        dispatch(setUser(userResult.data.user));
+      } else {
+        throw new Error("Failed to fetch user data");
+      }
+      // toast.success("Data fetched successfully");
+    } catch (error) {
+      console.error("Error fetching user and challenges:", error);
+    }
+      // toast.error("Failed to fetch data");
+    // } finally {
+    //   toast.dismiss(toastId);
+    // }
   };
 }

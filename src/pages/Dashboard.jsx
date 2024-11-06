@@ -6,28 +6,15 @@ import img from "../asset/verifysignup.webp";
 import { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { Meteors } from "./Meteors";
+import { fetchUserAndChallenges } from "../services/authAPI";
+import { useDispatch } from "react-redux";
 
 function Dashboard() {
-  const { fullname, balance, uid } = useSelector((state) => state.auth);
-  // const [backgroundImage, setBackgroundImage] = useState(`url(${img1})`);
+  const { fullname, balance, token } = useSelector((state) => state.auth);
   const location = useLocation();
-  // useEffect(() => {
-  //   // Array of background image URLs
-  //   const images = [`url(${img1})`, `url(${img2})`];
-
-  //   let index = 0;
-  //   const changeBackground = () => {
-  //     index = (index + 1) % images.length;
-  //     setBackgroundImage(images[index]);
-  //   };
-
-  //   const intervalId = setInterval(changeBackground, 5000);
-
-  //   return () => clearInterval(intervalId);
-  // }, []);
-
   const [isVisible, setIsVisible] = useState(true);
   const containerRef = useRef(null);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     // Automatically collapse after 1 minute
@@ -53,6 +40,12 @@ function Dashboard() {
     };
   }, []);
 
+  useEffect(() => {
+    if (token) {
+      dispatch(fetchUserAndChallenges(token));
+    }
+  }, [dispatch, token]);
+
   const toggleVisibility = () => {
     setIsVisible((prev) => !prev);
   };
@@ -69,9 +62,7 @@ function Dashboard() {
         className="transition-all duration-300 w-full max-w-xs sm:max-w-md md:max-w-xl lg:max-w-2xl"
       >
         {isVisible ? (
-          <div
-            className="p-4 mt-4 mb-4 px-6 bg-gradient-to-r from-zinc-800 via-purple-900 to-gray-800 rounded-lg shadow-2xl transition-transform transform hover:scale-105 hover:shadow-2xl "
-          >
+          <div className="p-4 mt-4 mb-4 px-6 bg-gradient-to-r from-zinc-800 via-purple-900 to-gray-800 rounded-lg shadow-2xl transition-transform transform hover:scale-105 hover:shadow-2xl ">
             {/* User Info Section */}
             <div className="flex justify-between items-center mb-4">
               <p className="text-gray-100 font-bold text-xl">
@@ -151,8 +142,6 @@ function Dashboard() {
 
       <div className="flex-1 w-full max-w-xs sm:max-w-md md:max-w-xl lg:max-w-2xl overflow-y-auto">
         {" "}
-        {/* Add margin-top to push content down */}
-        {/* Your main content goes here */}
         <Outlet />
       </div>
     </div>

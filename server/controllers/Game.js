@@ -69,10 +69,15 @@ exports.create = async (req, res) => {
 
 exports.getChallenges = async (req, res) => {
   try {
-    const challenges = await Challange.find().populate({
-      path: "users",
-      select: "fullname",
-    });
+    const challenges = await Challange.find()
+      .populate({
+        path: "users",
+        select: "fullname",
+      })
+      .populate({
+        path: "winners",
+        select: "fullname",
+      });
 
     res.status(200).json({ success: true, challenges });
   } catch (error) {
@@ -98,6 +103,12 @@ exports.updatePlayer = async (req, res) => {
       });
     }
     const user = await User.findById(id);
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
     console.log(user);
     for (let i = 0; i < user.joinChallenge.length; i++) {
       if (user.joinChallenge[i].equals(challenge._id)) {
@@ -160,11 +171,12 @@ exports.updateChallenge = async (req, res) => {
         .status(400)
         .json({ success: false, message: "Challenge is already completed." });
     }
-    const adminId = "6725c16abbcb52a1f24db7d5";
+    const adminId = "672af280520a7731da410e9c";
     const winnerShare = balance * 0.8;
     const creatorShare = balance * 0.15;
     const adminShare = balance * 0.05;
     const rewardPerUser = winnerShare / users.length;
+
     const updateUserBalances = users.map(async (userId) => {
       return await User.findByIdAndUpdate(
         userId,
@@ -184,6 +196,7 @@ exports.updateChallenge = async (req, res) => {
       { new: true }
     );
     challenge.status = "completed";
+    challenge.winners = users;
     await challenge.save();
     return res.status(200).json({
       success: true,

@@ -2,7 +2,7 @@ import { toast } from "react-hot-toast";
 import { apiConnector } from "./apiConnector";
 import { bgmiendpoint } from "./apis";
 
-const { CREATEBGMICHALLANGE_API, GETALLCHALLANGE_API } = bgmiendpoint;
+const { CREATEBGMICHALLANGE_API, GET_CHALLANGES } = bgmiendpoint;
 
 export function createBgmiChallange(
   uid,
@@ -44,3 +44,18 @@ export function createBgmiChallange(
     toast.dismiss(toastId);
   };
 }
+
+export const fetchChallenges = async () => {
+  try {
+    const result = await apiConnector("GET", GET_CHALLANGES);
+    if (result.data.success) {
+      return result.data.challenges;
+    } else {
+      toast.error("Failed to load challenges");
+      return [];
+    }
+  } catch (error) {
+    toast.error("An error occurred while fetching challenges");
+    return [];
+  }
+};

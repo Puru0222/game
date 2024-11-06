@@ -1,13 +1,19 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import SlideButton from "react-slide-button";
 import toast from "react-hot-toast";
 import { useState } from "react";
 import { apiConnector } from "../services/apiConnector";
 import { bgmiendpoint } from "../services/apis";
 import img from "../asset/mychallenge.webp";
+import { fetchChallenges } from "../services/bgmiAPI";
+import {
+  resetChallenges,
+  saveChallenges,
+} from "../slices/gameslices/challengeSlice";
 
 const MyChallenge = () => {
+  const dispatch = useDispatch();
   const joinChallenge = useSelector((state) => state.auth.joinChallenge);
   const createChallenge = useSelector((state) => state.auth.createChallenge);
   const challenges = useSelector((state) => state.challenge.challenges);
@@ -62,6 +68,19 @@ const MyChallenge = () => {
       toast.dismiss(toastId);
     }
   };
+
+  useEffect(() => {
+    const getChallenges = async () => {
+      const challengesData = await fetchChallenges();
+      dispatch(resetChallenges());
+      dispatch(saveChallenges(challengesData));
+    };
+
+    if (id) {
+      getChallenges();
+    }
+  }, [dispatch, id, joinChallenge, createChallenge]);
+
   return (
     <div
       className="flex justify-center items-center h-screen w-full bg-cover bg-center"
@@ -98,29 +117,32 @@ const MyChallenge = () => {
                   <div className="flex justify-center mb-2">
                     <div className="text-lg font-semibold">Players</div>
                   </div>
-                  <ul className="p-4 mb-2 border rounded-md shadow-lg">
-                    {challenge.users.map((player) => (
-                      <li
-                        key={player._id}
-                        className="flex items-center p-2 hover:bg-gray-100 rounded transition-colors duration-200"
-                      >
-                        <input
-                          type="checkbox"
-                          className="form-checkbox h-5 w-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                          checked={
-                            selectedUsers[challenge._id]?.includes(
-                              player._id
-                            ) || false
-                          }
-                          onChange={() =>
-                            handleUserSelection(challenge._id, player._id)
-                          }
-                        />
-                        <span className="ml-2">{player.fullname}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  {challenge.status === "completed" ? (
+
+                  {/* Conditionally render player selection if challenge is not completed */}
+                  {challenge.status !== "completed" ? (
+                    <ul className="p-4 mb-2 border rounded-md shadow-lg">
+                      {challenge.users.map((player) => (
+                        <li
+                          key={player._id}
+                          className="flex items-center p-2 hover:bg-gray-100 rounded transition-colors duration-200"
+                        >
+                          <input
+                            type="checkbox"
+                            className="form-checkbox h-5 w-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                            checked={
+                              selectedUsers[challenge._id]?.includes(
+                                player._id
+                              ) || false
+                            }
+                            onChange={() =>
+                              handleUserSelection(challenge._id, player._id)
+                            }
+                          />
+                          <span className="ml-2">{player.fullname}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
                     <div className="flex justify-center items-center p-4 rounded-lg shadow-lg bg-blue-500">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -138,7 +160,10 @@ const MyChallenge = () => {
                       </svg>
                       <span className="text-lg">Winner Selected!</span>
                     </div>
-                  ) : (
+                  )}
+
+                  {/* Conditionally render the winner selection button if challenge is not completed */}
+                  {challenge.status !== "completed" && (
                     <SlideButton
                       mainText="Select Winner"
                       onSlideDone={() =>
@@ -164,12 +189,33 @@ const MyChallenge = () => {
             {joinedChallenges.length > 0 ? (
               joinedChallenges.map((challenge, index) => (
                 <div key={index} className="p-4 border mb-2 rounded-md shadow">
-                  <p>
-                    <strong>Room ID:</strong> {challenge.roomId}
-                  </p>
+                  <div className="flex justify-between">
+                    <p>
+                      <strong>Room ID:</strong> {challenge.roomId}
+                    </p>
+                    <p>
+                      <strong>{challenge.fullname}</strong>
+                    </p>
+                  </div>
                   <p>
                     <strong>Map:</strong> {challenge.map}
                   </p>
+                  {challenge.winners && challenge.winners.length > 0 ? (
+                    <div className="mt-3">
+                      <p>
+                        <strong>Winners:</strong>
+                      </p>
+                      <ul className="list-disc pl-5">
+                        {challenge.winners.map((winner, idx) => (
+                          <li key={idx}>{winner.fullname}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  ) : (
+                    <p className="mt-3 text-gray-800">
+                      No winners selected yet.
+                    </p>
+                  )}
                 </div>
               ))
             ) : (

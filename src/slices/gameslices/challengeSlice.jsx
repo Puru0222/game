@@ -17,11 +17,13 @@ const challengeSlice = createSlice({
               newChallenge.uniqueSerialNumber
           )
       );
-
       state.challenges = [...state.challenges, ...newChallenges];
+    },
+    resetChallenges: (state) => {
+      state.challenges = [];
     },
   },
 });
 
-export const { saveChallenges } = challengeSlice.actions;
+export const { saveChallenges, resetChallenges } = challengeSlice.actions;
 export default challengeSlice.reducer;

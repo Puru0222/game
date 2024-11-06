@@ -43,8 +43,8 @@ function VerifyEmailPass() {
       className="flex justify-center items-center h-screen w-full bg-cover bg-center bg-no-repeat"
       style={{ backgroundImage: `url(${img})` }}
     >
-      <div className="bg-white bg-opacity-80 p-4 rounded-lg shadow-lg w-full max-w-80 sm:max-w-lg md:max-w-xl lg:max-w-2xl transform transition-all hover:scale-105 hover:shadow-2xl hover:-translate-y-2">
-        <div className="flex flex-col gap-y-5">
+      <div className="bg-white bg-opacity-80 p-4 rounded-lg shadow-lg transform transition-all hover:scale-105 hover:shadow-2xl hover:-translate-y-2">
+        <div className="flex flex-col gap-y-5 mb-8">
           {/* Form Section */}
           <div className="flex flex-col">
             <h1 className="text-2xl sm:text-3xl font-semibold text-gray-700 mb-4 text-center">

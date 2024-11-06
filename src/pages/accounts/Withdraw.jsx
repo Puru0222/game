@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { apiConnector } from "../../services/apiConnector";
 import { updateDataEndpoint } from "../../services/apis";
+import img1 from "../../asset/bgimg.png"
 
 const Withdraw = () => {
   const {
@@ -35,8 +36,15 @@ const Withdraw = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-gray-200 text-gray-800 ">
-      <h2 className="text-2xl font-semibold mb-1 p-4 animate-bounce border bg-white rounded-lg shadow-2xl transition-transform transform hover:scale-105 hover:shadow-2xl">
+    <div
+      className="flex flex-col justify-center items-center h-screen w-full bg-cover bg-center bg-no-repeat text-black p-4"
+      style={{ backgroundImage: `url(${img1})` }}
+    >
+      <div
+        className="bg-white bg-opacity-60 flex flex-col items-center p-8 sm:p-10 rounded-lg shadow-lg w-11/12"
+      >
+
+      <h2 className="text-2xl font-semibold mb-4 p-4 animate-breathe border bg-white rounded-lg shadow-2xl">
         Withdraw Money
       </h2>
       <p className="mb-4 text-center font-medium">
@@ -70,24 +78,6 @@ const Withdraw = () => {
         </div>
 
         <div>
-          <label className="block font-medium mb-1">
-            Bank Account & IFSC Code
-          </label>
-          <input
-            type="text"
-            {...register("bankAccount")}
-            className="w-full p-2 border border-gray-300 rounded mb-2"
-            placeholder="Enter your Bank Account Number (optional)"
-          />
-          <input
-            type="text"
-            {...register("ifscCode")}
-            className="w-full p-2 border border-gray-300 rounded"
-            placeholder="Enter IFSC Code (optional)"
-          />
-        </div>
-
-        <div>
           <label className="block font-medium mb-1">Amount</label>
           <input
             type="number"
@@ -110,6 +100,7 @@ const Withdraw = () => {
           Submit Withdrawal Request
         </button>
       </form>
+      </div>
     </div>
   );
 };

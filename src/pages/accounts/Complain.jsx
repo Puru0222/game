@@ -42,15 +42,15 @@ const Complain = () => {
       style={{ backgroundImage: `url(${img})` }}
     >
     <div
-        className="bg-white bg-opacity-80 p-8 sm:p-10 rounded-lg shadow-lg w-11/12"
+        className="bg-white bg-opacity-80 flex flex-col items-center p-8 sm:p-10 rounded-lg shadow-lg w-11/12"
       >
 
       <div className="flex justify-center text-2xl font-semibold mb-1 p-4 animate-bounce border rounded-lg shadow-2xl transition-transform transform hover:scale-105 hover:shadow-2xl">
-        Any Complain Tell us Freely
+        Any Complain, Tell us Freely
       </div>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="bg-gray-200 bg-opacity-70 shadow-lg rounded-lg p-5 space-y-5 w-full max-w-md"
+        className="bg-gray-200  bg-opacity-70 shadow-lg rounded-lg p-5 space-y-5 w-11/12"
       >
       <div>
           <label className="block font-medium mb-1">UID</label>

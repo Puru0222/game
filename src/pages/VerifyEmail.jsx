@@ -39,7 +39,7 @@ function VerifyEmail() {
           <div className="spinner"></div>
         </div>
       ) : (
-        <div className="bg-white bg-opacity-80 p-4 w-full max-w-80 sm:max-w-lg md:max-w-xl lg:max-w-2xl rounded-lg shadow-lg transform transition-all hover:scale-105 hover:shadow-2xl hover:-translate-y-2">
+        <div className="bg-white bg-opacity-80 p-4 w-11/12 mb-8 rounded-lg shadow-lg transform transition-all hover:scale-105 hover:shadow-2xl hover:-translate-y-2">
           <h1 className="text-richblack-5 font-bold text-[1.875rem] leading-[2.375rem] text-center">
             Verify Email
           </h1>
@@ -79,7 +79,7 @@ function VerifyEmail() {
               Verify Email
             </button>
           </form>
-          <div className="mt-8 flex items-center justify-between">
+          <div className="mt-8 mb-5 flex items-center justify-between">
             <Link to="/loginSignup">
               <p className="relative flex items-center gap-2 text-blue-500 hover:text-white p-2 rounded-md transition-all duration-500 ease-in-out hover:bg-gradient-to-r hover:from-blue-400 hover:to-blue-600">
                 <BiArrowBack /> Back To Signup

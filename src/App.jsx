@@ -46,14 +46,7 @@ const App = () => {
           }
         />
         <Route path="/forgot-password" element={<ForgotPasword />} />
-        <Route
-          path="/verify-email-password"
-          element={
-            <PrivateRoute>
-              <VerifyEmailPass />
-            </PrivateRoute>
-          }
-        />
+        <Route path="/verify-email-password" element={<VerifyEmailPass />} />
         <Route element={<Dashboard />}>
           {/* <Route index element={<Navigate to="/join" />} /> */}
           <Route
