@@ -61,9 +61,37 @@ const MyChallenge = () => {
         toast.error("Select Winner");
       } else {
         toast.success("Winner Selected!");
+        const updatedChallenges = await fetchChallenges();
+        dispatch(resetChallenges());
+        dispatch(saveChallenges(updatedChallenges));
       }
     } catch (error) {
       toast.error("No Winner Selected");
+    } finally {
+      toast.dismiss(toastId);
+    }
+  };
+
+  // In MyChallenge.js
+
+  const handleMarkStarted = async (challengeId) => {
+    const toastId = toast.loading("Starting challenge...");
+
+    try {
+      const response = await apiConnector("PUT", bgmiendpoint.START_CHALLENGE, {
+        challengeId,
+      });
+      if (response.data.success) {
+        toast.success("Challenge marked as started!");
+        // Update the challenge list to reflect the new status
+        const updatedChallenges = await fetchChallenges();
+        dispatch(resetChallenges());
+        dispatch(saveChallenges(updatedChallenges));
+      } else {
+        toast.error(response.data.message || "Failed to start challenge");
+      }
+    } catch (error) {
+      toast.error("An error occurred while starting the challenge.");
     } finally {
       toast.dismiss(toastId);
     }
@@ -108,9 +136,27 @@ const MyChallenge = () => {
                   <h3 className="text-lg font-medium">
                     <strong>Room ID:</strong> {challenge.roomId}
                   </h3>
-                  <p className="text-lg">
-                    <strong>Pool:</strong> {challenge.balance}
-                  </p>
+                  <div className="text-lg flex justify-between">
+                    <div>
+                      <strong>Pool:</strong> {challenge.balance}
+                    </div>
+                    {challenge.status === "started" ? (
+                      <p className="text-center text-red-500 font-semibold">
+                        Challenge has started.
+                      </p>
+                    ) : challenge.status === "completed" ? (
+                      <p className="text-center text-green-500 font-semibold">
+                        Challenge has been completed.
+                      </p>
+                    ) : (
+                      <button
+                        onClick={() => handleMarkStarted(challenge._id)}
+                        className="text-black bg-blue-500 rounded px-2 hover:text-gray-100"
+                      >
+                        Mark Started
+                      </button>
+                    )}
+                  </div>
                   <p className="text-lg">
                     <strong>Players Count:</strong> {challenge.users.length}
                   </p>

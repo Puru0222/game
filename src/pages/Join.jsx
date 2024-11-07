@@ -75,6 +75,10 @@ function Join() {
               <p className="text-center text-red-500 font-semibold mt-4">
                 Challenge has started.
               </p>
+            ) : challenge.status === "completed" ? (
+              <p className="text-center text-green-500 font-semibold mt-4">
+                Challenge has been completed.
+              </p>
             ) : (
               <button
                 className="flex w-full bg-gray-700 bg-opacity-80 justify-center gap-x-2 text-gray-50 hover:text-white p-2 rounded-md transition-all duration-500 ease-in-out hover:bg-gradient-to-r hover:from-blue-400 hover:to-blue-600"

@@ -6,12 +6,24 @@ import toast from "react-hot-toast";
 import { bgmiendpoint } from "../../services/apis";
 import { apiConnector } from "../../services/apiConnector";
 import img from "../../asset/challenge.webp";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+import { FaRegCopy } from "react-icons/fa6";
 
 const Challenge = () => {
   const { uniqueSerialNumber } = useParams();
   const [challenge, setChallenge] = useState(null);
   const [passwordVisible, setPasswordVisible] = useState(false);
   const { id, balance, uid } = useSelector((state) => state.auth);
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(challenge.roomId);
+    toast.success("Room ID copied!");
+  };
+
+  const handleCopyPass = () => {
+    navigator.clipboard.writeText(challenge.roomPassword);
+    toast.success("Password copied!");
+  };
 
   const storedChallenge = useSelector((state) =>
     state.challenge.challenges.find(
@@ -79,15 +91,31 @@ const Challenge = () => {
         </div>
         <div className="flex justify-between my-2 p-3 bg-gray-100 bg-opacity-90 rounded-md font-medium">
           <p className="text-md ">Room Id :</p>
-          <p className="text-sm font-semibold text-gray-900">
+          <div className="text-sm font-semibold text-gray-900">
             {challenge.roomId}
-          </p>
+            <CopyToClipboard onCopy={handleCopy}>
+              <button className="hover:text-white transition-all duration-500 ease-in-out hover:bg-gradient-to-r hover:from-blue-500 hover:to-blue-600 mx-4 mb-2 bg-white rounded p-1">
+                <FaRegCopy className="flex text-base" />
+              </button>
+            </CopyToClipboard>
+          </div>
         </div>
         <div className="flex justify-between my-2 p-3 bg-gray-100 bg-opacity-90 rounded-md font-medium">
           <p className="text-md ">Room Password:</p>
-          <p className="text-sm font-semibold text-gray-900">
-            {passwordVisible ? challenge.roomPassword : "******"}
-          </p>
+          <div className="text-sm font-semibold text-gray-900">
+            {passwordVisible ? (
+              <div>
+                {challenge.roomPassword}
+                <CopyToClipboard onCopy={handleCopyPass}>
+                  <button className="hover:text-white transition-all duration-500 ease-in-out hover:bg-gradient-to-r hover:from-blue-500 hover:to-blue-600 mx-4 mb-2 bg-white rounded p-1">
+                    <FaRegCopy className="flex text-base" />
+                  </button>
+                </CopyToClipboard>
+              </div>
+            ) : (
+              "******"
+            )}
+          </div>
         </div>
         <div className="flex justify-between my-2 p-3 bg-gray-100 bg-opacity-90 rounded-md font-medium">
           <p className="text-md ">Entry Price:</p>

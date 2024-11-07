@@ -8,19 +8,20 @@ export const endpoints = {
   SENDPASSWORDOTP_API: BASE_URL + "/auth/sendpasswordotp",
   FORGOTPASSWORD_API: BASE_URL + "/auth/forgotpassword",
   UPDATEPASSWORD_API: BASE_URL + "/auth/updatepassword",
-  USER_DATA : BASE_URL + "/auth/fetchuser",
+  USER_DATA: BASE_URL + "/auth/fetchuser",
 };
 
 export const updateDataEndpoint = {
   GETUSER_API: BASE_URL + "/update/getuser",
   UPDATEBALANCE_API: BASE_URL + "/update/updatebalance",
-  SENT_EMAIL : BASE_URL + "/update/sendemail",
-  SENT_COMP : BASE_URL + "/update/sendcomp"
+  SENT_EMAIL: BASE_URL + "/update/sendemail",
+  SENT_COMP: BASE_URL + "/update/sendcomp",
 };
 
 export const bgmiendpoint = {
   CREATEBGMICHALLANGE_API: BASE_URL + "/challange/create",
   GET_CHALLANGES: BASE_URL + "/challange/getChallenges",
-  UPDATE_PLAYER : BASE_URL + "/challange/updateplayer",
-  SELECT_WINNER : BASE_URL + "/challange/updateChallenge"
+  UPDATE_PLAYER: BASE_URL + "/challange/updateplayer",
+  SELECT_WINNER: BASE_URL + "/challange/updateChallenge",
+  START_CHALLENGE: BASE_URL + "/challange/markChallengeStarted",
 };

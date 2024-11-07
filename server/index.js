@@ -1,8 +1,8 @@
 const express = require("express");
 const app = express();
 const userRoutes = require("./routes/user");
-const balanceRoutes = require("./routes/balance")
-const challangeRoutes = require("./routes/challange")
+const balanceRoutes = require("./routes/balance");
+const challangeRoutes = require("./routes/challange");
 const database = require("./config/database");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
@@ -35,7 +35,6 @@ cloudinaryConnect();
 app.use("/api/v1/auth", userRoutes);
 app.use("/api/v1/update", balanceRoutes);
 app.use("/api/v1/challange", challangeRoutes);
-
 
 // Deafult Route
 app.get("/", (req, res) => {

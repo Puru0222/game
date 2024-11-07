@@ -212,3 +212,31 @@ exports.updateChallenge = async (req, res) => {
     });
   }
 };
+
+exports.markChallengeStarted = async (req, res) => {
+  const { challengeId } = req.body;
+
+  try {
+    const challenge = await Challange.findByIdAndUpdate(
+      challengeId,
+      { status: "started" },
+      { new: true }
+    );
+
+    if (!challenge) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Challenge not found." });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Challenge marked as started.",
+      challenge,
+    });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ success: false, message: "Failed to update challenge status." });
+  }
+};
