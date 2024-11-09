@@ -1,6 +1,6 @@
 export const initiateUPIPayment = (amount, uid, userId, app) => {
   try {
-    const upiID = "gamechallenger@upi";
+    const upiID = "9798933342@pthdfc";
     const name = "Purushotam Kumar";
     const note = `UID: ${uid}`;
     const currency = "INR";
