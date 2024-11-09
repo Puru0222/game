@@ -1,16 +1,12 @@
-export const initiateUPIPayment = (amount, uid, userId, app) => {
+export const initiateUPIPayment = (amount, uid, app) => {
   try {
-    const upiID = "9798933342@pthdfc";
-    const name = "Purushotam Kumar";
+    const upiID = "gamechallenger@upi";
     const note = `UID: ${uid}`;
-    const currency = "INR";
 
-    // Encode parameters
+    // Encode essential parameters
     const pa = encodeURIComponent(upiID);
-    const pn = encodeURIComponent(name);
     const tn = encodeURIComponent(note);
     const am = encodeURIComponent(amount);
-    const cu = encodeURIComponent(currency);
 
     // Choose app-specific UPI scheme
     let baseURL;
@@ -25,14 +21,11 @@ export const initiateUPIPayment = (amount, uid, userId, app) => {
         baseURL = `paytmmp://upi/pay`;
         break;
       default:
-        baseURL = `upi://pay`; // Fallback to default UPI scheme
+        baseURL = `upi://pay`; // Fallback for other UPI apps
     }
 
-    // Construct UPI URL
-    const upiURL = `${baseURL}?pa=${pa}&pn=${pn}&tn=${tn}&am=${am}&cu=${cu}`;
-
-    // Log for debugging
-    console.log("Generated UPI URL:", upiURL);
+    // Construct simplified UPI URL
+    const upiURL = `${baseURL}?pa=${pa}&tn=${tn}&am=${am}`;
 
     // Redirect to UPI app
     window.location.href = upiURL;

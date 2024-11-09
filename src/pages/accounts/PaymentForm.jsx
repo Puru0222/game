@@ -3,13 +3,13 @@ import React, { useState } from "react";
 import { initiateUPIPayment } from "../../services/payment";
 import { useSelector } from "react-redux";
 
-const PaymentForm = ({ userId }) => {
+const PaymentForm = () => {
   const [amount, setAmount] = useState("");
   const [app, setApp] = useState("GooglePay"); // Default selection
   const { uid } = useSelector((state) => state.auth);
 
   const handlePayment = () => {
-    initiateUPIPayment(amount, uid, userId, app);
+    initiateUPIPayment(amount, uid, app);
   };
 
   return (
