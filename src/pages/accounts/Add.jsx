@@ -2,6 +2,7 @@ import React from "react";
 import img from "../../asset/puruupi.png";
 import toast from "react-hot-toast";
 import img1 from "../../asset/bgimg.png"
+import { Link } from "react-router-dom";
 
 const Add = () => {
   const handleCopy = () => {
@@ -43,6 +44,11 @@ const Add = () => {
         >
           Copy UPI ID
         </button>
+        <Link to={"/payment"}>
+            <button className="px-6 py-3 lg:mt-4 sm:mt-3 bg-yellow-500 text-yellow-50 font-bold rounded-full shadow-lg hover:bg-yellow-700 transition duration-300">
+              Add Money
+            </button>
+          </Link>
       </div>
     </div>
   );
