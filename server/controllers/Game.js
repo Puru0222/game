@@ -196,6 +196,7 @@ exports.updateChallenge = async (req, res) => {
       { new: true }
     );
     challenge.status = "completed";
+    challenge.balanceDistributed = true;
     challenge.winners = users;
     await challenge.save();
     return res.status(200).json({
@@ -238,5 +239,31 @@ exports.markChallengeStarted = async (req, res) => {
     res
       .status(500)
       .json({ success: false, message: "Failed to update challenge status." });
+  }
+};
+
+exports.deleteChallenge = async (req, res) => {
+  const { challengeId } = req.query;
+
+  try {
+    const deletedChallenge = await Challange.findByIdAndDelete(challengeId);
+
+    if (!deletedChallenge) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Challenge not found." });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Challenge deleted successfully.",
+      deletedChallenge,
+    });
+  } catch (error) {
+    console.error("Error deleting challenge:", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to delete challenge.",
+    });
   }
 };

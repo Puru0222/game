@@ -24,4 +24,5 @@ export const bgmiendpoint = {
   UPDATE_PLAYER: BASE_URL + "/challange/updateplayer",
   SELECT_WINNER: BASE_URL + "/challange/updateChallenge",
   START_CHALLENGE: BASE_URL + "/challange/markChallengeStarted",
+  DELETE_CHALLENGE: BASE_URL + "/challange/deleteChallenge",
 };

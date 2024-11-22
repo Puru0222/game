@@ -1,8 +1,10 @@
 import React from "react";
 import img from "../../asset/puruupi.png";
 import toast from "react-hot-toast";
-import img1 from "../../asset/bgimg.png"
+import img1 from "../../asset/2.jpg";
+import img2 from "../../asset/add.jpg";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 const Add = () => {
   const handleCopy = () => {
@@ -17,10 +19,26 @@ const Add = () => {
     link.click();
   };
 
+  const [backgroundImage, setBackgroundImage] = useState(`url(${img1})`);
+  useEffect(() => {
+    // Array of background image URLs
+    const images = [`url(${img1})`, `url(${img2})`];
+    let index = 0;
+    const changeBackground = () => {
+      index = (index + 1) % images.length;
+      setBackgroundImage(images[index]);
+    };
+    const intervalId = setInterval(changeBackground, 4000);
+    return () => clearInterval(intervalId);
+  }, []);
+
   return (
     <div
-      className="flex flex-col justify-center items-center h-screen w-full bg-cover bg-center bg-no-repeat text-white p-4"
-      style={{ backgroundImage: `url(${img1})` }}
+      className="flex transition-all duration-300 flex-col justify-center items-center h-screen w-full bg-cover bg-center bg-no-repeat text-black p-4"
+      style={{
+        backgroundImage: backgroundImage,
+        transition: "background-image  ease-in-out",
+      }}
     >
       <h2 className="text-2xl font-semibold">Add Money to Your Wallet</h2>
       <p className="p-5 px-8 text-center font-medium">
@@ -45,10 +63,10 @@ const Add = () => {
           Copy UPI ID
         </button>
         <Link to={"/payment"}>
-            <button className="px-6 py-3 lg:mt-4 sm:mt-3 bg-yellow-500 text-yellow-50 font-bold rounded-full shadow-lg hover:bg-yellow-700 transition duration-300">
-              Add Money
-            </button>
-          </Link>
+          <button className="px-6 py-3 lg:mt-4 sm:mt-3 bg-yellow-500 text-yellow-50 font-bold rounded-full shadow-lg hover:bg-yellow-700 transition duration-300">
+            Add Money Only By UPI Lite
+          </button>
+        </Link>
       </div>
     </div>
   );

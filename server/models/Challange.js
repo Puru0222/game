@@ -68,7 +68,10 @@ const ChallangeSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now,
-    expires: 4 * 60 * 60,
+  },
+  balanceDistributed: {
+    type: Boolean,
+    default: false,
   },
 });
 

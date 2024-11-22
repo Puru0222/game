@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import img from "../../../asset/ffcreate.jpeg";
+import img from "../../../asset/3.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { createBgmiChallange } from "../../../services/bgmiAPI";
@@ -59,7 +59,7 @@ const FreeChallange = () => {
     >
       {/* <div className="absolute inset-0 bg-black bg-opacity-20"></div> */}
       <div className="relative z-10 p-8 sm:p-10 rounded-lg shadow-lg w-full max-w-80 sm:max-w-lg md:max-w-xl lg:max-w-2xl">
-        <div className="absolute inset-0 bg-gradient-to-r from-gray-950 via-red-800 to-black opacity-80 rounded-lg"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-gray-800 via-slate-400 to-gray-800 opacity-80 rounded-lg"></div>
         <div className="relative z-20">
           <h1 className="text-2xl font-bold mb-4 text-gray-200">
             Create Free Fire Challenge
