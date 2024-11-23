@@ -8,11 +8,16 @@ const distributeBalance = async (challenge) => {
     const userCount = challenge.users.length;
 
     if (userCount > 0) {
-      const share = Math.floor(challenge.balance / userCount);
+      const share = challenge.balance / userCount;
 
-      for (const userId of challenge.users) {
-        await User.findByIdAndUpdate(userId, { $inc: { balance: share } });
-      }
+      const updatePromises = challenge.users.map((userId) =>
+        User.findByIdAndUpdate(
+          userId,
+          { $inc: { balance: share } },
+          { new: true }
+        )
+      );
+      await Promise.all(updatePromises);
 
       console.log(`Balance distributed for challenge ${challenge._id}`);
     } else {
@@ -71,7 +76,16 @@ const processChallengesInBatches = async () => {
   await deleteProcessedChallenges();
 };
 
-cron.schedule("0 3 * * *", async () => {
-  console.log("Running 3 AM job to process challenges...");
-  await processChallengesInBatches();
+// cron.schedule("0 3 * * *", async () => {
+//   console.log("Running 3 AM job to process challenges...");
+//   await processChallengesInBatches();
+// });
+
+cron.schedule('0 3 * * *', async () => {
+  try {
+    console.log("Running job every minutes to process challenges...");
+    await processChallengesInBatches();
+  } catch (error) {
+    console.error("Error processing challenges:", error);
+  }
 });
