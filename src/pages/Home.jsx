@@ -2,6 +2,7 @@ import React from "react";
 import pic1 from "../asset/pic1.webp";
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
+import Footer from "../component/Footer";
 
 const Home = () => {
   return (
@@ -35,6 +36,7 @@ const Home = () => {
           </Link> */}
         </div>
       </div>
+      <Footer/>
     </div>
   );
 };

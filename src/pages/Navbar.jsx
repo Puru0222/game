@@ -7,14 +7,14 @@ const Navbar = () => {
   return (
     <nav className="text-white bg-gradient-to-r from-black via-gray-900 to-gray-800 relative z-20">
       {" "}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-10">
         <div className="flex justify-between h-16 items-center">
           {/* Brand */}
           <h1 className="lg:text-2xl sm:text-xl font-bold">
             Game Challenger
           </h1>
           {/* Desktop Menu */}
-          <div className="hidden md:flex space-x-6">
+          <div className="hidden md:flex space-x-6 font-bold">
             {/* <Link
               to="/"
               className="hover:text-yellow-400 transition duration-300"
@@ -58,7 +58,7 @@ const Navbar = () => {
       </div>
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="absolute top-16 left-0 w-full bg-gray-900 bg-opacity-55 px-2 pt-2 pb-3 space-y-1 z-30 backdrop-blur-lg ">
+        <div className="absolute top-16 left-0 w-full bg-gray-900 bg-opacity-55 px-2 pt-2 pb-3 space-y-1 z-30 backdrop-blur-lg font-bold">
           {/* <Link
             to="/"
             className="block px-3 py-2 text-base font-normal hover:bg-gray-700"
