@@ -7,6 +7,7 @@ const {
   sendpasswordotp,
   updatepassword,
   fetchUser,
+  initiatePayment,
 } = require("../controllers/Auth");
 
 router.post("/login", login);
@@ -15,5 +16,8 @@ router.post("/sendotp", sendotp);
 router.post("/sendpasswordotp", sendpasswordotp);
 router.put("/updatepassword", updatepassword);
 router.get("/fetchuser", fetchUser);
+router.post("/paymet", initiatePayment);
+
+
 
 module.exports = router;

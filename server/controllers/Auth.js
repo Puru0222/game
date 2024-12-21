@@ -293,3 +293,43 @@ exports.fetchUser = async (req, res) => {
     });
   }
 };
+
+// backend/controllers/paymentController.js
+exports.initiatePayment = async (req, res) => {
+  const { amount, uid } = req.body;
+
+  try {
+    // Replace with your UPIGateway API credentials
+    const apiKey = "4de07135-eaea-4ca7-954e-144c74a588fa";
+
+    // Request to generate a dynamic QR code
+    const response = await axios.post(
+      "https://api.upigateway.com/generate-qrcode",
+      {
+        amount,
+        note: `Payment for UID: ${uid}`,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    if (response.data && response.data.qrCodeURL) {
+      return res.status(200).json({
+        qrCodeURL: response.data.qrCodeURL,
+      });
+    }
+
+    return res.status(400).json({
+      message: "Failed to generate QR code",
+    });
+  } catch (error) {
+    console.error("Error initiating payment:", error);
+    return res.status(500).json({
+      message: "Internal server error",
+    });
+  }
+};
