@@ -52,14 +52,12 @@ exports.create = async (req, res) => {
       { $push: { createChallenge: challange._id } },
       { new: true }
     ).populate("createChallenge");
-    console.log(user);
 
     return res.status(200).json({
       success: true,
       message: "Challange Created successfully",
     });
   } catch (error) {
-    console.error(error);
     return res.status(500).json({
       success: false,
       message: "Challange cannot be Created. Please try again.",
@@ -109,7 +107,6 @@ exports.updatePlayer = async (req, res) => {
         message: "User not found",
       });
     }
-    console.log(user);
     for (let i = 0; i < user.joinChallenge.length; i++) {
       if (user.joinChallenge[i].equals(challenge._id)) {
         return res.status(200).json({
@@ -133,15 +130,12 @@ exports.updatePlayer = async (req, res) => {
       new mongoose.Types.ObjectId(challenge._id)
     );
     await updatedUserDetails.save();
-    //console.log(updatedUserDetails);
 
     return res.status(200).json({
       success: true,
       message: "Challenge updated successfully",
-      //data: updatedPlayerDetail, // Optionally return the updated challenge
     });
   } catch (error) {
-    console.error("Error occurred while updating Challenge:", error);
     return res.status(500).json({
       success: false,
       message:
@@ -206,7 +200,6 @@ exports.updateChallenge = async (req, res) => {
       updatedChallenge: challenge,
     });
   } catch (error) {
-    console.error("Error updating challenge:", error);
     return res.status(500).json({
       success: false,
       message: "Server error. Please try again later.",
@@ -247,7 +240,6 @@ exports.deleteChallenge = async (req, res) => {
 
   try {
     const deletedChallenge = await Challange.findByIdAndDelete(challengeId);
-
     if (!deletedChallenge) {
       return res
         .status(404)
@@ -260,7 +252,6 @@ exports.deleteChallenge = async (req, res) => {
       deletedChallenge,
     });
   } catch (error) {
-    console.error("Error deleting challenge:", error);
     res.status(500).json({
       success: false,
       message: "Failed to delete challenge.",

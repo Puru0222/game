@@ -13,7 +13,6 @@ const LoginSignupComp = () => {
   const [isSignup, setIsSignup] = useState(false);
   const [backgroundImage, setBackgroundImage] = useState(`url(${ff})`);
   useEffect(() => {
-    // Array of background image URLs
     const images = [`url(${pb})`, `url(${ff})` , `url(${cd})`];
     let index = 0;
     const changeBackground = () => {
@@ -51,7 +50,6 @@ const LoginSignupComp = () => {
       dispatch(sendOtp(data.email, data.uid,navigate));
       resetSignupForm();
     } catch (error) {
-      console.error("Error sending OTP:", error);
     }
   };
 
@@ -60,17 +58,12 @@ const LoginSignupComp = () => {
       dispatch(login(data.loginEmail, data.loginPassword, navigate));
       resetLoginForm();
     } catch (error) {
-      console.log("Error while login:", error);
     }
   };
 
   return (
     <div
-      className="section flex items-center justify-center relative w-full h-full min-h-screen bg-cover bg-center transition-all duration-300"
-      style={{
-        backgroundImage: backgroundImage,
-        transition: "background-image  ease-in-out",
-      }}
+      className="section flex items-center justify-center relative w-full h-full min-h-screen"
     >
       <div className="container mb-10">
         <div className="flex justify-center space-x-4 my-4">
@@ -92,11 +85,9 @@ const LoginSignupComp = () => {
           </span>
         </div>
         <div className={`card-3d-wrap ${isSignup ? "rotate" : ""}`}>
-          {/* Log In Form */}
-          <div className="backface-hidden absolute inset-0 bg-gray-800 text-white p-8">
+          <div className="backface-hidden absolute inset-0 text-white p-8">
             <div className="text-center">
               <h1 className="styled-heading animate-bounce">Good to See You Again</h1>
-              {/* <h4 className="mb-4 text-xl font-semibold">Log In</h4> */}
               <form onSubmit={handleLoginSubmit(submitLoginForm)}>
                 <div className="mb-4 relative">
                   <label htmlFor="email"> Enter Your Email</label>
@@ -156,7 +147,7 @@ const LoginSignupComp = () => {
           </div>
 
           {/* Sign Up Form */}
-          <div className="backface-hidden absolute inset-0 bg-gray-800 text-white p-5 rotate-y-180">
+          <div className="backface-hidden absolute inset-0 text-white p-5 rotate-y-180">
             <div className="text-center">
               <h4 className="mb-2 signup p-2 text-2xl font-bold animate-bounce">Sign Up</h4>
               <form onSubmit={handleSignupSubmit(submitSignupForm)}>

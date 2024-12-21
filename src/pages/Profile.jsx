@@ -32,7 +32,8 @@ function Profile() {
       <div className="bg-white bg-opacity-80 p-8 sm:p-10 rounded-lg shadow-lg transform transition-all w-11/12">
         <div className="flex justify-between items-center mb-4">
           <h1 className="text-2xl font-bold text-gray-900">Profile</h1>
-          <button onClick={handleLogout}
+          <button
+            onClick={handleLogout}
             to="/dashboard/join"
             className="px-4 py-2 text-red-500 font-bold hover:text-white p-2 rounded-md transition-all duration-500 ease-in-out hover:bg-gradient-to-r hover:from-red-400 hover:to-red-600"
           >
@@ -94,7 +95,7 @@ function Profile() {
                     />
                   ))}
                 </svg>
-                <p className="text-center text-lg text-blue-800 font-bold absolute top-0 w-11/12 -left-24 sm:-left-64 md:-left-80 lg:-left-96 mt-2">
+                <p className="text-center text-lg text-blue-800 font-bold absolute top-0 w-11/12 -left-28 sm:-left-64 md:-left-80 lg:-left-96 mt-2">
                   Withdraw
                 </p>
               </div>

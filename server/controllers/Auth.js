@@ -52,7 +52,6 @@ exports.login = async (req, res) => {
       });
     }
   } catch (error) {
-    console.error(error);
     return res.status(500).json({
       success: false,
       message: `Login Failure Please Try Again`,
@@ -85,7 +84,6 @@ exports.signup = async (req, res) => {
       });
     }
     const response = await OTP.find({ email }).sort({ createdAt: -1 }).limit(1);
-    console.log(response);
     if (response.length === 0) {
       return res.status(400).json({
         success: false,
@@ -111,7 +109,6 @@ exports.signup = async (req, res) => {
       message: "User registered successfully",
     });
   } catch (error) {
-    console.error(error);
     return res.status(500).json({
       success: false,
       message: "User cannot be registered. Please try again.",
@@ -151,14 +148,12 @@ exports.sendotp = async (req, res) => {
     }
     const otpPayload = { email, otp };
     const otpBody = await OTP.create(otpPayload);
-    console.log("OTP Body", otpBody);
     res.status(200).json({
       success: true,
       message: `OTP Sent Successfully`,
       otp,
     });
   } catch (error) {
-    console.log(error.message);
     return res.status(500).json({ success: false, error: error.message });
   }
 };
@@ -187,14 +182,12 @@ exports.sendpasswordotp = async (req, res) => {
     }
     const otpPayload = { email, otp };
     const otpBody = await OTP.create(otpPayload);
-    console.log("OTP Body", otpBody);
     res.status(200).json({
       success: true,
       message: `OTP Sent Successfully`,
       otp,
     });
   } catch (error) {
-    console.log(error.message);
     return res.status(500).json({ success: false, error: error.message });
   }
 };
@@ -206,9 +199,7 @@ async function sendUpdationEmail(email) {
       "Updation Email",
       emailTemplate(email)
     );
-    console.log("Email sent successfully: ", mailResponse.response);
   } catch (error) {
-    console.log("Error occurred while sending email: ", error);
     throw error;
   }
 }
@@ -245,13 +236,11 @@ exports.updatepassword = async (req, res) => {
         message: "User not found",
       });
     }
-    // await sendUpdationEmail(email);
     return res.status(200).json({
       success: true,
       message: "Password updated successfully",
     });
   } catch (error) {
-    console.error("Error occurred while updating password:", error);
     return res.status(500).json({
       success: false,
       message:
@@ -263,7 +252,6 @@ exports.updatepassword = async (req, res) => {
 
 exports.fetchUser = async (req, res) => {
   try {
-    // Extract token from authorization header
     const token = req.headers.authorization?.split(" ")[1];
     if (!token) {
       return res.status(401).json({
@@ -273,7 +261,6 @@ exports.fetchUser = async (req, res) => {
     }
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const userId = decoded.id;
-    // console.log(userId)
     const user = await User.findById(userId).select("-password -token");
     if (!user) {
       return res.status(404).json({
@@ -286,50 +273,9 @@ exports.fetchUser = async (req, res) => {
       user,
     });
   } catch (error) {
-    console.error("Error in fetching user:", error);
     res.status(500).json({
       success: false,
       message: "Failed to fetch user. Please try again later.",
-    });
-  }
-};
-
-// backend/controllers/paymentController.js
-exports.initiatePayment = async (req, res) => {
-  const { amount, uid } = req.body;
-
-  try {
-    // Replace with your UPIGateway API credentials
-    const apiKey = "4de07135-eaea-4ca7-954e-144c74a588fa";
-
-    // Request to generate a dynamic QR code
-    const response = await axios.post(
-      "https://api.upigateway.com/generate-qrcode",
-      {
-        amount,
-        note: `Payment for UID: ${uid}`,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${apiKey}`,
-          "Content-Type": "application/json",
-        },
-      }
-    );
-
-    if (response.data && response.data.qrCodeURL) {
-      return res.status(200).json({
-        qrCodeURL: response.data.qrCodeURL,
-      });
-    }
-
-    return res.status(400).json({
-      message: "Failed to generate QR code",
-    });
-  } catch (error) {
-    console.error("Error initiating payment:", error);
-    return res.status(500).json({
-      message: "Internal server error",
     });
   }
 };

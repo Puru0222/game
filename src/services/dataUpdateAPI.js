@@ -13,11 +13,9 @@ export function getUser(uid) {
       if (!result.data.success) {
         throw new Error(result.data.message);
       }
-      //console.log("GETUSER API ERROR.......", response);
       toast.success("User Got");
       dispatch(setUserdata(result.data.user));
     } catch (error) {
-      console.log("GETUSER API ERROR............", error);
       toast.error("User Absent");
     }
     toast.dismiss(toastId);

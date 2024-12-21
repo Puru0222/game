@@ -22,7 +22,6 @@ import Error from "./pages/Error";
 import Add from "./pages/accounts/Add";
 import Withdraw from "./pages/accounts/Withdraw";
 import Complain from "./pages/accounts/Complain";
-import PaymentForm from "./pages/accounts/PaymentForm";
 
 const App = () => {
   return (
@@ -144,14 +143,6 @@ const App = () => {
           element={
             <PrivateRoute>
               <Complain />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/payment"
-          element={
-            <PrivateRoute>
-              <PaymentForm />
             </PrivateRoute>
           }
         />

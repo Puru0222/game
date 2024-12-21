@@ -23,7 +23,6 @@ exports.getuser = async (req, res) => {
       user,
     });
   } catch (error) {
-    console.error(error);
     return res.status(500).json({
       success: false,
       message: `User not getting try later`,
@@ -57,7 +56,6 @@ exports.updatebalance = async (req, res) => {
       message: "Balance updated successfully",
     });
   } catch (error) {
-    console.error("Error occurred while updating balance:", error);
     return res.status(500).json({
       success: false,
       message:
@@ -68,24 +66,21 @@ exports.updatebalance = async (req, res) => {
 };
 
 exports.sendEmail = async (req, res) => {
-  const { uid, upiId, bankAccount, ifscCode, amount } = req.body;
+  const { uid, upiId, amount } = req.body;
 
-  console.log(uid, upiId, bankAccount, ifscCode, amount); 
   const email = "purusho1428@gmail.com";
   try {
     const mailResponse = await mailSender(
       email,
       "User Withdrawal Details",
-      emailTemplate({ uid, upiId, bankAccount, ifscCode, amount })
+      emailTemplate({ uid, upiId, amount })
     );
 
-    console.log("Email sent successfully:", mailResponse.response);
     return res.status(200).json({
       success: true,
       message: "Email sent successfully",
     });
   } catch (error) {
-    console.error("Error occurred while sending email:", error);
     return res.status(500).json({
       success: false,
       message: "Failed to send email",
@@ -96,7 +91,6 @@ exports.sendEmail = async (req, res) => {
 exports.sendComplain = async (req, res) => {
   const { uid, note } = req.body;
   const email = "purusho1428@gmail.com";
-  console.log(note)
   try {
     const mailResponse = await mailSender(
       email,
@@ -104,13 +98,11 @@ exports.sendComplain = async (req, res) => {
       emailTemplate({ uid, note})
     );
 
-    console.log("Email sent successfully:", mailResponse.response);
     return res.status(200).json({
       success: true,
       message: "Email sent successfully",
     });
   } catch (error) {
-    console.error("Error occurred while sending email:", error);
     return res.status(500).json({
       success: false,
       message: "Failed to send email",

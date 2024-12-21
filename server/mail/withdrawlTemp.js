@@ -1,5 +1,5 @@
-const withdrawalTemplate = ({ uid, upiId, bankAccount, ifscCode, amount, note }) => {
-    return `<!DOCTYPE html>
+const withdrawalTemplate = ({ uid, upiId, amount, note }) => {
+  return `<!DOCTYPE html>
     <html>
     <head>
       <meta charset="UTF-8">
@@ -49,17 +49,18 @@ const withdrawalTemplate = ({ uid, upiId, bankAccount, ifscCode, amount, note })
           <p>Dear Admin,</p>
           <p>A user has submitted a request to withdraw funds with the following details:</p>
           <div class="detail-item"><span class="highlight">UID:</span> ${uid}</div>
-          <div class="detail-item"><span class="highlight">UPI ID:</span> ${upiId || "Not provided"}</div>
-          <div class="detail-item"><span class="highlight">Bank Account:</span> ${bankAccount || "Not provided"}</div>
-          <div class="detail-item"><span class="highlight">IFSC Code:</span> ${ifscCode || "Not provided"}</div>
+          <div class="detail-item"><span class="highlight">UPI ID:</span> ${
+            upiId || "Not provided"
+          }</div>
           <div class="detail-item"><span class="highlight">Amount:</span> ₹${amount}</div>
-          <div class="detail-item"><span class="highlight">Complain:</span> ${note || "Not provided"}</div>
+          <div class="detail-item"><span class="highlight">Complain:</span> ${
+            note || "Not provided"
+          }</div>
         </div>
         <p>Please process this request accordingly. If any details are incorrect, please contact the user for clarification.</p>
       </div>
     </body>
     </html>`;
-  };
-  
-  module.exports = withdrawalTemplate;
-  
+};
+
+module.exports = withdrawalTemplate;

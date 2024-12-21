@@ -38,7 +38,6 @@ export function createBgmiChallange(
       toast.success("Challange Created");
       navigate("/profile");
     } catch (error) {
-      console.log("BGMI CHALLANGE CREATE ERROR.......", error);
       toast.error("Challange Not Created");
     }
     toast.dismiss(toastId);
