@@ -29,7 +29,7 @@ function Profile() {
       className="flex justify-center items-center h-screen w-full bg-cover bg-center bg-no-repeat "
       style={{ backgroundImage: `url(${img})` }}
     >
-      <div className="bg-white bg-opacity-80 p-8 sm:p-10 rounded-lg shadow-lg transform transition-all w-11/12">
+      <div className="bg-blue-100 bg-opacity-80 p-8 sm:p-10 rounded-lg shadow-lg transform transition-all w-11/12">
         <div className="flex justify-between items-center mb-4">
           <h1 className="text-2xl font-bold text-gray-900">Profile</h1>
           <button

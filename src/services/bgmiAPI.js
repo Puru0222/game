@@ -36,7 +36,7 @@ export function createBgmiChallange(
         throw new Error(result.data.message);
       }
       toast.success("Challange Created");
-      navigate("/profile");
+      navigate("/dashboard/join");
     } catch (error) {
       toast.error("Challange Not Created");
     }

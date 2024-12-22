@@ -62,10 +62,19 @@ function Dashboard() {
         className="transition-all duration-300 w-full max-w-xs sm:max-w-md md:max-w-xl lg:max-w-2xl"
       >
         {isVisible ? (
-          <div className="p-4 mt-4 mb-4 px-6 bg-gradient-to-r from-zinc-800 via-purple-900 to-gray-800 rounded-lg shadow-2xl transition-transform transform hover:scale-105 hover:shadow-2xl ">
+          <div
+            className="p-4 mt-4 mb-4 px-6 rounded-lg shadow-2xl transition-transform transform"
+            style={{
+              background:
+                "conic-gradient(from 45deg at 50% 50%, #1e3a8a, #3b82f6, #357ef3, #1d4ed8)",
+            }}
+          >
+          {/* "conic-gradient(from 45deg at 50% 50%, #1e3a8a, #296bd5, #60a5fa, #1d4ed8)", */}
+           
+            {" "}
             {/* User Info Section */}
             <div className="flex justify-between items-center mb-4">
-              <p className="text-gray-100 font-bold text-xl">
+              <p className="text-white font-bold text-xl">
                 <span role="img" aria-label="waving hand">
                   👋
                 </span>{" "}
@@ -73,12 +82,11 @@ function Dashboard() {
               </p>
               <Link
                 to="/mychallenge"
-                className="px-4 py-2 text-red-500 font-bold hover:text-white p-2 rounded-md transition-all duration-500 ease-in-out hover:bg-gradient-to-r hover:from-red-400 hover:to-red-600"
+                className="px-4 py-2 text-white font-bold hover:text-blue-800 p-2 rounded-md transition-all duration-500 ease-in-out hover:bg-gradient-to-r hover:from-blue-200 hover:to-blue-300"
               >
                 Challenge
               </Link>
             </div>
-
             {/* Stats Section */}
             <div className="flex justify-between items-center mb-4">
               <p className="text-xl font-bold text-gray-100">
@@ -87,7 +95,7 @@ function Dashboard() {
 
               <Link
                 to="/profile"
-                className="relative text-blue-300 font-bold hover:text-white p-2 rounded-md transition-all duration-500 ease-in-out hover:bg-gradient-to-r hover:from-blue-500 hover:to-blue-600"
+                className="relative text-white font-bold hover:text-blue-800 p-2 rounded-md transition-all duration-500 ease-in-out hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-200"
               >
                 Profile
               </Link>
@@ -117,12 +125,12 @@ function Dashboard() {
         {/* Navigation Section */}
       </div>
 
-      <div className="flex sticky top-0 z-10 shadow-md bg-black justify-between w-full max-w-xs sm:max-w-md md:max-w-xl lg:max-w-2xl p-4 px-7 rounded-lg bg-opacity-60 hover:shadow-3xl mt-3 animate-bounce">
+      <div className="flex sticky top-0 z-10 shadow-md bg-black justify-between w-full max-w-xs sm:max-w-md md:max-w-xl lg:max-w-2xl p-4 px-7 rounded-lg bg-opacity-60 hover:shadow-3xl mt-3 animate-float">
         <Link
           to="/dashboard/join"
-          className={`px-4 py-2 rounded-md transition-colors ${
+          className={`px-4 py-2 font-bold rounded-md transition-colors ${
             location.pathname === "/dashboard/join"
-              ? "bg-blue-500 text-white" // Active link styles
+              ? "bg-blue-500 text-white" 
               : "bg-blue-100 text-blue-700 hover:bg-blue-300"
           }`}
         >
@@ -130,9 +138,9 @@ function Dashboard() {
         </Link>
         <Link
           to="/dashboard/create"
-          className={`px-4 py-2 rounded-md transition-colors ${
+          className={`px-4 py-2 font-bold rounded-md transition-colors ${
             location.pathname === "/dashboard/create"
-              ? "bg-blue-500 text-white" // Active link styles
+              ? "bg-blue-500 text-white" 
               : "bg-blue-100 text-blue-700 hover:bg-blue-200"
           }`}
         >

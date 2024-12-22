@@ -48,20 +48,21 @@ const Complain = () => {
       style={{ backgroundImage: `url(${img})` }}
     >
       <div className="bg-white bg-opacity-80 flex flex-col items-center p-8 sm:p-10 rounded-lg shadow-lg w-11/12">
-        <div className="flex justify-center text-2xl font-semibold mb-1 p-4 animate-bounce">
+        <p className="flex text-center text-2xl font-semibold p-4 animate-bounce">
           Any Complain, Tell us Freely
-        </div>
+        </p>
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="bg-gray-200  bg-opacity-70 shadow-lg rounded-lg p-5 space-y-5 w-11/12"
         >
           <div>
             <label className="block font-medium mb-1">Complain</label>
-            <input
+            <textarea
               type="text"
               {...register("note", { required: "Note is required" })}
               className="w-full p-2 border border-gray-300 rounded"
               placeholder="Write Your Complain"
+              rows={8}
             />
             {errors.note && (
               <p className="text-red-500 text-sm">{errors.note.message}</p>
