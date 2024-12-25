@@ -19,11 +19,16 @@ module.exports = {
           "50%": { transform: "translateY(-10px)" },
           "100%": { transform: "translateY(0px)" },
         },
+        infiniteScroll: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(calc(-100% / 3.8))" },
+        },
       },
       animation: {
         breathe: "breathe 2s ease-in-out infinite",
         shimmer: "shimmer 2s linear infinite",
         float: "float 3s ease-in-out infinite",
+        infiniteScroll: "infiniteScroll 10s linear infinite",
       },
       colors: { 
         'night-sky-start': '#1e3a8a', 

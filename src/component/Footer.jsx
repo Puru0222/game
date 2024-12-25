@@ -5,7 +5,7 @@ const BottomFooter = ["Privacy Policy", "Terms"];
 
 const Footer = () => {
   return (
-    <div className="bg-gray-950 text-gray-200 border-gray-800 p-6">
+    <div className="bg-black bg-opacity-95 text-gray-200 border-t-4 border-orange-400 p-6">
       {/* Section 1 */}
       <div className="flex font-semibold justify-between lg:items-start items-center flex-col lg:flex-row gap-3 w-full">
         <div className="flex flex-row">

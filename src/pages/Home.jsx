@@ -3,26 +3,32 @@ import pic1 from "../asset/pic1.webp";
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "../component/Footer";
+import home1 from "../asset/home1.jpeg";
+import home2 from "../asset/home2.jpeg";
+import home3 from "../asset/home3.jpeg";
+import noise from "../asset/darkened_noise.jpg";
+import { GiReceiveMoney } from "react-icons/gi";
+import { BiSupport } from "react-icons/bi";
+import { RiTeamFill } from "react-icons/ri";
+import { BsFillPersonXFill } from "react-icons/bs";
+import FAQ from "./Faq";
 
 const Home = () => {
   return (
     <div>
       <Navbar />
       <div
-        className="relative flex items-center justify-center w-full min-h-screen bg-cover bg-center"
+        className="relative flex items-center justify-center w-full min-h-screen bg-cover bg-center border-b-4 border-orange-400"
         style={{ backgroundImage: `url(${pic1})` }}
       >
-        {/* Add an overlay to enhance readability */}
         <div className="absolute inset-0 bg-black bg-opacity-50"></div>
-
-        {/* Content Section */}
         <div className="relative z-10 text-center px-6">
           <h1 className="font-extrabold text-4xl sm:text-6xl lg:text-7xl text-yellow-50 mb-5">
             Join the Ultimate Battleground for Gamers!
           </h1>
           <p className="text-lg sm:text-lg lg:text-2xl text-gray-100 max-w-3xl mx-auto mb-6">
-            Compete in BGMI, FreeFire, Call of Duty, and More for Real Rewards. Create or Join
-            Tournaments
+            Compete in BGMI, FreeFire, Call of Duty, and More for Real Rewards.
+            Create or Join Tournaments
           </p>
           <Link to={"/loginSignup"}>
             <button className="px-6 mb-10 py-3 lg:mt-4 sm:mt-3 bg-yellow-500 text-yellow-50 font-bold rounded-full shadow-lg hover:bg-yellow-700 transition duration-300 animate-breathe">
@@ -36,7 +42,100 @@ const Home = () => {
           </Link> */}
         </div>
       </div>
-      <Footer/>
+      <div className="dark:bg-black bg-white relative flex items-center flex-col justify-center">
+        {/* Background grid */}
+        <div
+          className="absolute inset-0 bg-grid pointer-events-none"
+          style={{
+            backgroundImage: `
+            linear-gradient(to right, rgba(255,255,255,0.1) 2px, transparent 2px),
+            linear-gradient(to bottom, rgba(255,255,255,0.1) 2px, transparent 2px)
+          `,
+            backgroundSize: "30px 30px", // Adjust grid size here
+          }}
+        ></div>
+
+        <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
+
+        <div className="grid mt-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-6 p-6">
+          {/* Instant Withdrawal */}
+          <div className="flex flex-col items-center justify-center bg-gradient-to-r from-green-500 to-green-700 text-white rounded-lg p-6 shadow-md transform transition hover:scale-105">
+            <GiReceiveMoney className="text-5xl mb-4" />
+            <h3 className="text-xl font-semibold">Instant Withdrawal</h3>
+            <p className="text-sm mt-2">Get your winnings within 60 minutes.</p>
+          </div>
+
+          {/* 24/7 Support */}
+          <div className="flex flex-col items-center justify-center bg-gradient-to-r from-blue-500 to-blue-700 text-white rounded-lg p-6 shadow-md transform transition hover:scale-105">
+            <BiSupport className="text-5xl mb-4" />
+            <h3 className="text-xl font-semibold">24/7 Support</h3>
+            <p className="text-sm mt-2">
+              We're here to help, anytime you need us.
+            </p>
+          </div>
+
+          {/* Team Challenges */}
+          <div className="flex flex-col items-center justify-center bg-gradient-to-r from-purple-500 to-purple-700 text-white rounded-lg p-6 shadow-md transform transition hover:scale-105">
+            <RiTeamFill className="text-5xl mb-4" />
+            <h3 className="text-xl font-semibold">Team Challenges</h3>
+            <p className="text-sm mt-2">
+              Gather your team and challenge others!
+            </p>
+          </div>
+          <div className="flex flex-col items-center justify-center bg-gradient-to-r from-red-500 to-red-700 text-white rounded-lg p-6 shadow-md transform transition hover:scale-105 max-w-md mx-auto">
+            <BsFillPersonXFill className="text-5xl mb-4" />
+
+            <h3 className="text-xl font-semibold">File a Complaint</h3>
+            <p className="text-sm mt-2 text-center">
+              Not received your winning prize? Complain about the challenge
+              creator, and we'll assist you promptly.
+            </p>
+          </div>
+        </div>
+
+        <div
+          className="flex m-4 mt-12 mb-12 z-10 w-11/12 sm:w-9/12 md:w-8/12 lg:w-8/12 overflow-hidden rounded-md bg-center flex-col"
+          style={{ backgroundImage: `url(${noise})` }}
+        >
+          <div className="m-4 flex flex-col justify-center items-center z-20">
+            {" "}
+            {/* Overlap and background */}
+            <h2 className="text-center text-3xl font-bold text-gray-100 mb-4">
+              Make Challenges In
+            </h2>
+            <div className="overflow-hidden relative">
+              {" "}
+              {/* Important: Add overflow-hidden */}
+              <div className="flex flex-row animate-infiniteScroll whitespace-nowrap">
+                {" "}
+                {[
+                  home3,
+                  home1,
+                  home2,
+                  home3,
+                  home1,
+                  home2,
+                  home3,
+                  home1,
+                  home2,
+                ].map((src, index) => (
+                  <div key={index} className="inline-block w-[300px] shrink-0">
+                    {" "}
+                    {/* Fixed width and shrink-0 */}
+                    <img
+                      src={src}
+                      alt={`Image ${index + 1}`}
+                      className="w-4/5 h-auto object-cover rounded-lg shadow-md"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+        <FAQ />
+      </div>
+      <Footer />
     </div>
   );
 };

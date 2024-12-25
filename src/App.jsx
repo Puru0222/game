@@ -22,6 +22,7 @@ import Error from "./pages/Error";
 import Add from "./pages/accounts/Add";
 import Withdraw from "./pages/accounts/Withdraw";
 import Complain from "./pages/accounts/Complain";
+import { HowToUse } from "./pages/HowToUse";
 
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="/howtouse" element={<HowToUse />} />
         <Route
           path="/loginSignup"
           element={
