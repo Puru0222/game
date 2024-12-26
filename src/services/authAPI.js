@@ -1,5 +1,5 @@
 import { toast } from "react-hot-toast";
-import { setLoading, setToken, setUser } from "../slices/authSlice";
+import { setToken, setUser } from "../slices/authSlice";
 import { apiConnector } from "./apiConnector";
 import { endpoints } from "./apis";
 

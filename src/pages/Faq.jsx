@@ -37,9 +37,9 @@ const FAQ = () => {
   ];
 
   return (
-    <div className="max-w-4xl bg-neutral-950 opacity-90 mx-auto p-6">
+    <div className="bg-neutral-950 opacity-90 mx-auto p-6">
       <h2 className="text-3xl font-bold text-center mb-10 text-white">
-        <span className="bg-gradient-to-r from-purple-600 via-gray-500 to-pink-500 bg-clip-text text-transparent">
+        <span className="bg-gradient-to-r from-blue-500 via-gray-400 to-indigo-700 bg-clip-text text-transparent">
           Frequently Asked Questions
         </span>
       </h2>
@@ -49,8 +49,8 @@ const FAQ = () => {
           <div
             key={index}
             className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-xl 
-        transition-all duration-300 hover:border-purple-500/50 hover:shadow-lg 
-        hover:shadow-purple-500/10"
+        transition-all duration-300 hover:border-blue-500/50 hover:shadow-lg 
+        hover:shadow-blue-500/10"
           >
             <div
               className="p-5 flex justify-between items-center cursor-pointer"

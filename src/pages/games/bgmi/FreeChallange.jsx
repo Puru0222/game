@@ -61,8 +61,8 @@ const FreeChallange = () => {
       <div className="relative z-10 p-8 sm:p-10 rounded-lg shadow-lg w-full max-w-80 sm:max-w-lg md:max-w-xl lg:max-w-2xl">
         <div className="absolute inset-0 bg-gradient-to-r from-gray-800 via-slate-400 to-gray-800 opacity-80 rounded-lg"></div>
         <div className="relative z-20">
-          <h1 className="text-2xl font-bold mb-4 text-gray-200">
-            Create Free Fire Challenge
+          <h1 className="text-2xl text-center font-bold mb-4 text-gray-200">
+            Free Fire Challenge
           </h1>
           <form onSubmit={handleSubmit(onSubmit)}>
             {/* Room ID */}
@@ -168,23 +168,6 @@ const FreeChallange = () => {
                   <p className="text-red-500 text-sm">{errors.price.message}</p>
                 )}
               </div>
-              {/* <div className="mb-4">
-                <label className="text-sm font-medium text-gray-300">
-                  Players
-                </label>
-                <input
-                  className="border border-gray-600 bg-gray-800 bg-opacity-60 p-2 w-full rounded text-white"
-                  type="text"
-                  {...register("players", {
-                    required: "players is required",
-                  })}
-                />
-                {errors.players && (
-                  <p className="text-red-500 text-sm">
-                    {errors.players.message}
-                  </p>
-                )}
-              </div> */}
             </div>
             <div className="flex">
               <div className="mb-4">

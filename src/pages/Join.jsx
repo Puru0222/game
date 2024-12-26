@@ -46,7 +46,7 @@ function Join() {
         challenges.map((challenge) => (
           <div
             key={challenge.uniqueSerialNumber}
-            className="bg-gray-900 w-full bg-opacity-90 p-4 rounded-lg border border-blue-500  shadow-[0_0_10px_2px_rgba(59,130,246,0.8)] transition-shadow duration-300"
+            className="bg-blue-900 w-full bg-opacity-70 p-4 rounded-lg border border-blue-500  shadow-[0_0_10px_2px_rgba(59,130,246,0.8)] transition-shadow duration-300"
             >
             <div className="text-xl flex justify-evenly mb-2 font-bold text-white">
               <div>{challenge.gname}</div>
@@ -83,7 +83,7 @@ function Join() {
               </p>
             ) : (
               <button
-                className="flex w-full mt-2 bg-gray-700 bg-opacity-80 border border-blue-500 justify-center gap-x-2 text-gray-50 hover:text-white p-2 rounded-md transition-all duration-500 ease-in-out hover:bg-gradient-to-r hover:from-blue-400 hover:to-blue-600"
+                className="flex w-full mt-2 bg-blue-700 bg-opacity-80 border border-blue-500 justify-center gap-x-2 text-gray-50 hover:text-white p-2 rounded-md transition-all duration-500 ease-in-out hover:bg-gradient-to-r hover:from-blue-400 hover:to-blue-600"
                 onClick={() => onClickHandle(challenge.uniqueSerialNumber)}
               >
                 View Challenge

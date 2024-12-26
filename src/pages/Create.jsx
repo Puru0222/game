@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Create = () => {
   return (
     <div className="bg-black bg-opacity-70 p-8 sm:p-10 rounded-lg shadow-lg w-full max-w-80 sm:max-w-lg md:max-w-xl lg:max-w-2xl border-black">
-      <h1 className="text-3xl mb-6 mt-2 sm:text-4xl md:text-6xl lg:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gray-200 via-red-600 to-gray-200 drop-shadow-lg animate-breathe">
+      <h1 className="text-3xl text-center mb-6 mt-2 sm:text-4xl md:text-6xl lg:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-200 via-blue-500 to-blue-200 drop-shadow-lg animate-breathe">
         Create Challenge
       </h1>
 

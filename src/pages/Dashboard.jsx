@@ -69,9 +69,7 @@ function Dashboard() {
                 "conic-gradient(from 45deg at 50% 50%, #1e3a8a, #3b82f6, #357ef3, #1d4ed8)",
             }}
           >
-          {/* "conic-gradient(from 45deg at 50% 50%, #1e3a8a, #296bd5, #60a5fa, #1d4ed8)", */}
-           
-            {" "}
+            {/* "conic-gradient(from 45deg at 50% 50%, #1e3a8a, #296bd5, #60a5fa, #1d4ed8)", */}{" "}
             {/* User Info Section */}
             <div className="flex justify-between items-center mb-4">
               <p className="text-white font-bold text-xl">
@@ -125,12 +123,12 @@ function Dashboard() {
         {/* Navigation Section */}
       </div>
 
-      <div className="flex sticky top-0 z-10 shadow-md bg-black justify-between w-full max-w-xs sm:max-w-md md:max-w-xl lg:max-w-2xl p-4 px-7 rounded-lg bg-opacity-60 hover:shadow-3xl mt-3 animate-float">
+      <div className="flex sticky top-0 z-10 shadow-md bg-indigo-800 justify-between w-full max-w-xs sm:max-w-md md:max-w-xl lg:max-w-2xl p-4 px-7 rounded-lg bg-opacity-70 hover:shadow-3xl mt-3 animate-float">
         <Link
           to="/dashboard/join"
           className={`px-4 py-2 font-bold rounded-md transition-colors ${
             location.pathname === "/dashboard/join"
-              ? "bg-blue-500 text-white" 
+              ? "bg-blue-500 text-white"
               : "bg-blue-100 text-blue-700 hover:bg-blue-300"
           }`}
         >
@@ -140,7 +138,7 @@ function Dashboard() {
           to="/dashboard/create"
           className={`px-4 py-2 font-bold rounded-md transition-colors ${
             location.pathname === "/dashboard/create"
-              ? "bg-blue-500 text-white" 
+              ? "bg-blue-500 text-white"
               : "bg-blue-100 text-blue-700 hover:bg-blue-200"
           }`}
         >

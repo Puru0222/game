@@ -11,6 +11,9 @@ import { logout } from "../slices/authSlice";
 import { useDispatch } from "react-redux";
 
 function Profile() {
+  const [showReview, setShowReview] = useState(false);
+  const [review, setReview] = useState("");
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [copied, setCopied] = useState(false);
   const { fullname, balance, email, uid } = useSelector((state) => state.auth);
   const handleCopy = () => {
@@ -20,6 +23,24 @@ function Profile() {
   const dispatch = useDispatch();
 
   const handleLogout = () => {
+    dispatch(logout());
+    dispatch(resetChallenges());
+  };
+
+  const handleReviewSubmit = () => {
+    // Handle review submission logic here
+    if (review.trim()) {
+      toast.success("Review submitted successfully!");
+      setReview("");
+      setShowReview(false);
+    } else {
+      toast.error("Please write a review before submitting");
+    }
+  };
+
+  const handleDeleteAccount = () => {
+    // Handle account deletion logic here
+    toast.success("Account deleted successfully");
     dispatch(logout());
     dispatch(resetChallenges());
   };
@@ -107,6 +128,74 @@ function Profile() {
           >
             Complain
           </Link>
+        </div>
+        <hr className="border-gray-400 mb-2" />
+        <div className="mb-4">
+          <button
+            onClick={() => setShowReview(!showReview)}
+            className="text-blue-600 font-semibold hover:text-blue-800 transition-colors duration-300"
+          >
+            {showReview ? "Cancel Review" : "Give Review"}
+          </button>
+
+          {showReview && (
+            <div className="mt-2 space-y-2">
+              <textarea
+                value={review}
+                onChange={(e) => {
+                  const words = e.target.value.split(/\s+/).filter(Boolean); // Split by spaces and filter out empty strings
+                  if (words.length <= 50) {
+                    setReview(e.target.value);
+                  }
+                }}
+                className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                rows="3"
+                placeholder="Review Will be taken only once, Write your review here (max 50 words)..."
+              />
+              <div className="text-sm text-gray-500">
+                {review.split(/\s+/).filter(Boolean).length}/22 words
+              </div>
+              <button
+                onClick={handleReviewSubmit}
+                className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors duration-300"
+              >
+                Submit Review
+              </button>
+            </div>
+          )}
+        </div>
+
+        {/* Delete Account Section */}
+        <div className="mt-4">
+          {!showDeleteConfirm ? (
+            <button
+              onClick={() => setShowDeleteConfirm(true)}
+              className="text-red-500 font-semibold hover:text-red-700 transition-colors duration-300"
+            >
+              Delete Account
+            </button>
+          ) : (
+            <div className="space-y-2">
+              <p className="text-red-600 font-medium">
+                Are you sure you want to delete your account? Your account will
+                be deleted after 22 dayes. This action cannot be undone.
+              </p>
+              <div className="space-x-2">
+                <button
+                  onClick={handleDeleteAccount}
+                  className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition-colors duration-300"
+                >
+                  Yes, Delete Account
+                </button>
+                <button
+                  onClick={() => setShowDeleteConfirm(false)}
+                  className="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600 transition-colors duration-300"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

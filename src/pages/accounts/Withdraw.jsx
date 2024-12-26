@@ -7,7 +7,6 @@ import img2 from "../../asset/add.jpg";
 import { useSelector } from "react-redux";
 
 const Withdraw = () => {
-
   const { balance, uid } = useSelector((state) => state.auth);
   const {
     register,
@@ -76,6 +75,8 @@ const Withdraw = () => {
               {...register("amount", {
                 required: "Amount is required",
                 min: { value: 50, message: "Amount must be Greater than 50" },
+                validate: (value) =>
+                  value <= balance || "Amount exceeds your available balance",
               })}
               className="w-full p-2 border border-gray-300 rounded"
               placeholder="Enter the amount to withdraw"

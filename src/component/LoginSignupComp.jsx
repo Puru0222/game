@@ -1,7 +1,4 @@
-import React, { useState, useEffect } from "react";
-import ff from "../asset/3.jpg";
-import pb from "../asset/2.jpg";
-import cd from "../asset/1.jpg"
+import React, { useState } from "react";
 import "./loginSignupComp.css";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
@@ -11,17 +8,6 @@ import { setSignupData } from "../slices/authSlice";
 
 const LoginSignupComp = () => {
   const [isSignup, setIsSignup] = useState(false);
-  const [backgroundImage, setBackgroundImage] = useState(`url(${ff})`);
-  useEffect(() => {
-    const images = [`url(${pb})`, `url(${ff})` , `url(${cd})`];
-    let index = 0;
-    const changeBackground = () => {
-      index = (index + 1) % images.length;
-      setBackgroundImage(images[index]);
-    };
-    const intervalId = setInterval(changeBackground, 4000);
-    return () => clearInterval(intervalId);
-  }, []);
 
   const toggleForm = () => {
     setIsSignup(!isSignup);
@@ -47,24 +33,20 @@ const LoginSignupComp = () => {
   const submitSignupForm = async (data) => {
     try {
       dispatch(setSignupData(data));
-      dispatch(sendOtp(data.email, data.uid,navigate));
+      dispatch(sendOtp(data.email, data.uid, navigate));
       resetSignupForm();
-    } catch (error) {
-    }
+    } catch (error) {}
   };
 
   const submitLoginForm = async (data) => {
     try {
       dispatch(login(data.loginEmail, data.loginPassword, navigate));
       resetLoginForm();
-    } catch (error) {
-    }
+    } catch (error) {}
   };
 
   return (
-    <div
-      className="section flex items-center justify-center relative w-full h-full min-h-screen"
-    >
+    <div className="section flex items-center justify-center relative w-full h-full min-h-screen">
       <div className="container mb-10">
         <div className="flex justify-center space-x-4 my-4">
           <span
@@ -87,7 +69,9 @@ const LoginSignupComp = () => {
         <div className={`card-3d-wrap ${isSignup ? "rotate" : ""}`}>
           <div className="backface-hidden absolute inset-0 text-white p-8">
             <div className="text-center">
-              <h1 className="styled-heading animate-bounce">Good to See You Again</h1>
+              <h1 className="styled-heading animate-bounce">
+                Good to See You Again
+              </h1>
               <form onSubmit={handleLoginSubmit(submitLoginForm)}>
                 <div className="mb-4 relative">
                   <label htmlFor="email"> Enter Your Email</label>
@@ -101,7 +85,7 @@ const LoginSignupComp = () => {
                       required: "Enter your Email",
                     })}
                   />
-                  <i className="input-icon uil uil-at text-yellow-300"></i>
+                  <i className="input-icon uil uil-at text-blue-500"></i>
                   {loginErrors.loginEmail && (
                     <span className="text-red-500">
                       {loginErrors.loginEmail.message}
@@ -120,14 +104,16 @@ const LoginSignupComp = () => {
                       required: "Password is required",
                     })}
                   />
-                  <i className="input-icon uil uil-lock-alt text-yellow-300"></i>
+                  <i className="input-icon uil uil-lock-alt text-blue-500"></i>
                   {loginErrors.loginPassword && (
                     <span className="text-red-500">
                       {loginErrors.loginPassword.message}
                     </span>
                   )}
                 </div>
-                <button className="btn animate-breathe">Log in</button>
+                <button className="btn text-white animate-breathe">
+                  Log in
+                </button>
               </form>
               <div className="flex mt-5 justify-between items-center p-3 border border-gray-300 rounded-md bg-gradient-to-r from-gray-200 to-gray-300 transition-all duration-500">
                 <Link
@@ -149,7 +135,9 @@ const LoginSignupComp = () => {
           {/* Sign Up Form */}
           <div className="backface-hidden absolute inset-0 text-white p-5 rotate-y-180">
             <div className="text-center">
-              <h4 className="mb-2 signup p-2 text-2xl font-bold animate-bounce">Sign Up</h4>
+              <h4 className="mb-2 signup p-2 text-2xl font-bold animate-bounce">
+                Sign Up
+              </h4>
               <form onSubmit={handleSignupSubmit(submitSignupForm)}>
                 <div className="mb-1 relative">
                   <input
@@ -164,7 +152,7 @@ const LoginSignupComp = () => {
                       required: "Full name is required",
                     })}
                   />
-                  <i className="input-icon uil uil-user text-yellow-300"></i>
+                  <i className="input-icon uil uil-user text-blue-500"></i>
                   {signupErrors.fullname && (
                     <span className="text-red-500">
                       {signupErrors.fullname.message}
@@ -182,7 +170,7 @@ const LoginSignupComp = () => {
                     placeholder="UID No."
                     {...signupRegister("uid", { required: "U-ID is required" })}
                   />
-                  <i className="input-icon uil uil-user text-yellow-300"></i>
+                  <i className="input-icon uil uil-user text-blue-500"></i>
                   {signupErrors.uid && (
                     <span className="text-red-500">
                       {signupErrors.uid.message}
@@ -206,7 +194,7 @@ const LoginSignupComp = () => {
                       },
                     })}
                   />
-                  <i className="input-icon uil uil-at text-yellow-300"></i>
+                  <i className="input-icon uil uil-at text-blue-500"></i>
                   {signupErrors.email && (
                     <span className="text-red-500">
                       {signupErrors.email.message}
@@ -226,7 +214,7 @@ const LoginSignupComp = () => {
                       required: "Password is required",
                     })}
                   />
-                  <i className="input-icon uil uil-lock-alt text-yellow-300"></i>
+                  <i className="input-icon uil uil-lock-alt text-blue-500"></i>
                   {signupErrors.password && (
                     <span className="text-red-500">
                       {signupErrors.password.message}
@@ -249,14 +237,17 @@ const LoginSignupComp = () => {
                       //   return value === password || "Passwords do not match";
                     })}
                   />
-                  <i className="input-icon uil uil-lock-alt text-yellow-300"></i>
+                  <i className="input-icon uil uil-lock-alt text-blue-500"></i>
                   {signupErrors.confirmPassword && (
                     <span className="text-red-500">
                       {signupErrors.confirmPassword.message}
                     </span>
                   )}
                 </div>
-                <button type="submit" className="btn animate-breathe">
+                <button
+                  type="submit"
+                  className="btn text-white animate-breathe"
+                >
                   Send OTP
                 </button>
               </form>

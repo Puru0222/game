@@ -31,7 +31,7 @@ const Home = () => {
             Create or Join Tournaments
           </p>
           <Link to={"/loginSignup"}>
-            <button className="px-6 mb-10 py-3 lg:mt-4 sm:mt-3 bg-yellow-500 text-yellow-50 font-bold rounded-full shadow-lg hover:bg-yellow-700 transition duration-300 animate-breathe">
+            <button className="px-6 mb-10 py-3 lg:mt-4 sm:mt-3 bg-blue-600 text-yellow-50 font-bold rounded-full shadow-lg hover:bg-blue-700 transition duration-300 animate-breathe">
               Get Started
             </button>
           </Link>
@@ -124,7 +124,7 @@ const Home = () => {
                     {/* Fixed width and shrink-0 */}
                     <img
                       src={src}
-                      alt={`Image ${index + 1}`}
+                      alt={`${index + 1}`}
                       className="w-4/5 h-auto object-cover rounded-lg shadow-md"
                     />
                   </div>
