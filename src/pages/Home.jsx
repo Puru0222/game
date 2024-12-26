@@ -42,20 +42,20 @@ const Home = () => {
           </Link> */}
         </div>
       </div>
-      <div className="dark:bg-black bg-white relative flex items-center flex-col justify-center">
+      <div className="bg-black relative flex items-center flex-col justify-center">
         {/* Background grid */}
         <div
           className="absolute inset-0 bg-grid pointer-events-none"
           style={{
             backgroundImage: `
-            linear-gradient(to right, rgba(255,255,255,0.1) 2px, transparent 2px),
-            linear-gradient(to bottom, rgba(255,255,255,0.1) 2px, transparent 2px)
+            linear-gradient(to right, grey 2px, transparent 2px),
+            linear-gradient(to bottom, grey 2px, transparent 2px)
           `,
-            backgroundSize: "30px 30px", // Adjust grid size here
+            backgroundSize: "40px 40px", // Adjust grid size here
           }}
         ></div>
 
-        <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
+        <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-black [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
 
         <div className="grid mt-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-6 p-6">
           {/* Instant Withdrawal */}
@@ -133,8 +133,8 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <FAQ />
       </div>
+      <FAQ />
       <Footer />
     </div>
   );

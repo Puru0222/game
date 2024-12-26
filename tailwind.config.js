@@ -23,12 +23,17 @@ module.exports = {
           "0%": { transform: "translateX(0)" },
           "100%": { transform: "translateX(calc(-100% / 3.8))" },
         },
+        fadeIn: { 
+          from: { opacity: 0, transform: "translateY(-10px)" },
+          to: { opacity: 1, transform: "translateY(0)" },
+        },
       },
       animation: {
         breathe: "breathe 2s ease-in-out infinite",
         shimmer: "shimmer 2s linear infinite",
         float: "float 3s ease-in-out infinite",
         infiniteScroll: "infiniteScroll 10s linear infinite",
+        fadeIn: "fadeIn 0.3s ease-in-out", 
       },
       colors: { 
         'night-sky-start': '#1e3a8a', 

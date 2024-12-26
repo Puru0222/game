@@ -37,30 +37,49 @@ const FAQ = () => {
   ];
 
   return (
-    <div className="max-w-3xl z-20 mb-12 text-white mx-auto mt-10 p-4">
-      <h2 className="text-2xl font-bold text-center mb-6">Frequently Asked Questions</h2>
-      <div className="space-y-4">
+    <div className="max-w-4xl bg-neutral-950 opacity-90 mx-auto p-6">
+      <h2 className="text-3xl font-bold text-center mb-10 text-white">
+        <span className="bg-gradient-to-r from-purple-600 via-gray-500 to-pink-500 bg-clip-text text-transparent">
+          Frequently Asked Questions
+        </span>
+      </h2>
+
+      <div className="space-y-6">
         {faqs.map((faq, index) => (
           <div
             key={index}
-            className="border border-gray-300 rounded-lg p-4 transition-shadow hover:shadow-md"
+            className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-xl 
+        transition-all duration-300 hover:border-purple-500/50 hover:shadow-lg 
+        hover:shadow-purple-500/10"
           >
             <div
-              className="flex justify-between items-center cursor-pointer"
+              className="p-5 flex justify-between items-center cursor-pointer"
               onClick={() => toggleQuestion(index)}
             >
-              <h3 className="text-lg font-semibold">{faq.question}</h3>
-              {openQuestion === index ? (
-                <FaChevronUp className="text-gray-500" />
-              ) : (
-                <FaChevronDown className="text-gray-500" />
-              )}
+              <h3 className="text-xl font-medium text-gray-100 pr-8">
+                {faq.question}
+              </h3>
+              <div className="flex-shrink-0">
+                {openQuestion === index ? (
+                  <FaChevronUp className="w-5 h-5 text-purple-400 transition-transform duration-300" />
+                ) : (
+                  <FaChevronDown className="w-5 h-5 text-purple-400 transition-transform duration-300" />
+                )}
+              </div>
             </div>
-            {openQuestion === index && (
-              <p className="mt-2 text-gray-600 transition-opacity duration-300">
+
+            <div
+              className={`overflow-hidden transition-all duration-300 ease-in-out
+          ${
+            openQuestion === index
+              ? "max-h-96 opacity-100"
+              : "max-h-0 opacity-0"
+          }`}
+            >
+              <p className="px-5 pb-5 text-gray-300 leading-relaxed">
                 {faq.answer}
               </p>
-            )}
+            </div>
           </div>
         ))}
       </div>
