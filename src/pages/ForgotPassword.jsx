@@ -4,7 +4,8 @@ import { sendPasswordOtp } from "../services/authAPI";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setEmail } from "../slices/authSlice";
-import img from "../asset/forgottenpass.webp";
+import { FiMail } from "react-icons/fi";
+import { motion } from "framer-motion";
 
 const ForgotPassword = () => {
   const {
@@ -28,49 +29,87 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div
-      className="flex justify-center items-center h-screen w-full bg-cover bg-center"
-      style={{ backgroundImage: `url(${img})` }}
-    >
-      <div
-        className="bg-white bg-opacity-80 p-8 sm:p-10 rounded-lg shadow-lg w-full transform transition-all hover:scale-105 hover:shadow-2xl hover:-translate-y-2
-                   max-w-80 sm:max-w-lg md:max-w-xl lg:max-w-2xl"
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-slate-900 via-blue-900 to-slate-900 p-4 bg-400% animate-gradientBG">
+      {" "}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="max-w-md w-full bg-white rounded-2xl shadow-2xl overflow-hidden"
       >
-        <h1 className="text-4xl font-semibold text-gray-900 mb-4 text-center">
-          Forgotten Password? Don’t Worry
-        </h1>
-        <p className="text-gray-900 font-normal text-center mb-6">Enter your email below</p>
-
-        <form
-          className="flex flex-col gap-6"
-          onSubmit={handleSubmit(submitEmailForm)}
-        >
-          <div className="flex flex-col">
-            <label htmlFor="email" className="text-gray-900 mb-2 font-medium">
-              Email
-            </label>
-            <input
-              type="email"
-              name="email"
-              id="email"
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-300 transition-all duration-300"
-              placeholder="Enter your email"
-              {...register("email", { required: true })}
-            />
-            {errors.email && (
-              <span className="text-red-500 text-sm mt-1">
-                Please enter your Email.
-              </span>
-            )}
+        <div className="p-8">
+          {/* Header Section */}
+          <div className="text-center mb-8">
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 0.5 }}
+              className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <FiMail className="text-blue-500 text-3xl" />
+            </motion.div>
+            <h1 className="text-3xl font-bold text-gray-800 mb-2">
+              Forgot Password?
+            </h1>
+            <p className="text-gray-600">
+              No worries! Enter your email and we'll send you reset
+              instructions.
+            </p>
           </div>
-          <button
-            type="submit"
-            className="w-full bg-yellow-400 text-white py-4 rounded-md hover:bg-yellow-500 transition-all duration-300 font-bold text-xl"
-          >
-            SEND OTP
-          </button>
-        </form>
-      </div>
+
+          {/* Form Section */}
+          <form onSubmit={handleSubmit(submitEmailForm)} className="space-y-6">
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-gray-700 block">
+                Email Address
+              </label>
+              <div className="relative">
+                <input
+                  type="email"
+                  {...register("email", {
+                    required: "Email is required",
+                    pattern: {
+                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                      message: "Invalid email address",
+                    },
+                  })}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 outline-none"
+                  placeholder="Enter your email"
+                />
+                <FiMail className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+              </div>
+              {errors.email && (
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="text-red-500 text-sm mt-1"
+                >
+                  {errors.email.message}
+                </motion.p>
+              )}
+            </div>
+
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              type="submit"
+              className="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors duration-200"
+            >
+              Send Reset Instructions
+            </motion.button>
+          </form>
+
+          {/* Back to Login Link */}
+          <div className="text-center mt-6">
+            <button
+              onClick={() => navigate("/loginSignup")}
+              className="text-blue-600 hover:text-blue-800 text-sm font-medium transition-colors duration-200"
+            >
+              ← Back to Login
+            </button>
+          </div>
+        </div>
+      </motion.div>
     </div>
   );
 };

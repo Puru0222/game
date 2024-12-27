@@ -1,35 +1,99 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion"; // Add framer-motion
+import { FaGamepad, FaFire, FaCrosshairs } from "react-icons/fa"; // Add icons
 
 const Create = () => {
+  const games = [
+    {
+      to: "/bgmichallange",
+      title: "BGMI",
+      icon: <FaGamepad className="mr-3 text-2xl" />,
+      gradient: "from-blue-400 to-blue-600",
+    },
+    {
+      to: "/ffchallange",
+      title: "FreeFire",
+      icon: <FaFire className="mr-3 text-2xl" />,
+      gradient: "from-orange-400 to-red-600",
+    },
+    {
+      to: "/codchallange",
+      title: "Call Of Duty",
+      icon: <FaCrosshairs className="mr-3 text-2xl" />,
+      gradient: "from-purple-400 to-purple-600",
+    },
+  ];
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+    },
+  };
+
   return (
-    <div className="bg-black bg-opacity-70 p-8 sm:p-10 rounded-lg shadow-lg w-full max-w-80 sm:max-w-lg md:max-w-xl lg:max-w-2xl border-black">
-      <h1 className="text-3xl text-center mb-6 mt-2 sm:text-4xl md:text-6xl lg:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-200 via-blue-500 to-blue-200 drop-shadow-lg animate-breathe">
-        Create Challenge
-      </h1>
-
-      <div className="w-full gap-6 flex flex-col place-items-center">
-        <Link
-          to="/bgmichallange"
-          className="inline-flex animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-24 py-4 text-2xl text-slate-400 font-semibold focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 hover:border-white hover:text-white transition-all duration-300 ease-in-out "
+    <div className="">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5 }}
+        className="w-full max-w-2xl bg-black/80 backdrop-blur-lg p-8 sm:p-12 rounded-2xl shadow-2xl border border-gray-800"
+      >
+        <motion.h1
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          className="text-4xl text-center mb-12 sm:text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-blue-500 to-purple-600"
         >
-          Bgmi
-        </Link>
+          Create Challenge
+        </motion.h1>
 
-        <Link
-          to="/ffchallange"
-          className="inline-flex animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-20 py-4 text-2xl font-semibold  text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 hover:border-white hover:text-white transition-all duration-300 ease-in-out "
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="space-y-6"
         >
-          FreeFire
-        </Link>
+          {games.map((game, index) => (
+            <motion.div
+              key={index}
+              variants={itemVariants}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <Link
+                to={game.to}
+                className={`group relative w-full flex items-center justify-center px-8 py-5 rounded-xl bg-gradient-to-r ${game.gradient} transform transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/25`}
+              >
+                <div className="absolute inset-0 bg-black/50 rounded-xl group-hover:bg-black/40 transition-all duration-300" />
+                <div className="relative flex items-center text-white text-2xl font-bold">
+                  {game.icon}
+                  {game.title}
+                </div>
+                <div className="absolute right-4 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                  →
+                </div>
+              </Link>
+            </motion.div>
+          ))}
+        </motion.div>
 
-        <Link
-          to="/codchallange"
-          className="inline-flex animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-16 py-4 font-semibold text-2xl  text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 hover:border-white hover:text-white transition-all duration-300 ease-in-out "
-        >
-          CallOfDuty
-        </Link>
-      </div>
+        {/* Optional: Add a decorative element */}
+        <div className="mt-12 text-center text-gray-500 text-sm">
+          Select a game to create your challenge
+        </div>
+      </motion.div>
     </div>
   );
 };

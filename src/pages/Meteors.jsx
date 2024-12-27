@@ -9,11 +9,11 @@ export function Meteors({ number }) {
   }, [number]);
 
   return (
-    <div className="absolute inset-0 pointer-events-none overflow-hidden">
+    <div className="absolute inset-0 z-10 pointer-events-none overflow-hidden">
       {meteors.map((meteor, idx) => (
         <div
           key={idx}
-          className="absolute bg-white rounded-full"
+          className="absolute bg-gray-100 rounded-full"
           style={{
             width: "4px",
             height: "4px",

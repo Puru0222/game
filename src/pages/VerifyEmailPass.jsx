@@ -4,9 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { BiArrowBack } from "react-icons/bi";
 import { RxCountdownTimer } from "react-icons/rx";
+import { FiLock, FiMail } from "react-icons/fi";
 import { useForm } from "react-hook-form";
 import { updatePassword } from "../services/authAPI";
-import img from "../asset/verifyemail.webp";
+import { motion } from "framer-motion";
 
 function VerifyEmailPass() {
   const { emailData } = useSelector((state) => state.auth);
@@ -24,7 +25,6 @@ function VerifyEmailPass() {
 
   const onSubmit = (data) => {
     try {
-      // Dispatching updatePassword action
       dispatch(updatePassword(emailData, data.otp, data.password, navigate));
       reset();
     } catch (error) {
@@ -39,70 +39,94 @@ function VerifyEmailPass() {
   }, []);
 
   return (
-    <div
-      className="flex justify-center items-center h-screen w-full bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: `url(${img})` }}
-    >
-      <div className="bg-white bg-opacity-80 p-4 rounded-lg shadow-lg transform transition-all hover:scale-105 hover:shadow-2xl hover:-translate-y-2">
-        <div className="flex flex-col gap-y-5 mb-8">
-          {/* Form Section */}
-          <div className="flex flex-col">
-            <h1 className="text-2xl sm:text-3xl font-semibold text-gray-700 mb-4 text-center">
-              Reset Your Password
-            </h1>
-            <form
-              onSubmit={handleSubmit(onSubmit)}
-              className="flex flex-col gap-4"
-            >
-              {/* Password field */}
-              <label htmlFor="password" className="text-gray-600 font-medium">
-                Password
-              </label>
-              <input
-                type="password"
-                id="password"
-                className="w-full px-3 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-300 transition-all duration-300"
-                {...register("password", { required: "Password is required" })}
-                placeholder="Enter your password"
-              />
-              {errors.password && (
-                <span className="text-red-500 text-sm">
-                  {errors.password.message}
-                </span>
-              )}
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 p-3">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="max-w-md w-full bg-white/10 backdrop-blur-lg rounded-2xl shadow-2xl p-6 border border-blue-500/20"
+      >
+        <div className="text-center mb-6">
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            className="w-20 h-20 bg-blue-600/30 rounded-full flex items-center justify-center mx-auto mb-4"
+          >
+            <FiLock className="text-blue-300 text-3xl" />
+          </motion.div>
+          <h1 className="text-3xl font-bold text-white mb-2">Reset Password</h1>
+          <p className="text-gray-300">Enter your new password and OTP</p>
+        </div>
 
-              {/* Confirm Password field */}
-              <label
-                htmlFor="confirmPassword"
-                className="text-gray-600 font-medium"
-              >
-                Confirm Password
-              </label>
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+          {/* Password Field */}
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-gray-300">
+              Password
+            </label>
+            <div className="relative">
               <input
                 type="password"
-                id="confirmPassword"
-                className="w-full px-3 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-300 transition-all duration-300"
+                {...register("password", {
+                  required: "Password is required",
+                  minLength: {
+                    value: 8,
+                    message: "Password must be at least 8 characters",
+                  },
+                })}
+                className="w-full px-4 py-3 bg-white/10 border border-blue-500/30 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 outline-none text-white placeholder-gray-400"
+                placeholder="Enter new password"
+              />
+              <FiLock className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+            </div>
+            {errors.password && (
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="text-red-400 text-sm"
+              >
+                {errors.password.message}
+              </motion.p>
+            )}
+          </div>
+
+          {/* Confirm Password Field */}
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-gray-300">
+              Confirm Password
+            </label>
+            <div className="relative">
+              <input
+                type="password"
                 {...register("confirmPassword", {
                   required: "Please confirm your password",
                   validate: (value) =>
                     value === password || "Passwords do not match",
                 })}
-                placeholder="Confirm your password"
+                className="w-full px-4 py-3 bg-white/10 border border-blue-500/30 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 outline-none text-white placeholder-gray-400"
+                placeholder="Confirm new password"
               />
-              {errors.confirmPassword && (
-                <span className="text-red-500 text-sm">
-                  {errors.confirmPassword.message}
-                </span>
-              )}
+              <FiLock className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+            </div>
+            {errors.confirmPassword && (
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="text-red-400 text-sm"
+              >
+                {errors.confirmPassword.message}
+              </motion.p>
+            )}
+          </div>
 
-              {/* OTP Field */}
-              <label htmlFor="otp" className="text-gray-600 font-medium">
-                Enter OTP (6 digits)
-              </label>
+          {/* OTP Field */}
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-gray-300">
+              Enter OTP
+            </label>
+            <div className="relative">
               <input
                 type="text"
-                id="otp"
-                className="w-full px-3 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-300 transition-all duration-300"
                 {...register("otp", {
                   required: "OTP is required",
                   pattern: {
@@ -110,40 +134,46 @@ function VerifyEmailPass() {
                     message: "OTP must be a 6-digit number",
                   },
                 })}
-                placeholder="Enter OTP"
+                className="w-full px-4 py-3 bg-white/10 border border-blue-500/30 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 outline-none text-white placeholder-gray-400"
+                placeholder="Enter 6-digit OTP"
               />
-              {errors.otp && (
-                <span className="text-red-500 text-sm">
-                  {errors.otp.message}
-                </span>
-              )}
-
-              {/* Submit Button */}
-              <button
-                type="submit"
-                className="w-full bg-yellow-400 text-white py-2 rounded-md hover:bg-yellow-500 transition-all duration-300 font-medium"
+              <FiMail className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+            </div>
+            {errors.otp && (
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="text-red-400 text-sm"
               >
-                Update Password
-              </button>
-            </form>
+                {errors.otp.message}
+              </motion.p>
+            )}
           </div>
-          <div className="flex justify-between items-center">
-            {/* Back Link */}
-            <Link
-              to="/loginSignup"
-              className="relative text-blue-500 hover:text-white p-2 rounded-md transition-all duration-500 ease-in-out hover:bg-gradient-to-r hover:from-blue-400 hover:to-blue-600"
-            >
-              <p className="text-richblack-5 flex items-center gap-x-2">
-                <BiArrowBack /> Back To Signup
-              </p>
-            </Link>
-            {/* Resend OTP */}
-            <button className="flex items-center gap-x-2 text-blue-500 hover:text-white p-2 rounded-md transition-all duration-500 ease-in-out hover:bg-gradient-to-r hover:from-blue-400 hover:to-blue-600">
-              <RxCountdownTimer /> Resend Otp
-            </button>
-          </div>
+
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            type="submit"
+            className="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors duration-200"
+          >
+            Reset Password
+          </motion.button>
+        </form>
+
+        <div className="flex justify-between items-center mt-6">
+          <Link
+            to="/loginSignup"
+            className="text-blue-300 hover:text-white flex items-center gap-2 transition-colors duration-200 group"
+          >
+            <BiArrowBack className="group-hover:transform group-hover:-translate-x-1 transition-transform" />
+            Back to Login
+          </Link>
+          <button className="text-blue-300 hover:text-white flex items-center gap-2 transition-colors duration-200 group">
+            <RxCountdownTimer className="group-hover:rotate-180 transition-transform duration-500" />
+            Resend OTP
+          </button>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }

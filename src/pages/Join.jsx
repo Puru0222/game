@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   resetChallenges,
   saveChallenges,
 } from "../slices/gameslices/challengeSlice";
-import { useSelector } from "react-redux";
 import { fetchChallenges } from "../services/bgmiAPI";
+import { motion } from "framer-motion";
+import { FiUsers, FiMap, FiInfo } from "react-icons/fi";
+import { MdOutlineCurrencyRupee } from "react-icons/md";
+import { GiTrophy } from "react-icons/gi";
 
 function Join() {
   const dispatch = useDispatch();
@@ -34,69 +37,144 @@ function Join() {
     navigate(`/challenge/${uniqueSerialNumber}`);
   };
 
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const item = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0 },
+  };
+
   return (
-    <div className="flex flex-col gap-6 p-1 mt-1">
+    <div className="min-h-screen bg-black rounded bg-opacity-60 p-4">
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="max-w-7xl mx-auto mb-6"
+      >
+        <h1 className="text-3xl font-bold text-white text-center mb-2">
+          Available Challenges
+        </h1>
+        <p className="text-blue-300 text-center">
+          Join exciting gaming challenges and compete with others
+        </p>
+      </motion.div>
+
       {loading ? (
-        <div className="flex justify-center items-center bg-black bg-opacity-70 rounded-lg shadow-md p-6">
-          <p className="text-center text-gray-50 text-lg font-semibold">
-            Loading .....
-          </p>
-        </div>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="flex justify-center items-center p-8"
+        >
+          <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+        </motion.div>
       ) : challenges.length > 0 ? (
-        challenges.map((challenge) => (
-          <div
-            key={challenge.uniqueSerialNumber}
-            className="bg-blue-900 w-full bg-opacity-70 p-4 rounded-lg border border-blue-500  shadow-[0_0_10px_2px_rgba(59,130,246,0.8)] transition-shadow duration-300"
+        <motion.div
+          variants={container}
+          initial="hidden"
+          animate="show"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
+          {challenges.map((challenge) => (
+            <motion.div
+              key={challenge.uniqueSerialNumber}
+              variants={item}
+              className="bg-white/10 backdrop-blur-lg rounded-xl border border-blue-500/30 overflow-hidden hover:shadow-[0_0_15px_rgba(59,130,246,0.5)] transition-all duration-300"
             >
-            <div className="text-xl flex justify-evenly mb-2 font-bold text-white">
-              <div>{challenge.gname}</div>
-              <div>{challenge.fullname}</div>
-            </div>
-            <div className="flex justify-between">
-              <div className="text-sm text-gray-100 font-medium">
-                Team Mode: {challenge.teamMode}
+              <div className="p-6">
+                {/* Header */}
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center space-x-2">
+                    <GiTrophy className="text-yellow-400 text-2xl" />
+                    <h2 className="text-xl font-bold text-white">
+                      {challenge.gname}
+                    </h2>
+                  </div>
+                  <span className="px-3 py-1 bg-blue-500/20 rounded-full text-blue-300 text-sm">
+                    {challenge.fullname}
+                  </span>
+                </div>
+
+                {/* Details */}
+                <div className="space-y-3 mb-4">
+                  <div className="flex items-center justify-between text-gray-300">
+                    <div className="flex items-center space-x-2">
+                      <FiUsers className="text-blue-400" />
+                      <span>Team Mode: {challenge.teamMode}</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <FiMap className="text-blue-400" />
+                      <span>Map: {challenge.map}</span>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between text-gray-300">
+                    <div className="flex items-center space-x-2">
+                      <FiUsers className="text-blue-400" />
+                      <span>Players: {challenge.players}</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <MdOutlineCurrencyRupee className="text-blue-400" />
+                      <span>Entry: {challenge.price}</span>
+                    </div>
+                  </div>
+
+                  {challenge.note && (
+                    <div className="flex items-start space-x-2 text-gray-300">
+                      <FiInfo className="text-blue-400 mt-1 flex-shrink-0" />
+                      <p className="text-sm">{challenge.note}</p>
+                    </div>
+                  )}
+                </div>
+
+                {/* Status/Action */}
+                {challenge.status === "started" ? (
+                  <div className="text-center py-2 px-4 bg-red-500/20 rounded-lg text-red-400">
+                    Challenge has started
+                  </div>
+                ) : challenge.status === "completed" ? (
+                  <div className="text-center py-2 px-4 bg-green-500/20 rounded-lg text-green-400">
+                    Challenge completed
+                  </div>
+                ) : (
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => onClickHandle(challenge.uniqueSerialNumber)}
+                    className="w-full py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors duration-200"
+                  >
+                    View Challenge
+                  </motion.button>
+                )}
               </div>
-              <div className="text-sm text-gray-100 font-medium">
-                Map: {challenge.map}
-              </div>
-            </div>
-            <div className="flex justify-between mb-1">
-              <div className="text-sm text-gray-100 font-medium">
-                Players: {challenge.players}
-              </div>
-              <div className="text-sm text-gray-100 font-medium">
-                Entry Price: {challenge.price}
-              </div>
-            </div>
-            {challenge.note && (
-              <div className="text-gray-100 font-medium">
-                Note: {challenge.note}
-              </div>
-            )}
-            {challenge.status === "started" ? (
-              <p className="text-center text-red-500 font-semibold mt-4">
-                Challenge has started.
-              </p>
-            ) : challenge.status === "completed" ? (
-              <p className="text-center text-green-500 font-semibold mt-4">
-                Challenge has been completed.
-              </p>
-            ) : (
-              <button
-                className="flex w-full mt-2 bg-blue-700 bg-opacity-80 border border-blue-500 justify-center gap-x-2 text-gray-50 hover:text-white p-2 rounded-md transition-all duration-500 ease-in-out hover:bg-gradient-to-r hover:from-blue-400 hover:to-blue-600"
-                onClick={() => onClickHandle(challenge.uniqueSerialNumber)}
-              >
-                View Challenge
-              </button>
-            )}
-          </div>
-        ))
+            </motion.div>
+          ))}
+        </motion.div>
       ) : (
-        <div className="flex justify-center items-center bg-black bg-opacity-70 rounded-lg shadow-md p-6">
-          <p className="text-center text-gray-50 text-lg font-semibold">
-            No challenges available.
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="flex flex-col items-center justify-center p-8 bg-white/5 backdrop-blur-lg rounded-xl border border-blue-500/30"
+        >
+          <img
+            src="/empty-state.svg" // Add an appropriate empty state illustration
+            alt="No challenges"
+            className="w-48 h-48 mb-4 opacity-50"
+          />
+          <p className="text-xl font-semibold text-gray-300 mb-2">
+            No Challenges Available
           </p>
-        </div>
+          <p className="text-gray-400 text-center">
+            Check back later for new gaming challenges
+          </p>
+        </motion.div>
       )}
     </div>
   );

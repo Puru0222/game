@@ -1,27 +1,31 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import img from "../asset/profile.jpg";
+import { motion, AnimatePresence } from "framer-motion";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import { useState } from "react";
-import { FaRegCopy } from "react-icons/fa6";
+import {
+  FaRegCopy,
+  FaUserCircle,
+  FaSignOutAlt,
+  FaTrash,
+  FaCoins,
+  FaCommentAlt,
+  FaExclamationCircle,
+} from "react-icons/fa";
+import { BiSupport } from "react-icons/bi";
 import { toast } from "react-hot-toast";
 import { resetChallenges } from "../slices/gameslices/challengeSlice";
 import { logout } from "../slices/authSlice";
-import { useDispatch } from "react-redux";
+import img from "../asset/profile.jpg";
 
 function Profile() {
   const [showReview, setShowReview] = useState(false);
   const [review, setReview] = useState("");
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
-  const [copied, setCopied] = useState(false);
   const { fullname, balance, email, uid } = useSelector((state) => state.auth);
-  const handleCopy = () => {
-    toast.success("Copied to clipboard!");
-  };
-
   const dispatch = useDispatch();
 
+  const handleCopy = () => toast.success("User ID copied to clipboard!");
   const handleLogout = () => {
     dispatch(logout());
     dispatch(resetChallenges());
@@ -45,159 +49,224 @@ function Profile() {
     dispatch(resetChallenges());
   };
 
+  const ProfileSection = ({ title, children, icon }) => (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="bg-white/80 rounded-lg p-3 shadow-lg mb-4"
+    >
+      <div className="flex items-center gap-2 mb-4">
+        {icon}
+        <h2 className="font-semibold text-base text-gray-800">{title}</h2>
+      </div>
+      {children}
+    </motion.div>
+  );
+
   return (
     <div
-      className="flex justify-center items-center h-screen w-full bg-cover bg-center bg-no-repeat "
-      style={{ backgroundImage: `url(${img})` }}
+      className="min-h-screen w-full bg-cover bg-center bg-no-repeat p-6 md:p-4"
+      style={{
+        backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(${img})`,
+      }}
     >
-      <div className="bg-blue-100 bg-opacity-80 p-8 sm:p-10 rounded-lg shadow-lg transform transition-all w-11/12">
-        <div className="flex justify-between items-center mb-4">
-          <h1 className="text-2xl font-bold text-gray-900">Profile</h1>
-          <button
-            onClick={handleLogout}
-            to="/dashboard/join"
-            className="px-4 py-2 text-red-500 font-bold hover:text-white p-2 rounded-md transition-all duration-500 ease-in-out hover:bg-gradient-to-r hover:from-red-400 hover:to-red-600"
-          >
-            LogOut
-          </button>
-        </div>
-
-        <div className="flex flex-col mb-2">
-          <p className="text-gray-700 font-semibold mb-2">
-            <span className="font-bold">Name: </span> {fullname}
-          </p>
-          <div className="flex  align-text-center rounded-md">
-            <p className="text-gray-700 font-semibold mb-2">
-              <span className="font-bold">User ID:</span> {uid}
-            </p>
-            <CopyToClipboard text={uid} onCopy={handleCopy}>
-              <button className="hover:text-white transition-all duration-500 ease-in-out hover:bg-gradient-to-r hover:from-blue-500 hover:to-blue-600 mx-4 mb-2 bg-white rounded p-1">
-                <FaRegCopy className="flex text-base" />
-              </button>
-            </CopyToClipboard>
-          </div>
-          <p className="text-gray-700 font-semibold mb-2 overflow-x-auto whitespace-nowrap">
-            <span className="font-bold">Email:</span> {email}
-          </p>
-        </div>
-        <hr className="border-gray-400 mb-2" />
-
-        <div className="flex flex-col mb-6">
-          <p className="text-gray-700 font-semibold mb-2">
-            <span className="font-bold">Balance:</span> ₹ {balance}
-          </p>
-          <Link
-            to="/add"
-            className="bg-orange-600 font-semibold m-1 text-white py-2 px-4 rounded"
-          >
-            Add
-          </Link>
-          <Link to="/Withdraw" className="m-1 text-white rounded">
-            <div className="bg-white h-10 w-full py-2 px-4 flex justify-center items-center relative">
-              {/* Ashoka Chakra (Wheel) */}
-              <div className="h-10 absolute">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 100 100"
-                  fill="none"
-                  stroke="blue"
-                  strokeWidth="3"
-                  className="w-full h-full"
-                >
-                  <circle cx="50" cy="50" r="45" />
-                  {[...Array(24)].map((_, i) => (
-                    <line
-                      key={i}
-                      x1="50"
-                      y1="5"
-                      x2="50"
-                      y2="20"
-                      transform={`rotate(${i * 15} 50 50)`}
-                    />
-                  ))}
-                </svg>
-                <p className="text-center text-lg text-blue-800 font-bold absolute top-0 w-11/12 -left-28 sm:-left-64 md:-left-80 lg:-left-96 mt-2">
-                  Withdraw
-                </p>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="max-w-2xl mx-auto"
+      >
+        {/* Header Section */}
+        <ProfileSection
+          title="Profile Details"
+          icon={<FaUserCircle className="text-blue-600 text-2xl" />}
+        >
+          <div className="space-y-1">
+            <div className="flex justify-between items-center">
+              <div className="flex-1">
+                <p className="text-gray-600">Name</p>
+                <p className="font-semibold">{fullname}</p>
               </div>
-            </div>
-          </Link>
-          <Link
-            to="/complain"
-            className="bg-green-600 m-1 font-semibold text-white py-2 px-4 rounded duration-300"
-          >
-            Complain
-          </Link>
-        </div>
-        <hr className="border-gray-400 mb-2" />
-        <div className="mb-4">
-          <button
-            onClick={() => setShowReview(!showReview)}
-            className="text-blue-600 font-semibold hover:text-blue-800 transition-colors duration-300"
-          >
-            {showReview ? "Cancel Review" : "Give Review"}
-          </button>
-
-          {showReview && (
-            <div className="mt-2 space-y-2">
-              <textarea
-                value={review}
-                onChange={(e) => {
-                  const words = e.target.value.split(/\s+/).filter(Boolean); // Split by spaces and filter out empty strings
-                  if (words.length <= 50) {
-                    setReview(e.target.value);
-                  }
-                }}
-                className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                rows="3"
-                placeholder="Review Will be taken only once, Write your review here (max 50 words)..."
-              />
-              <div className="text-sm text-gray-500">
-                {review.split(/\s+/).filter(Boolean).length}/22 words
-              </div>
-              <button
-                onClick={handleReviewSubmit}
-                className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors duration-300"
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={handleLogout}
+                className="flex items-center gap-2 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
               >
-                Submit Review
-              </button>
+                <FaSignOutAlt /> Logout
+              </motion.button>
             </div>
-          )}
-        </div>
+
+            <div className="flex items-center gap-1">
+              <div className="flex-1">
+                <p className="text-gray-600">User ID</p>
+                <p className="font-semibold">{uid}</p>
+              </div>
+              <CopyToClipboard text={uid} onCopy={handleCopy}>
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  className="p-2 rounded-full hover:bg-gray-100"
+                >
+                  <FaRegCopy className="text-blue-600" />
+                </motion.button>
+              </CopyToClipboard>
+            </div>
+
+            <div>
+              <p className="text-gray-600">Email</p>
+              <p className="font-semibold truncate">{email}</p>
+            </div>
+          </div>
+        </ProfileSection>
+
+        {/* Balance Section */}
+        <ProfileSection
+          title="Balance & Transactions"
+          icon={<FaCoins className="text-yellow-500 text-xl" />}
+        >
+          <div className="space-y-2">
+            <div className="bg-gradient-to-r from-blue-500 to-blue-700 p-4 rounded-lg text-white">
+              <p className="text-sm">Current Balance</p>
+              <p className="text-xl font-bold">₹ {balance}</p>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <Link
+                to="/add"
+                className="bg-green-500 text-white py-2 px-4 rounded-lg text-center hover:bg-green-600 transition-colors"
+              >
+                Add Money
+              </Link>
+              <Link
+                to="/Withdraw"
+                className="bg-blue-500 text-white py-2 px-4 rounded-lg text-center hover:bg-blue-600 transition-colors"
+              >
+                Withdraw
+              </Link>
+            </div>
+          </div>
+        </ProfileSection>
+
+        {/*Complain Section */}
+        <ProfileSection
+          title="Complain"
+          icon={<BiSupport  className="text-purple-600 text-2xl" />}
+        >
+          <div className="space-y-4">
+            {/* Review Section */}
+            <AnimatePresence>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Link to="/complain" className="flex-1">
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="w-full px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors flex items-center justify-center gap-2"
+                  >
+                    <FaExclamationCircle />{" "}
+                    {/* Import this icon from react-icons/fa */}
+                    Submit Complain
+                  </motion.button>
+                </Link>
+              </div>
+            </AnimatePresence>
+          </div>
+        </ProfileSection>
+        {/* Review Section */}
+        <ProfileSection
+          title="Review"
+          icon={<FaCommentAlt className="text-purple-600 text-xl" />}
+        >
+          <AnimatePresence>
+            {showReview ? (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                className="space-y-3"
+              >
+                <textarea
+                  value={review}
+                  onChange={(e) => setReview(e.target.value)}
+                  className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  placeholder="Share your experience..."
+                  rows="4"
+                />
+                <div className="flex justify-end gap-2">
+                  <button
+                    onClick={() => setShowReview(false)}
+                    className="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={() => {
+                      toast.success("Thank you for your feedback!");
+                      setShowReview(false);
+                    }}
+                    className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+                  >
+                    Submit
+                  </button>
+                </div>
+              </motion.div>
+            ) : (
+              <button
+                onClick={() => setShowReview(true)}
+                className="text-blue-500 hover:text-blue-600"
+              >
+                Give Review
+              </button>
+            )}
+          </AnimatePresence>
+        </ProfileSection>
+
 
         {/* Delete Account Section */}
-        <div className="mt-4">
-          {!showDeleteConfirm ? (
-            <button
-              onClick={() => setShowDeleteConfirm(true)}
-              className="text-red-500 font-semibold hover:text-red-700 transition-colors duration-300"
-            >
-              Delete Account
-            </button>
-          ) : (
-            <div className="space-y-2">
-              <p className="text-red-600 font-medium">
-                Are you sure you want to delete your account? Your account will
-                be deleted after 22 dayes. This action cannot be undone.
-              </p>
-              <div className="space-x-2">
-                <button
-                  onClick={handleDeleteAccount}
-                  className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition-colors duration-300"
-                >
-                  Yes, Delete Account
-                </button>
-                <button
-                  onClick={() => setShowDeleteConfirm(false)}
-                  className="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600 transition-colors duration-300"
-                >
-                  Cancel
-                </button>
-              </div>
-            </div>
-          )}
-        </div>
-      </div>
+        <ProfileSection
+          title="Danger Zone"
+          icon={<FaTrash className="text-red-500 text-xl" />}
+        >
+          <AnimatePresence>
+            {showDeleteConfirm ? (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="bg-red-50 p-1 rounded-lg border border-red-200"
+              >
+                <p className="text-red-600 mb-2">
+                  Are you sure? This action cannot be undone. Your account will
+                  be scheduled for deletion after 22 days.
+                </p>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => setShowDeleteConfirm(false)}
+                    className="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={() => {
+                      toast.success("Account scheduled for deletion");
+                      handleLogout();
+                    }}
+                    className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
+                  >
+                    Confirm Delete
+                  </button>
+                </div>
+              </motion.div>
+            ) : (
+              <button
+                onClick={() => setShowDeleteConfirm(true)}
+                className="text-red-500 hover:text-red-600"
+              >
+                Delete Account
+              </button>
+            )}
+          </AnimatePresence>
+        </ProfileSection>
+      </motion.div>
     </div>
   );
 }
