@@ -44,17 +44,17 @@ const Create = () => {
   };
 
   return (
-    <div className="">
+    <div className="flex justify-center items-center">
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }}
-        className="w-full max-w-2xl bg-black/80 backdrop-blur-lg p-8 sm:p-12 rounded-2xl shadow-2xl border border-gray-800"
+        className="w-full bg-black/80 backdrop-blur-lg p-8 sm:p-12 rounded-2xl shadow-2xl border border-gray-800"
       >
         <motion.h1
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          className="text-4xl text-center mb-12 sm:text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-blue-500 to-purple-600"
+          className="text-4xl text-center mb-10 sm:text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-blue-500 to-purple-600"
         >
           Create Challenge
         </motion.h1>
@@ -90,7 +90,7 @@ const Create = () => {
         </motion.div>
 
         {/* Optional: Add a decorative element */}
-        <div className="mt-12 text-center text-gray-500 text-sm">
+        <div className="mt-10 text-center text-gray-500 text-sm">
           Select a game to create your challenge
         </div>
       </motion.div>

@@ -57,7 +57,7 @@ function Dashboard() {
     >
       {/* Main Card */}
       <Meteors number={70} />
-      <div ref={containerRef} className="transition-all duration-300 w-5/6">
+      <div ref={containerRef} className="transition-all duration-300 w-11/12">
         {isVisible ? (
           <div
             className="p-4 mt-4 mb-4 px-6 rounded-lg shadow-2xl transition-transform transform"
@@ -120,7 +120,7 @@ function Dashboard() {
         {/* Navigation Section */}
       </div>
 
-      <div className="flex sticky top-0 z-10 shadow-md bg-black justify-between w-5/6 p-4 px-7 rounded-lg bg-opacity-60 mt-1 animate-float">
+      <div className="flex sticky top-0 z-10 shadow-md bg-black justify-between w-11/12 p-4 px-7 rounded-lg bg-opacity-60 mt-1 animate-float">
         <Link
           to="/dashboard/join"
           className={`px-4 py-2 font-bold rounded-md transition-colors ${
@@ -143,7 +143,7 @@ function Dashboard() {
         </Link>
       </div>
 
-      <div className="flex-1 w-5/6 mt-1 overflow-y-auto">
+      <div className="flex-1 w-11/12 mt-1 overflow-y-auto">
         {" "}
         <Outlet />
       </div>

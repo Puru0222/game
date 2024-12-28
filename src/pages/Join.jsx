@@ -53,7 +53,7 @@ function Join() {
   };
 
   return (
-    <div className="min-h-screen bg-black rounded bg-opacity-60 p-4">
+    <div className="bg-black rounded bg-opacity-60 p-4">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -88,24 +88,24 @@ function Join() {
               variants={item}
               className="bg-white/10 backdrop-blur-lg rounded-xl border border-blue-500/30 overflow-hidden hover:shadow-[0_0_15px_rgba(59,130,246,0.5)] transition-all duration-300"
             >
-              <div className="p-6">
+              <div className="p-2">
                 {/* Header */}
                 <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center space-x-2">
+                  <div className="flex items-center space-x-1">
                     <GiTrophy className="text-yellow-400 text-2xl" />
                     <h2 className="text-xl font-bold text-white">
                       {challenge.gname}
                     </h2>
                   </div>
-                  <span className="px-3 py-1 bg-blue-500/20 rounded-full text-blue-300 text-sm">
+                  <span className="px-2 py-2 bg-blue-500/20 rounded-full text-blue-300 text-sm">
                     {challenge.fullname}
                   </span>
                 </div>
 
                 {/* Details */}
-                <div className="space-y-3 mb-4">
+                <div className="space-y-2 mb-4">
                   <div className="flex items-center justify-between text-gray-300">
-                    <div className="flex items-center space-x-2">
+                    <div className="flex items-center space-x-1">
                       <FiUsers className="text-blue-400" />
                       <span>Team Mode: {challenge.teamMode}</span>
                     </div>
@@ -164,7 +164,7 @@ function Join() {
           className="flex flex-col items-center justify-center p-8 bg-white/5 backdrop-blur-lg rounded-xl border border-blue-500/30"
         >
           <img
-            src="/empty-state.svg" // Add an appropriate empty state illustration
+            src="/empty-state.svg"
             alt="No challenges"
             className="w-48 h-48 mb-4 opacity-50"
           />

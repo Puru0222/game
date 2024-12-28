@@ -101,7 +101,7 @@ const Challenge = () => {
           </h2>
         </div>
 
-        <div className="flex justify-between my-2 p-3 bg-gray-100 bg-opacity-90 rounded-md font-medium">
+        <div className="flex justify-between my-2 p-3 bg-gray-200 bg-opacity-90 rounded-md font-medium">
           <p className="text-blue-700 font-semibold">Room Password:</p>
           <div className="text-sm font-semibold text-blue-700">
             {passwordVisible ? (
