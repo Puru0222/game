@@ -93,10 +93,10 @@ const Challenge = () => {
         className="bg-white/45 p-6 w-full max-w-md mx-4 rounded-2xl shadow-2xl backdrop-blur-sm"
       >
         <div className="text-center mb-6">
-          <h1 className="text-3xl font-bold text-blue-700 mb-2">
+          <h1 className="text-3xl font-bold text-gray-800 mb-2">
             Accept Challenge
           </h1>
-          <h2 className="text-2xl font-semibold text-blue-600">
+          <h2 className="text-2xl font-semibold text-gray-800">
             {challenge.gname}
           </h2>
         </div>

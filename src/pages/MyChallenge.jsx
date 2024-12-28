@@ -147,8 +147,8 @@ const MyChallenge = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-900 to-black py-8">
-      <div className="container mx-auto px-4">
-        <div className="max-w-4xl mx-auto bg-white/10 backdrop-blur-lg rounded-xl shadow-2xl overflow-hidden">
+      <div className="container mx-auto px-3">
+        <div className="max-w-4xl mx-auto bg-white/10 backdrop-blur-lg rounded-xl shadow-xl overflow-hidden">
           {/* Header */}
           <div className="bg-gradient-to-r from-blue-600 to-blue-800 p-6">
             <h1 className="text-2xl font-bold text-white text-center flex items-center justify-center gap-2">
@@ -158,10 +158,10 @@ const MyChallenge = () => {
           </div>
 
           {/* Content */}
-          <div className="p-6">
+          <div className="p-4">
             {/* Created Challenges Section */}
-            <section className="mb-8">
-              <h2 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+            <section className="mb-6">
+              <h2 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
                 <FaTrophy className="text-yellow-400" />
                 Created Challenges
               </h2>
@@ -171,9 +171,9 @@ const MyChallenge = () => {
                   createdChallenges.map((challenge) => (
                     <div
                       key={challenge._id}
-                      className="bg-white/20 backdrop-blur p-6 rounded-lg shadow-lg transition-all hover:transform hover:scale-[1.01]"
+                      className="bg-white/20 backdrop-blur p-4 rounded-lg shadow-lg transition-all hover:transform hover:scale-[1.01]"
                     >
-                      <div className="flex justify-between items-center mb-4">
+                      <div className="flex justify-between items-center mb-2">
                         <div className="flex items-center gap-2">
                           <span className="text-white font-semibold">
                             Room ID:
@@ -193,7 +193,7 @@ const MyChallenge = () => {
                         )}
                       </div>
 
-                      <div className="grid grid-cols-2 gap-4 mb-4">
+                      <div className="grid grid-cols-2 gap-4 mb-2">
                         <div className="flex items-center gap-2 text-white">
                           <FaUsers className="text-blue-400" />
                           <span>Players: {challenge.users.length}</span>
@@ -207,8 +207,8 @@ const MyChallenge = () => {
 
                       {/* Players Selection */}
                       {challenge.status !== "completed" && (
-                        <div className="bg-white/10 rounded-lg p-4 mb-4">
-                          <h3 className="text-white font-semibold mb-2">
+                        <div className="bg-white/10 rounded-lg p-2 mb-2">
+                          <h3 className="text-white font-semibold mb-1">
                             Select Winners
                           </h3>
                           <div className="space-y-2">
@@ -241,7 +241,7 @@ const MyChallenge = () => {
                       )}
 
                       {/* Action Buttons */}
-                      <div className="flex justify-center gap-4">
+                      <div className="flex justify-center gap-2">
                         {challenge.status === "started" ? (
                           <p className="text-center text-red-500 pt-2 font-semibold">
                             Challenge has started.
@@ -253,7 +253,7 @@ const MyChallenge = () => {
                         ) : (
                           <button
                             onClick={() => handleMarkStarted(challenge._id)}
-                            className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors"
+                            className="bg-green-500 text-white px-2 py-1 rounded-lg hover:bg-green-600 transition-colors"
                           >
                             Start Challenge
                           </button>
@@ -264,7 +264,7 @@ const MyChallenge = () => {
                             onClick={() =>
                               handleJoin(challenge.balance, challenge._id)
                             }
-                            className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors"
+                            className="bg-blue-500 text-white px-2 py-1 rounded-lg hover:bg-blue-600 transition-colors"
                           >
                             Select Winner
                           </button>
@@ -282,7 +282,7 @@ const MyChallenge = () => {
 
             {/* Joined Challenges Section */}
             <section>
-              <h2 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+              <h2 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
                 <FaUsers className="text-green-400" />
                 Joined Challenges
               </h2>
@@ -292,28 +292,22 @@ const MyChallenge = () => {
                   joinedChallenges.map((challenge) => (
                     <div
                       key={challenge._id}
-                      className="bg-white/20 backdrop-blur p-6 rounded-lg shadow-lg"
+                      className="bg-white/20 backdrop-blur p-4 rounded-lg shadow-lg"
                     >
                       <div className="flex justify-between text-white">
                         <span>{challenge.fullname}</span>
-                        <div className="flex gap-2 items-center">
-                          <FaMapMarkedAlt className="text-green-400" />
-                          <span>{challenge.map}</span>
-                        </div>
+                        <span>{challenge.map}</span>
                       </div>
-                      <div className="flex mt-2 justify-between gap-6 text-white">
-                        <div className="flex gap-2 items-center">
-                          <BiKey className="text-yellow-400" />
-                          <strong>
-                            ID:{" "}
-                            <span className="bg-blue-600 px-3 py-1 rounded text-white">
-                              {challenge.roomId}
-                            </span>
-                          </strong>
+                      <div className="flex mt-1 justify-between text-white">
+                        <div className="flex gap-1 items-center">
+                          ID:
+                          <span className="bg-blue-600 px-1 py-1 rounded text-white">
+                            {challenge.roomId}
+                          </span>
                         </div>
-                        <div>
-                          <strong>Password:</strong>{" "}
-                          <span className="bg-blue-600 px-3 py-1 rounded text-white">
+                        <div className="flex gap-1 items-center">
+                          Pass:
+                          <span className="bg-blue-600 px-1 py-1 rounded text-white">
                             {challenge.roomPassword}
                           </span>
                         </div>

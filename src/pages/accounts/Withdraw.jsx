@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaWallet, FaRupeeSign, FaInfoCircle, FaMoneyBillWave } from "react-icons/fa";
+import {
+  FaWallet,
+  FaRupeeSign,
+  FaInfoCircle,
+  FaMoneyBillWave,
+} from "react-icons/fa";
 import toast from "react-hot-toast";
 import { apiConnector } from "../../services/apiConnector";
 import { updateDataEndpoint } from "../../services/apis";
@@ -26,15 +31,15 @@ const Withdraw = () => {
     const toastId = toast.loading("Processing withdrawal request...");
 
     try {
-      const result = await apiConnector(
-        "POST",
-        updateDataEndpoint.SENT_EMAIL,
-        { upiId: data.upiId, amount: data.amount, uid }
-      );
+      const result = await apiConnector("POST", updateDataEndpoint.SENT_EMAIL, {
+        upiId: data.upiId,
+        amount: data.amount,
+        uid,
+      });
 
       if (result.data?.success) {
         toast.success("Withdrawal request submitted successfully!", {
-          icon: '💰',
+          icon: "💰",
           duration: 4000,
         });
         reset();
@@ -44,7 +49,7 @@ const Withdraw = () => {
     } catch (error) {
       console.error("Error:", error);
       toast.error("Failed to process withdrawal. Please try again.", {
-        icon: '❌',
+        icon: "❌",
         duration: 4000,
       });
     } finally {
@@ -87,10 +92,9 @@ const Withdraw = () => {
                 type="text"
                 {...register("upiId", {
                   required: "UPI ID or Phone Number is required",
-                  
                 })}
                 className={`w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 ${
-                  errors.upiId ? 'border-red-500' : 'border-gray-300'
+                  errors.upiId ? "border-red-500" : "border-gray-300"
                 }`}
                 placeholder="Enter UPI ID or Phone Number"
               />
@@ -114,19 +118,25 @@ const Withdraw = () => {
               <label className="block text-gray-700 font-medium mb-2">
                 Withdrawal Amount
               </label>
-              <div className="relative">
-                <span className="absolute left-3 top-3 text-gray-500">
+              <div className="relative text-center">
+                <span className="absolute left-3 top-4 text-gray-500">
                   <FaRupeeSign />
                 </span>
                 <input
                   type="number"
                   {...register("amount", {
                     required: "Amount is required",
-                    min: { value: 50, message: "Minimum withdrawal amount is ₹50" },
-                    max: { value: balance, message: "Amount exceeds available balance" },
+                    min: {
+                      value: 50,
+                      message: "Minimum withdrawal amount is ₹10",
+                    },
+                    max: {
+                      value: balance,
+                      message: "Amount exceeds available balance",
+                    },
                   })}
                   className={`w-full p-3 pl-8 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 ${
-                    errors.amount ? 'border-red-500' : 'border-gray-300'
+                    errors.amount ? "border-red-500" : "border-gray-300"
                   }`}
                   placeholder="Enter amount"
                 />
@@ -154,7 +164,7 @@ const Withdraw = () => {
               </h3>
               <ul className="text-sm text-blue-700 space-y-1">
                 <li>• Minimum withdrawal amount: ₹10</li>
-                <li>• Processing time: 45-60 Minuts</li>
+                <li>• Processing time: 10-20 Minutes</li>
                 <li>• Ensure UPI ID is correct</li>
                 <li>• Available balance: ₹{balance}</li>
               </ul>
@@ -168,8 +178,8 @@ const Withdraw = () => {
               whileTap={{ scale: 0.98 }}
               className={`w-full py-3 px-4 rounded-lg text-white font-medium flex items-center justify-center gap-2 ${
                 isSubmitting
-                  ? 'bg-gray-400 cursor-not-allowed'
-                  : 'bg-blue-600 hover:bg-blue-700'
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-blue-600 hover:bg-blue-700"
               }`}
             >
               {isSubmitting ? (

@@ -122,7 +122,7 @@ function Profile() {
         {/* Balance Section */}
         <ProfileSection
           title="Balance & Transactions"
-          icon={<FaCoins className="text-yellow-500 text-xl" />}
+          icon={<FaCoins className="text-blue-500 text-xl" />}
         >
           <div className="space-y-2">
             <div className="bg-gradient-to-r from-blue-500 to-blue-700 p-4 rounded-lg text-white">
@@ -150,7 +150,7 @@ function Profile() {
         {/*Complain Section */}
         <ProfileSection
           title="Complain"
-          icon={<BiSupport  className="text-purple-600 text-2xl" />}
+          icon={<BiSupport  className="text-red-600 text-2xl" />}
         >
           <div className="space-y-4">
             {/* Review Section */}

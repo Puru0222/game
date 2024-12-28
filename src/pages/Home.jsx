@@ -12,6 +12,7 @@ import { BiSupport } from "react-icons/bi";
 import { RiTeamFill } from "react-icons/ri";
 import { BsFillPersonXFill } from "react-icons/bs";
 import FAQ from "./Faq";
+import { FaDiscord, FaInstagram } from "react-icons/fa";
 
 const Home = () => {
   return (
@@ -131,6 +132,58 @@ const Home = () => {
                 ))}
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-black py-8 sm:py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h2 className="text-2xl font-extrabold text-white sm:text-4xl">
+              Connect With Us
+            </h2>
+            <p className="mt-3 max-w-2xl mx-auto text-base text-gray-300 sm:text-xl sm:mt-4">
+              Join our community on Discord and follow us on Instagram for
+              updates and exclusive content
+            </p>
+          </div>
+
+          <div className="mt-6 sm:mt-10 flex flex-col sm:flex-row justify-center items-center gap-6">
+            {/* Discord Card */}
+            <a
+              href="https://discord.gg/XnMRZHqmka"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group transform transition duration-500 hover:scale-105"
+            >
+              <div className="bg-[#5865F2] rounded-lg p-6 flex flex-col items-center w-72 mx-auto">
+                <FaDiscord className="h-12 w-12 text-white group-hover:animate-bounce" />
+                <h3 className="mt-4 text-lg font-medium text-white">
+                  Join Discord
+                </h3>
+                <p className="mt-2 text-sm text-gray-200 text-center">
+                  Connect with our gaming community
+                </p>
+              </div>
+            </a>
+
+            {/* Instagram Card */}
+            <a
+              href="https://www.instagram.com/gamechallenger.in/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group transform transition duration-500 hover:scale-105"
+            >
+              <div className="bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg p-6 flex flex-col items-center w-72 mx-auto">
+                <FaInstagram className="h-12 w-12 text-white group-hover:animate-spin-slow" />
+                <h3 className="mt-4 text-lg font-medium text-white">
+                  Follow Instagram
+                </h3>
+                <p className="mt-2 text-sm text-gray-200 text-center">
+                  Stay updated with the latest news
+                </p>
+              </div>
+            </a>
           </div>
         </div>
       </div>
