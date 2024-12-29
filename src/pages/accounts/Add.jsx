@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import toast from "react-hot-toast";
-import { FaQrcode, FaCopy, FaDownload, FaRupeeSign } from "react-icons/fa";
+import {
+  FaQrcode,
+  FaCopy,
+  FaDownload,
+  FaRupeeSign,
+  FaArrowAltCircleLeft,
+} from "react-icons/fa";
 import img from "../../asset/puruupi.png";
 
 const Add = () => {
@@ -10,11 +16,11 @@ const Add = () => {
   const handleCopy = () => {
     navigator.clipboard.writeText("gamechallenger@upi");
     toast.success("UPI ID copied to clipboard!", {
-      icon: '📋',
+      icon: "📋",
       style: {
-        borderRadius: '10px',
-        background: '#333',
-        color: '#fff',
+        borderRadius: "10px",
+        background: "#333",
+        color: "#fff",
       },
     });
   };
@@ -25,11 +31,11 @@ const Add = () => {
     link.download = "UPI_QR_Code.png";
     link.click();
     toast.success("QR Code downloaded!", {
-      icon: '⬇️',
+      icon: "⬇️",
       style: {
-        borderRadius: '10px',
-        background: '#333',
-        color: '#fff',
+        borderRadius: "10px",
+        background: "#333",
+        color: "#fff",
       },
     });
   };
@@ -51,35 +57,38 @@ const Add = () => {
             Scan QR code or use UPI ID to add funds
           </p>
         </div>
-          {/* Instructions */}
-          <div className="bg-blue-50 p-4 rounded-lg">
-            <h3 className="font-semibold text-blue-800 mb-2">
-              How to add money:
-            </h3>
-            <ol className="list-decimal list-inside text-sm text-blue-700 space-y-1">
-              <li>Scan the QR code or copy UPI ID</li>
-              <li>Enter the amount you want to add</li>
-              <li>Add your UID in the payment note</li>
-              <li>Complete the payment</li>
-            </ol>
+        {/* Instructions */}
+        <div className="bg-blue-50 p-4 rounded-lg">
+          <h3 className="font-semibold text-blue-800 mb-2">
+            How to add money:
+          </h3>
+          <ol className="list-decimal list-inside text-sm text-blue-700 space-y-1">
+            <li>Scan the QR code or copy UPI ID</li>
+            <li>Enter the amount you want to add</li>
+            <li className="text-red-600 font-bold flex items-center">
+              Add your UID in the payment note
+              <FaArrowAltCircleLeft className="ml-1" />
+              <strong className="mx-1 animate-ping">IMPORTANT</strong>
+            </li>
+            <li>Complete the payment</li>
+          </ol>
+        </div>
+
+        {/* UPI ID Section */}
+        <div className="bg-gray-50 p-3 rounded-lg">
+          <p className="text-gray-600 text-sm mb-1">UPI ID</p>
+          <div className="flex items-center justify-between bg-white p-3 rounded-lg border border-gray-200">
+            <span className="font-mono text-blue-600">gamechallenger@upi</span>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={handleCopy}
+              className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+            >
+              <FaCopy className="text-blue-600" />
+            </motion.button>
           </div>
-          {/* UPI ID Section */}
-          <div className="bg-gray-50 p-3 rounded-lg">
-            <p className="text-gray-600 text-sm mb-1">UPI ID</p>
-            <div className="flex items-center justify-between bg-white p-3 rounded-lg border border-gray-200">
-              <span className="font-mono text-blue-600">
-                gamechallenger@upi
-              </span>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={handleCopy}
-                className="p-2 hover:bg-gray-100 rounded-full transition-colors"
-              >
-                <FaCopy className="text-blue-600" />
-              </motion.button>
-            </div>
-          </div>
+        </div>
 
         {/* Content */}
         <div className="p-2 space-y-4">
@@ -114,8 +123,6 @@ const Add = () => {
               <FaDownload /> Download QR
             </motion.button>
           </motion.div>
-
-
         </div>
       </motion.div>
 

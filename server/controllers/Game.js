@@ -165,7 +165,7 @@ exports.updateChallenge = async (req, res) => {
         .status(400)
         .json({ success: false, message: "Challenge is already completed." });
     }
-    const adminId = "672af280520a7731da410e9c";
+    const adminId = "672af29d520a7731da410ea0";
     const winnerShare = balance * 0.8;
     const creatorShare = balance * 0.15;
     const adminShare = balance * 0.05;
