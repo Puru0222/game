@@ -1,11 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import SlideButton from "react-slide-button";
 import toast from "react-hot-toast";
 import { useState } from "react";
 import { apiConnector } from "../services/apiConnector";
 import { bgmiendpoint } from "../services/apis";
-import img from "../asset/mychallenge.webp";
 import { fetchChallenges } from "../services/bgmiAPI";
 import {
   MdDeleteSweep,
@@ -13,8 +11,6 @@ import {
   MdPerson,
   MdContentCopy,
 } from "react-icons/md";
-import { FaMapMarkedAlt } from "react-icons/fa";
-import { BiKey } from "react-icons/bi";
 
 import {
   FaTrophy,
@@ -159,7 +155,7 @@ const MyChallenge = () => {
   }, [dispatch, id, joinChallenge, createChallenge]);
 
   return (
-    <div className="flex justify-center items-center min-h-screen w-full bg-gradient-to-b from-blue-900 via-indigo-900 to-black p-6">
+    <div className="flex justify-center items-center min-h-screen w-full bg-gradient-to-b from-blue-900 via-indigo-900 to-black p-3">
       <div className="flex w-full max-w-6xl">
         <div className="w-full bg-white/5 flex flex-col backdrop-blur-xl rounded-2xl shadow-2xl overflow-hidden border border-white/10">
           {/* Header */}
@@ -184,7 +180,7 @@ const MyChallenge = () => {
                   createdChallenges.map((challenge) => (
                     <div
                       key={challenge._id}
-                      className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur p-6 rounded-xl shadow-lg transition-all duration-300 hover:transform hover:scale-[1.02] border border-white/10"
+                      className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur p-4 rounded-xl shadow-lg transition-all duration-300 hover:transform hover:scale-[1.02] border border-white/10"
                     >
                       <div className="flex justify-between items-center mb-4">
                         <div className="flex items-center gap-3">
@@ -319,7 +315,7 @@ const MyChallenge = () => {
                   joinedChallenges.map((challenge) => (
                     <div
                       key={challenge._id}
-                      className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur p-6 rounded-xl shadow-lg transition-all duration-300 hover:transform hover:scale-[1.02] border border-white/10"
+                      className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur p-4 rounded-xl shadow-lg transition-all duration-300 hover:transform hover:scale-[1.02] border border-white/10"
                     >
                       {/* Challenge Header */}
                       <div className="flex justify-between items-center mb-4">
@@ -337,14 +333,14 @@ const MyChallenge = () => {
                       </div>
 
                       {/* Room Details */}
-                      <div className="grid grid-cols-2 gap-6 mb-4">
-                        <div className="bg-white/5 p-4 rounded-lg">
+                      <div className="grid grid-cols-2 gap-4 mb-4">
+                        <div className="bg-white/5 p-3 rounded-lg">
                           <div className="flex flex-col gap-2">
                             <span className="text-blue-300 text-sm font-medium">
                               Room ID
                             </span>
                             <div className="flex items-center gap-2">
-                              <span className="bg-blue-600/80 px-4 py-1.5 rounded-lg text-white font-medium">
+                              <span className="bg-blue-600/80 px-2 py-1.5 rounded-lg text-white font-medium">
                                 {challenge.roomId}
                               </span>
                               <button
@@ -367,7 +363,7 @@ const MyChallenge = () => {
                               Room Password
                             </span>
                             <div className="flex items-center gap-2">
-                              <span className="bg-blue-600/80 px-4 py-1.5 rounded-lg text-white font-medium">
+                              <span className="bg-blue-600/80 px-2 py-1.5 rounded-lg text-white font-medium">
                                 {challenge.roomPassword}
                               </span>
                               <button
