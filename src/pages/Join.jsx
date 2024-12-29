@@ -7,7 +7,7 @@ import {
 } from "../slices/gameslices/challengeSlice";
 import { fetchChallenges } from "../services/bgmiAPI";
 import { motion } from "framer-motion";
-import { FiUsers, FiMap, FiInfo } from "react-icons/fi";
+import { FiUsers, FiInfo } from "react-icons/fi";
 import { MdOutlineCurrencyRupee } from "react-icons/md";
 import { GiTrophy } from "react-icons/gi";
 
@@ -97,20 +97,18 @@ function Join() {
                       {challenge.gname}
                     </h2>
                   </div>
-                  <span className="px-2 py-2 bg-blue-500/20 rounded-full text-blue-300 text-sm">
+                  <span className="px-2 py-2 bg-blue-500/20 rounded-full text-blue-300 font-bold">
                     {challenge.fullname}
                   </span>
                 </div>
 
                 {/* Details */}
-                <div className="space-y-2 mb-4">
+                <div className="space-y-2 font-medium mb-4">
                   <div className="flex items-center justify-between text-gray-300">
-                    <div className="flex items-center space-x-1">
-                      <FiUsers className="text-blue-400" />
-                      <span>Team Mode: {challenge.teamMode}</span>
+                    <div className="flex justify-center items-center space-x-1">
+                      <span>Team: {challenge.teamMode}</span>
                     </div>
-                    <div className="flex items-center space-x-2">
-                      <FiMap className="text-blue-400" />
+                    <div className="flex items-center space-x-1">
                       <span>Map: {challenge.map}</span>
                     </div>
                   </div>

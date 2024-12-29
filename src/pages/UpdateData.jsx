@@ -2,6 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser, updateBalance } from "../services/dataUpdateAPI";
+import { motion } from "framer-motion";
 
 const UpdateData = () => {
   const { fullname, uid, balance, email } = useSelector((state) => state.user);
@@ -34,99 +35,190 @@ const UpdateData = () => {
     }
   };
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        duration: 0.5,
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+      },
+    },
+  };
+
   return (
-    <div className="flex justify-center items-center bg-gray-300 h-screen w-full">
-      <div className="bg-gray-100 p-8 sm:p-10 rounded-lg shadow-lg w-full max-w-80 sm:max-w-lg md:max-w-xl lg:max-w-2xl">
-        <h1 className="text-2xl font-semibold mb-3 text-center">
-          Search For UID
-        </h1>
-        <form
-          className="flex flex-col gap-2"
-          onSubmit={handleUidSubmit(submitUidForm)}
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="min-h-screen w-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center p-3"
+    >
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl p-6"
+      >
+        <motion.h1
+          variants={itemVariants}
+          className="text-3xl font-bold mb-4 text-center text-gray-800"
         >
-          <div className="flex flex-col">
-            <label htmlFor="uid" className="text-gray-600 font-medium">
-              UID
-            </label>
-            <input
+          Search For UID
+        </motion.h1>
+
+        {/* Search Form */}
+        <motion.form
+          variants={itemVariants}
+          onSubmit={handleUidSubmit(submitUidForm)}
+          className="space-y-4 mb-2"
+        >
+          <div className="space-y-2">
+            <label className="text-gray-700 font-semibold block">UID</label>
+            <motion.input
+              whileFocus={{ scale: 1.01 }}
               type="text"
-              name="uid"
-              id="uid"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-300 transition-all duration-300"
-              placeholder="Enter uid"
+              className="w-full px-2 py-1 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+              placeholder="Enter UID"
               {...uidRegister("uid", { required: true })}
             />
             {uidErrors.uid && (
-              <span className="text-red-500 text-sm mt-1">
-                UID likho tb khojna.
-              </span>
+              <motion.span
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="text-red-500 text-sm"
+              >
+                Please enter a UID
+              </motion.span>
             )}
           </div>
-          <button
+
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="w-full py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg font-semibold hover:from-blue-600 hover:to-blue-700 transition-all duration-300"
             type="submit"
-            className="hover:text-white transition-all duration-500 ease-in-out hover:bg-gradient-to-r hover:from-blue-500 hover:to-blue-600 mb-2 bg-blue-400 rounded p-1"
           >
             Search
-          </button>
-        </form>
-        <hr className="border-gray-400 mb-2" />
-        <div className="flex flex-col bg-white p-4 rounded-lg shadow-md mb-2">
-          <div className="flex justify-between items-center mb-1">
-            <p className="font-bold text-lg">{fullname}</p>
-            <p className="text-sm font-medium">{uid}</p>
-          </div>
-          <p className="font-medium text-sm overflow-x-auto whitespace-nowrap">
-            {email}
-          </p>
-          <p className="text-blue-600 font-bold text-xl">₹ {balance}</p>
-        </div>
+          </motion.button>
+        </motion.form>
 
-        <hr className="border-gray-400 mb-2" />
-        <form
-          className="flex flex-col gap-2"
-          onSubmit={handleBalanceSubmit(submitBalanceForm)}
+        <motion.div
+          variants={itemVariants}
+          className="border-t border-gray-200 my-2"
+        />
+
+        {/* User Info Card */}
+        <motion.div
+          variants={itemVariants}
+          className="bg-gray-50 p-4 rounded-xl shadow-lg mb-4"
         >
-          <div className="flex flex-col">
-            <label htmlFor="uid" className="text-gray-600  font-medium">
-              UID
-            </label>
-            <input
-              type="text"
-              name="uid"
-              id="uid"
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-300 transition-all duration-300"
-              placeholder="Enter uid"
-              {...balanceRegister("uid", { required: true })}
-            />
-            {balanceErrors.uid && (
-              <span className="text-red-500 text-sm mt-1">
-                UID likho tb khojna.
-              </span>
-            )}
-            <label htmlFor="balance" className="text-gray-600 font-medium">
-              Balance
-            </label>
-            <input
-              type="text"
-              name="balance"
-              id="balance"
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-300 transition-all duration-300"
-              placeholder="Enter balance"
-              {...balanceRegister("balance", { required: true })}
-            />
-            {balanceErrors.balance && (
-              <span className="text-red-500 text-sm mt-1">Balance batao.</span>
-            )}
+          <div className="flex justify-between items-center mb-2">
+            <motion.p
+              initial={{ x: -20, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              className="font-bold text-xl text-gray-800"
+            >
+              {fullname}
+            </motion.p>
+            <motion.p
+              initial={{ x: 20, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              className="text-gray-600 font-medium"
+            >
+              {uid}
+            </motion.p>
           </div>
-          <button
-            type="submit"
-            className="hover:text-white transition-all bg-blue-400 duration-500 ease-in-out hover:bg-gradient-to-r hover:from-blue-500 hover:to-blue-600 mb-2 rounded p-1"
+          <motion.p className="text-gray-600 font-medium mb-2">
+            {email}
+          </motion.p>
+          <motion.p
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            className="text-2xl font-bold text-blue-600"
           >
-            Update
-          </button>
-        </form>
-      </div>
-    </div>
+            ₹ {balance}
+          </motion.p>
+        </motion.div>
+
+        <motion.div
+          variants={itemVariants}
+          className="border-t border-gray-200 my-6"
+        />
+
+        {/* Update Balance Form */}
+        <motion.form
+          variants={itemVariants}
+          onSubmit={handleBalanceSubmit(submitBalanceForm)}
+          className="space-y-4"
+        >
+          <div className="space-y-4">
+            <div>
+              <label className="text-gray-700 font-semibold block mb-2">
+                UID
+              </label>
+              <motion.input
+                whileFocus={{ scale: 1.01 }}
+                type="text"
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+                placeholder="Enter UID"
+                {...balanceRegister("uid", { required: true })}
+              />
+              {balanceErrors.uid && (
+                <motion.span
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="text-red-500 text-sm"
+                >
+                  Please enter a UID
+                </motion.span>
+              )}
+            </div>
+
+            <div>
+              <label className="text-gray-700 font-semibold block">
+                Balance
+              </label>
+              <motion.input
+                whileFocus={{ scale: 1.01 }}
+                type="text"
+                className="w-full px-3 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+                placeholder="Enter balance"
+                {...balanceRegister("balance", { required: true })}
+              />
+              {balanceErrors.balance && (
+                <motion.span
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="text-red-500 text-sm"
+                >
+                  Please enter balance amount
+                </motion.span>
+              )}
+            </div>
+          </div>
+
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="w-full py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg font-semibold hover:from-blue-600 hover:to-blue-700 transition-all duration-300"
+            type="submit"
+          >
+            Update Balance
+          </motion.button>
+        </motion.form>
+      </motion.div>
+    </motion.div>
   );
 };
 

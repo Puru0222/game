@@ -81,7 +81,7 @@ const Challenge = () => {
 
   return (
     <div
-      className="min-h-screen w-full bg-cover bg-center flex items-center justify-center py-8"
+      className="min-h-screen w-full bg-cover bg-center flex items-center justify-center"
       style={{
         backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${img})`,
       }}
@@ -90,7 +90,7 @@ const Challenge = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="bg-white/45 p-6 w-full max-w-md mx-4 rounded-2xl shadow-2xl backdrop-blur-sm"
+        className="bg-white/45 p-4 mb-10 sm:mb-4 md:mb-2 lg:mb-2 w-full max-w-md mx-2 rounded-2xl shadow-2xl backdrop-blur-sm"
       >
         <div className="text-center mb-6">
           <h1 className="text-3xl font-bold text-gray-800 mb-2">
