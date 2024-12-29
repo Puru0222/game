@@ -39,7 +39,7 @@ const FAQ = () => {
   return (
     <div className="bg-neutral-950 opacity-90 mx-auto p-6">
       <h2 className="text-3xl font-bold text-center mb-10 text-white">
-        <span className="bg-gradient-to-r from-blue-500 via-gray-400 to-indigo-700 bg-clip-text text-transparent">
+        <span className="bg-gradient-to-r from-blue-600 via-gray-300 to-blue-700 bg-clip-text text-transparent">
           Frequently Asked Questions
         </span>
       </h2>
@@ -61,9 +61,9 @@ const FAQ = () => {
               </h3>
               <div className="flex-shrink-0">
                 {openQuestion === index ? (
-                  <FaChevronUp className="w-5 h-5 text-purple-400 transition-transform duration-300" />
+                  <FaChevronUp className="w-5 h-5 text-blue-600 transition-transform duration-300" />
                 ) : (
-                  <FaChevronDown className="w-5 h-5 text-purple-400 transition-transform duration-300" />
+                  <FaChevronDown className="w-5 h-5 text-blue-600 transition-transform duration-300" />
                 )}
               </div>
             </div>

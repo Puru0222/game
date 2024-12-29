@@ -146,11 +146,11 @@ const MyChallenge = () => {
   }, [dispatch, id, joinChallenge, createChallenge]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-900 to-black py-8">
-      <div className="container mx-auto px-3">
-        <div className="max-w-4xl mx-auto bg-white/10 backdrop-blur-lg rounded-xl shadow-xl overflow-hidden">
+    <div className="h-screen flex justify-center items-center w-full bg-gradient-to-b from-blue-900 to-black py-8">
+      <div className="container w-11/12">
+        <div className="bg-white/10 backdrop-blur-lg rounded-xl shadow-xl overflow-hidden">
           {/* Header */}
-          <div className="bg-gradient-to-r from-blue-600 to-blue-800 p-6">
+          <div className="bg-gradient-to-r from-blue-600 to-blue-800 p-4">
             <h1 className="text-2xl font-bold text-white text-center flex items-center justify-center gap-2">
               <MdGamepad className="text-3xl" />
               My Challenges
@@ -158,10 +158,10 @@ const MyChallenge = () => {
           </div>
 
           {/* Content */}
-          <div className="p-4">
+          <div className="p-1 py-3">
             {/* Created Challenges Section */}
             <section className="mb-6">
-              <h2 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
+              <h2 className="text-xl justify-center font-bold text-white mb-2 flex items-center gap-2">
                 <FaTrophy className="text-yellow-400" />
                 Created Challenges
               </h2>
@@ -240,6 +240,10 @@ const MyChallenge = () => {
                         </div>
                       )}
 
+                      <div className="text-white font-bold m-2">
+                        Winner gets : ₹ {(challenge.balance * 0.8).toFixed(2)}
+                      </div>
+
                       {/* Action Buttons */}
                       <div className="flex justify-center gap-2">
                         {challenge.status === "started" ? (
@@ -282,7 +286,7 @@ const MyChallenge = () => {
 
             {/* Joined Challenges Section */}
             <section>
-              <h2 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
+              <h2 className="text-xl justify-center font-bold text-white mb-2 flex items-center gap-2">
                 <FaUsers className="text-green-400" />
                 Joined Challenges
               </h2>
@@ -292,13 +296,13 @@ const MyChallenge = () => {
                   joinedChallenges.map((challenge) => (
                     <div
                       key={challenge._id}
-                      className="bg-white/20 backdrop-blur p-4 rounded-lg shadow-lg"
+                      className="bg-white/20 backdrop-blur w-full rounded-lg flex flex-col items-center justify-between"
                     >
-                      <div className="flex justify-between text-white">
+                      <div className="flex gap-4 text-white">
                         <span>{challenge.fullname}</span>
                         <span>{challenge.map}</span>
                       </div>
-                      <div className="flex mt-1 justify-between text-white">
+                      <div className="flex mt-1 mb-2 gap-4 text-white">
                         <div className="flex gap-1 items-center">
                           ID:
                           <span className="bg-blue-600 px-1 py-1 rounded text-white">

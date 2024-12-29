@@ -16,7 +16,7 @@ import { FaDiscord, FaInstagram } from "react-icons/fa";
 
 const Home = () => {
   return (
-    <div>
+    <div className="bg-black/90 pt-20">
       <Navbar />
       <div
         className="relative flex items-center justify-center w-full min-h-screen bg-cover bg-center border-b-4 border-orange-400"

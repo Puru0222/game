@@ -1,85 +1,142 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  FaHome,
+  FaInfoCircle,
+  FaQuestionCircle,
+  FaBars,
+  FaTimes,
+} from "react-icons/fa";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
+
+  const navLinks = [
+    {
+      path: "/",
+      label: "Home",
+      icon: <FaHome className="mr-2" />,
+    },
+    {
+      path: "/about",
+      label: "About",
+      icon: <FaInfoCircle className="mr-2" />,
+    },
+    {
+      path: "/howtouse",
+      label: "How to Use",
+      icon: <FaQuestionCircle className="mr-2" />,
+    },
+  ];
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location]);
 
   return (
-    <nav className="text-white bg-black bg-opacity-95 relative z-20">
-      {" "}
-      <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-10">
-        <div className="flex justify-between h-16 items-center">
-          {/* Brand */}
-          <h1 className="lg:text-2xl sm:text-xl font-bold">
-            Game Challenger
-          </h1>
-          {/* Desktop Menu */}
-          <div className="hidden md:flex space-x-6 font-bold">
-            {/* <Link
-              to="/"
-              className="hover:text-yellow-400 transition duration-300"
-            >
-              Home
-            </Link> */}
-            <Link
-              to="/about"
-              className="hover:text-yellow-400 transition duration-300"
-            >
-              About
-            </Link>
-            <Link
-              to="/howtouse"
-              className="hover:text-yellow-400 transition duration-300"
-            >
-              How to Use
-            </Link>
-          </div>
-          {/* Mobile Menu Button */}{" "}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden bg-gray-950 rounded-md p-1 focus:outline-none text-white"
+    <motion.nav
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+        isScrolled
+          ? "bg-blue-900/90 backdrop-blur-md shadow-lg shadow-blue-500/20"
+          : "bg-transparent"
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-20">
+          {/* Brand Logo */}
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            className="flex items-center"
           >
-            <svg
-              className="h-6 w-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
+            <h1 className="text-2xl md:text-3xl font-bold text-white tracking-wider">
+              <span className="text-blue-400">Game</span> Challenger
+            </h1>
+          </motion.div>
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex space-x-6">
+            {navLinks.map((link) => (
+              <motion.div
+                key={link.path}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Link
+                  to={link.path}
+                  className={`flex items-center text-white font-medium px-3 py-2 rounded-lg transition-all duration-300 ${
+                    location.pathname === link.path
+                      ? "bg-blue-500 text-white shadow-lg shadow-blue-500/30"
+                      : "hover:bg-blue-700/50 hover:text-blue-200"
+                  }`}
+                >
+                  {link.icon}
+                  {link.label}
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Mobile Menu Toggle */}
+          <div className="md:hidden">
+            <motion.button
+              whileTap={{ scale: 0.9 }}
+              onClick={() => setIsOpen(!isOpen)}
+              className="text-white p-2 rounded-lg hover:bg-blue-700/50 focus:outline-none"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d={isOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16m-7 6h7"}
-              />
-            </svg>
-          </button>
+              {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+            </motion.button>
+          </div>
         </div>
       </div>
+
       {/* Mobile Menu */}
-      {isOpen && (
-        <div className="absolute top-16 left-0 w-full bg-neutral-950 bg-opacity-60 px-2 pt-2 pb-3 space-y-1 z-30 backdrop-blur-lg font-bold">
-          {/* <Link
-            to="/"
-            className="block px-3 py-2 text-base font-normal hover:bg-gray-700"
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -50 }}
+            transition={{ duration: 0.3 }}
+            className="md:hidden absolute top-20 left-0 w-full bg-blue-900/95 backdrop-blur-md shadow-lg shadow-blue-500/20"
           >
-            Home
-          </Link> */}
-          <Link
-            to="/about"
-            className="block px-3 py-2 text-base font-normal hover:bg-neutral-900"
-          >
-            About
-          </Link>
-          <Link
-            to="/howtouse"
-            className="block px-3 py-2 text-base font-normal hover:bg-neutral-900"
-          >
-            How to Use
-          </Link>
-        </div>
-      )}
-    </nav>
+            <div className="px-2 pt-2 pb-3 space-y-1">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className={`flex items-center w-full px-4 py-3 text-white rounded-lg transition-all duration-300 ${
+                    location.pathname === link.path
+                      ? "bg-blue-500 shadow-md shadow-blue-500/30"
+                      : "hover:bg-blue-700/50"
+                  }`}
+                >
+                  {link.icon}
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Decorative gradient line */}
+      <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-blue-400 to-transparent opacity-30"></div>
+    </motion.nav>
   );
 };
 
