@@ -3,8 +3,8 @@ import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   FaHome,
-  FaInfoCircle,
-  FaQuestionCircle,
+  FaDiscord,
+  FaInstagram,
   FaBars,
   FaTimes,
 } from "react-icons/fa";
@@ -16,19 +16,16 @@ const Navbar = () => {
 
   const navLinks = [
     {
-      path: "/",
-      label: "Home",
-      icon: <FaHome className="mr-2" />,
+      path: "https://discord.gg/XnMRZHqmka",
+      label: "Discord",
+      icon: <FaDiscord className="mr-2" />,
+      external: true,
     },
     {
-      path: "/about",
-      label: "About",
-      icon: <FaInfoCircle className="mr-2" />,
-    },
-    {
-      path: "/howtouse",
-      label: "How to Use",
-      icon: <FaQuestionCircle className="mr-2" />,
+      path: "https://www.instagram.com/gamechallenger.in/",
+      label: "Instagram",
+      icon: <FaInstagram className="mr-2" />,
+      external: true,
     },
   ];
 
@@ -72,21 +69,19 @@ const Navbar = () => {
           <div className="hidden md:flex space-x-6">
             {navLinks.map((link) => (
               <motion.div
-                key={link.path}
+                key={link.label}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Link
-                  to={link.path}
-                  className={`flex items-center text-white font-medium px-3 py-2 rounded-lg transition-all duration-300 ${
-                    location.pathname === link.path
-                      ? "bg-blue-500 text-white shadow-lg shadow-blue-500/30"
-                      : "hover:bg-blue-700/50 hover:text-blue-200"
-                  }`}
+                <a
+                  href={link.path}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center text-white font-medium px-3 py-2 rounded-lg transition-all duration-300 hover:bg-blue-700/50 hover:text-blue-200"
                 >
                   {link.icon}
                   {link.label}
-                </Link>
+                </a>
               </motion.div>
             ))}
           </div>
@@ -116,18 +111,16 @@ const Navbar = () => {
           >
             <div className="px-2 pt-2 pb-3 space-y-1">
               {navLinks.map((link) => (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  className={`flex items-center w-full px-4 py-3 text-white rounded-lg transition-all duration-300 ${
-                    location.pathname === link.path
-                      ? "bg-blue-500 shadow-md shadow-blue-500/30"
-                      : "hover:bg-blue-700/50"
-                  }`}
+                <a
+                  key={link.label}
+                  href={link.path}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center w-full px-4 py-3 text-white rounded-lg transition-all duration-300 hover:bg-blue-700/50"
                 >
                   {link.icon}
                   {link.label}
-                </Link>
+                </a>
               ))}
             </div>
           </motion.div>

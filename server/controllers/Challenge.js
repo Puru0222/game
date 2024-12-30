@@ -15,8 +15,7 @@ const logger = {
 const distributeBalance = async (challenge, session) => {
   try {
     if (challenge.winners.length === 0 && challenge.users.length > 0) {
-      const share = Math.floor(challenge.balance / challenge.users.length);
-
+      const share = parseFloat((challenge.balance / totalUsers).toFixed(1));
       const bulkOperations = challenge.users.map((userId) => ({
         updateOne: {
           filter: { _id: userId },
@@ -146,7 +145,7 @@ const processWithRetry = async () => {
   }
 };
 
-cron.schedule("30 21 * * *", processWithRetry, {
+cron.schedule("00 09 * * *", processWithRetry, {
   timezone: "Asia/Kolkata",
 });
 
