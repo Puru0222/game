@@ -77,28 +77,30 @@ export function signUp(
 export function login(loginEmail, loginPassword, navigate) {
   return async (dispatch) => {
     const toastId = toast.loading("Loading...");
-    // dispatch(setLoading(true));
     try {
       const response = await apiConnector("POST", LOGIN_API, {
         email: loginEmail,
         password: loginPassword,
       });
 
-
       if (!response.data.success) {
-        throw new Error(response.data.message);
+        toast.error(response.data.message);
+        toast.dismiss(toastId);
+        return;
       }
-
       toast.success("Login Successful");
       dispatch(setToken(response.data.token));
       dispatch(setUser(response.data.user));
       localStorage.setItem("token", JSON.stringify(response.data.token));
       navigate("/dashboard/join");
     } catch (error) {
-      toast.error("Login Failed");
+      toast.error(
+        error.response?.data?.message ||
+          "Something went wrong. Please try again."
+      );
+    } finally {
+      toast.dismiss(toastId);
     }
-    // dispatch(setLoading(false));
-    toast.dismiss(toastId);
   };
 }
 
@@ -171,7 +173,7 @@ export function fetchUserAndChallenges(token) {
     } catch (error) {
       console.error("Error fetching user and challenges:", error);
     }
-      // toast.error("Failed to fetch data");
+    // toast.error("Failed to fetch data");
     // } finally {
     //   toast.dismiss(toastId);
     // }
