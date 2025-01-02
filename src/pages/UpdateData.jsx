@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 
 const UpdateData = () => {
   const { fullname, uid, balance, email } = useSelector((state) => state.user);
+
   const dispatch = useDispatch();
   const {
     register: uidRegister,

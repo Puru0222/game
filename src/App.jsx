@@ -23,6 +23,7 @@ import Add from "./pages/accounts/Add";
 import Withdraw from "./pages/accounts/Withdraw";
 import Complain from "./pages/accounts/Complain";
 import { HowToUse } from "./pages/HowToUse";
+import AdminRoute from "./component/AdminRoute";
 
 const App = () => {
   return (
@@ -79,9 +80,9 @@ const App = () => {
         <Route
           path="/updateData"
           element={
-            <PrivateRoute>
+            <AdminRoute>
               <UpdateData />
-            </PrivateRoute>
+            </AdminRoute>
           }
         />
         <Route
