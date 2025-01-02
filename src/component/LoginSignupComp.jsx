@@ -167,7 +167,7 @@ const LoginSignupComp = () => {
                     }`}
                     name="uid"
                     id="uid"
-                    placeholder="UID No."
+                    placeholder="UID"
                     {...signupRegister("uid", { required: "U-ID is required" })}
                   />
                   <i className="input-icon uil uil-user text-blue-500"></i>

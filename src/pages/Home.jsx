@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import pic1 from "../asset/pic1.webp";
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
@@ -13,8 +13,32 @@ import { RiTeamFill } from "react-icons/ri";
 import { BsFillPersonXFill } from "react-icons/bs";
 import FAQ from "./Faq";
 import { FaDiscord, FaInstagram } from "react-icons/fa";
+import { motion } from "framer-motion";
+import { getReviews } from "../services/authAPI";
+import { InfiniteMovingCards } from "../component/InfiniteMovingCards";
+import { InfiniteMovingImages } from "../component/InfiniteMovingImages";
 
 const Home = () => {
+  const [reviews, setReviews] = useState([]);
+  const images = [home3, home1, home2, home3, home1, home2];
+
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const response = await getReviews();
+        if (response.data.success) {
+          setReviews(response.data.reviews);
+        } else {
+          console.error("Failed to fetch reviews:", response.data.message);
+        }
+      } catch (error) {
+        console.error("Error fetching reviews:", error);
+      }
+    };
+
+    fetchReviews();
+  }, []);
+
   return (
     <div className="bg-black/90 pt-20">
       <Navbar />
@@ -36,11 +60,6 @@ const Home = () => {
               Get Started
             </button>
           </Link>
-          {/* <Link to={"/updateData"}>
-            <button className="px-6 py-3 lg:mt-4 sm:mt-3 bg-yellow-500 text-yellow-50 font-bold rounded-full shadow-lg hover:bg-yellow-700 transition duration-300">
-              update
-            </button>
-          </Link> */}
         </div>
       </div>
       <div className="bg-black relative flex items-center flex-col justify-center">
@@ -95,45 +114,47 @@ const Home = () => {
         </div>
 
         <div
-          className="flex m-4 mt-12 mb-12 z-10 w-11/12 sm:w-9/12 md:w-8/12 lg:w-8/12 overflow-hidden rounded-md bg-center flex-col"
+          className="flex m-4 z-10 w-11/12 overflow-hidden rounded-md bg-center flex-col"
           style={{ backgroundImage: `url(${noise})` }}
         >
           <div className="m-4 flex flex-col justify-center items-center z-20">
             {" "}
             {/* Overlap and background */}
-            <h2 className="text-center text-3xl font-bold text-gray-100 mb-4">
+            <h2 className="text-center text-3xl font-bold text-gray-100">
               Make Challenges In
             </h2>
             <div className="overflow-hidden relative">
-              {" "}
-              {/* Important: Add overflow-hidden */}
-              <div className="flex flex-row animate-infiniteScroll whitespace-nowrap">
-                {" "}
-                {[
-                  home3,
-                  home1,
-                  home2,
-                  home3,
-                  home1,
-                  home2,
-                  home3,
-                  home1,
-                  home2,
-                ].map((src, index) => (
-                  <div key={index} className="inline-block w-[300px] shrink-0">
-                    {" "}
-                    {/* Fixed width and shrink-0 */}
-                    <img
-                      src={src}
-                      alt={`${index + 1}`}
-                      className="w-4/5 h-auto object-cover rounded-lg shadow-md"
-                    />
-                  </div>
-                ))}
-              </div>
+              <InfiniteMovingImages
+                images={images}
+                direction="right"
+                speed="normal"
+                pauseOnHover={true}
+                title="Make Challenges In"
+              />
             </div>
           </div>
         </div>
+      <div className="z-20 m-4 mb-6 w-11/12 overflow-hidden rounded">
+        <div className="bg-neutral-900  py-4 ">
+          <div className="max-w-8xl px-4 sm:px-6 lg:px-8">
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-center text-white mb-2">
+              What Players Are Saying
+            </h2>
+
+            <InfiniteMovingCards
+              items={reviews.map((review) => ({
+                quote: review.comment,
+                name: review.fullname,
+                title: `UID: ${review.uid}`,
+              }))}
+              direction="left"
+              speed="normal"
+              pauseOnHover={true}
+              className="py-2"
+            />
+          </div>
+        </div>
+      </div>
       </div>
 
       <div className="bg-black py-8 sm:py-16">

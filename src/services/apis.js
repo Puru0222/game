@@ -26,3 +26,8 @@ export const bgmiendpoint = {
   START_CHALLENGE: BASE_URL + "/challange/markChallengeStarted",
   DELETE_CHALLENGE: BASE_URL + "/challange/deleteChallenge",
 };
+
+export const reviewendpoints = {
+  CREATE_REVIEW_API: BASE_URL + "/review/create-review",
+  GET_REVIEW_API: BASE_URL + "/review/get-reviews",
+};

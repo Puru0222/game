@@ -48,6 +48,10 @@ module.exports = {
             "background-position": "right center",
           },
         },
+        infiniteScroll: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(calc(-100% / 3.8))" },
+        },
       },
       animation: {
         breathe: "breathe 2s ease-in-out infinite",
@@ -57,6 +61,7 @@ module.exports = {
         fadeIn: "fadeIn 0.3s ease-in-out",
         gradientBG: "gradientBG 8s ease infinite",
         gradient: "gradient 8s linear infinite",
+        infiniteScroll: "infiniteScroll 10s linear infinite",
       },
       colors: {
         "night-sky-start": "#1e3a8a",

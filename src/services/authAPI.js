@@ -1,7 +1,7 @@
 import { toast } from "react-hot-toast";
 import { setToken, setUser } from "../slices/authSlice";
 import { apiConnector } from "./apiConnector";
-import { endpoints } from "./apis";
+import { endpoints, reviewendpoints } from "./apis";
 
 const {
   SENDOTP_API,
@@ -11,6 +11,8 @@ const {
   UPDATEPASSWORD_API,
   USER_DATA,
 } = endpoints;
+
+const { CREATE_REVIEW_API, GET_REVIEW_API } = reviewendpoints;
 
 export function sendOtp(email, uid, navigate) {
   return async (dispatch) => {
@@ -178,4 +180,41 @@ export function fetchUserAndChallenges(token) {
     //   toast.dismiss(toastId);
     // }
   };
+}
+
+export function reviewHandler(fullname, uid, review) {
+  return async (dispatch) => {
+    const toastId = toast.loading("Submitting review...");
+    try {
+      const response = await apiConnector("POST", CREATE_REVIEW_API, {
+        fullname,
+        uid,
+        comment: review,
+      });
+
+      if (response.data?.success) {
+        toast.success(response.data.message || "Review submitted successfully");
+      } else {
+        throw new Error(response.data?.message || "Unexpected error");
+      }
+    } catch (error) {
+      console.error("Error submitting review:", error);
+      toast.error(
+        error.response?.data?.message ||
+          "Failed to submit review. Please try again."
+      );
+    } finally {
+      toast.dismiss(toastId);
+    }
+  };
+}
+
+export async function getReviews() {
+  try {
+    const response = await apiConnector("GET", GET_REVIEW_API);
+    return response;
+  } catch (error) {
+    console.error("Error in getReviews API:", error);
+    throw error;
+  }
 }

@@ -17,9 +17,9 @@ import { toast } from "react-hot-toast";
 import { resetChallenges } from "../slices/gameslices/challengeSlice";
 import { logout } from "../slices/authSlice";
 import img from "../asset/profile.jpg";
+import { reviewHandler } from "../services/authAPI";
 
 function Profile() {
-  const [showReview, setShowReview] = useState(false);
   const [review, setReview] = useState("");
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const { fullname, balance, email, uid } = useSelector((state) => state.auth);
@@ -31,14 +31,12 @@ function Profile() {
     dispatch(resetChallenges());
   };
 
-  const handleReviewSubmit = () => {
-    // Handle review submission logic here
-    if (review.trim()) {
-      toast.success("Review submitted successfully!");
-      setReview("");
-      setShowReview(false);
-    } else {
-      toast.error("Please write a review before submitting");
+  const handleReviewSubmit = async () => {
+    try {
+      dispatch(reviewHandler(fullname, uid, review));
+    } catch (error) {
+      console.error("Error submitting review:", error);
+      toast.error("Failed to submit review. Please try again.");
     }
   };
 
@@ -150,7 +148,7 @@ function Profile() {
         {/*Complain Section */}
         <ProfileSection
           title="Complain"
-          icon={<BiSupport  className="text-red-600 text-2xl" />}
+          icon={<BiSupport className="text-red-600 text-2xl" />}
         >
           <div className="space-y-4">
             {/* Review Section */}
@@ -171,55 +169,6 @@ function Profile() {
             </AnimatePresence>
           </div>
         </ProfileSection>
-        {/* Review Section */}
-        <ProfileSection
-          title="Review"
-          icon={<FaCommentAlt className="text-purple-600 text-xl" />}
-        >
-          <AnimatePresence>
-            {showReview ? (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                exit={{ opacity: 0, height: 0 }}
-                className="space-y-3"
-              >
-                <textarea
-                  value={review}
-                  onChange={(e) => setReview(e.target.value)}
-                  className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  placeholder="Share your experience..."
-                  rows="4"
-                />
-                <div className="flex justify-end gap-2">
-                  <button
-                    onClick={() => setShowReview(false)}
-                    className="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg"
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    onClick={() => {
-                      toast.success("Thank you for your feedback!");
-                      setShowReview(false);
-                    }}
-                    className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
-                  >
-                    Submit
-                  </button>
-                </div>
-              </motion.div>
-            ) : (
-              <button
-                onClick={() => setShowReview(true)}
-                className="text-blue-500 hover:text-blue-600"
-              >
-                Give Review
-              </button>
-            )}
-          </AnimatePresence>
-        </ProfileSection>
-
 
         {/* Delete Account Section */}
         <ProfileSection
@@ -267,6 +216,27 @@ function Profile() {
           </AnimatePresence>
         </ProfileSection>
       </motion.div>
+      <div className="p-6 bg-white/80 rounded">
+        <div className="flex gap-2 mb-2 font-bold items-center text-lg">
+          <FaCommentAlt className="text-purple-600" />
+          Review
+        </div>
+        <textarea
+          value={review}
+          onChange={(e) => setReview(e.target.value)}
+          className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          placeholder="Share your experience..."
+          rows="2"
+        />
+        <div className="flex justify-end gap-2">
+          <button
+            onClick={handleReviewSubmit}
+            className="px-4 py-2 mt-1 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+          >
+            Submit
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
