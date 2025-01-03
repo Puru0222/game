@@ -216,25 +216,32 @@ function Profile() {
           </AnimatePresence>
         </ProfileSection>
       </motion.div>
-      <div className="p-6 bg-white/80 rounded">
-        <div className="flex gap-2 mb-2 font-bold items-center text-lg">
-          <FaCommentAlt className="text-purple-600" />
-          Review
-        </div>
-        <textarea
-          value={review}
-          onChange={(e) => setReview(e.target.value)}
-          className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          placeholder="Share your experience..."
-          rows="2"
-        />
-        <div className="flex justify-end gap-2">
-          <button
-            onClick={handleReviewSubmit}
-            className="px-4 py-2 mt-1 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
-          >
-            Submit
-          </button>
+        <div className="flex h-fit  justify-center items-center">
+          <div className="p-6 w-full max-w-2xl bg-white/80 rounded shadow-lg">
+            <div className="flex gap-2 mb-2 font-bold items-center text-lg">
+              <FaCommentAlt className="text-purple-600" />
+              Review
+            </div>
+            <textarea
+              value={review}
+              onChange={(e) => {
+                const words = e.target.value.split(/\s+/);
+                if (words.length <= 30) {
+                  setReview(e.target.value);
+                }
+              }}
+              className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              placeholder="Share your experience... (max 30 words)"
+              rows="2"
+            />
+            <div className="flex justify-end gap-2">
+              <button
+                onClick={handleReviewSubmit}
+                className="px-4 py-2 mt-1 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+              >
+                Submit
+              </button>
+            </div>
         </div>
       </div>
     </div>
