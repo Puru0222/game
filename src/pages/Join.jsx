@@ -68,24 +68,14 @@ function Join() {
       </motion.div>
 
       {loading ? (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="flex justify-center items-center p-8"
-        >
+        <div className="flex justify-center items-center p-8">
           <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-        </motion.div>
+        </div>
       ) : challenges.length > 0 ? (
-        <motion.div
-          variants={container}
-          initial="hidden"
-          animate="show"
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {challenges.map((challenge) => (
-            <motion.div
-              key={challenge.uniqueSerialNumber}
-              variants={item}
+            <div
+              key={challenge.uniqueSerialNumber || challenge._id}
               className="bg-white/10 backdrop-blur-lg rounded-xl border border-blue-500/30 overflow-hidden hover:shadow-[0_0_15px_rgba(59,130,246,0.5)] transition-all duration-300"
             >
               <div className="p-2">
@@ -152,9 +142,9 @@ function Join() {
                   </motion.button>
                 )}
               </div>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       ) : (
         <motion.div
           initial={{ opacity: 0 }}
