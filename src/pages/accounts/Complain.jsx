@@ -6,7 +6,6 @@ import { FaPaperPlane, FaExclamationCircle } from "react-icons/fa";
 import toast from "react-hot-toast";
 import { apiConnector } from "../../services/apiConnector";
 import { updateDataEndpoint } from "../../services/apis";
-import img from "../../asset/add.jpg";
 
 const Complain = () => {
   const { uid } = useSelector((state) => state.auth);
@@ -29,15 +28,14 @@ const Complain = () => {
     const toastId = toast.loading("Submitting your complaint...");
 
     try {
-      const result = await apiConnector(
-        "POST",
-        updateDataEndpoint.SENT_COMP,
-        { note: data.note, uid }
-      );
+      const result = await apiConnector("POST", updateDataEndpoint.SENT_COMP, {
+        note: data.note,
+        uid,
+      });
 
       if (result.data?.success) {
         toast.success("Your complaint has been submitted successfully!", {
-          icon: '✅',
+          icon: "✅",
           duration: 4000,
         });
         reset();
@@ -47,7 +45,7 @@ const Complain = () => {
     } catch (error) {
       console.error("Error:", error);
       toast.error("Failed to submit complaint. Please try again.", {
-        icon: '❌',
+        icon: "❌",
         duration: 4000,
       });
     } finally {
@@ -87,7 +85,8 @@ const Complain = () => {
                     required: "Please describe your complaint",
                     minLength: {
                       value: 5,
-                      message: "Please provide more details (minimum 5 characters)",
+                      message:
+                        "Please provide more details (minimum 5 characters)",
                     },
                     maxLength: {
                       value: maxCharacters,
@@ -95,7 +94,7 @@ const Complain = () => {
                     },
                   })}
                   className={`w-full p-4 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300 min-h-[100px] ${
-                    errors.note ? 'border-red-500' : 'border-gray-300'
+                    errors.note ? "border-red-500" : "border-gray-300"
                   }`}
                   placeholder="Please provide detailed information about your complaint..."
                 />
@@ -120,7 +119,9 @@ const Complain = () => {
 
             {/* Guidelines */}
             <div className="bg-gray-50 p-4 rounded-lg text-sm text-gray-600">
-              <h3 className="font-semibold mb-2">Guidelines for submitting a complaint:</h3>
+              <h3 className="font-semibold mb-2">
+                Guidelines for submitting a complaint:
+              </h3>
               <ul className="list-disc list-inside space-y-1">
                 <li>Be specific about the issue you're facing</li>
                 <li>Include relevant details (dates, transaction IDs, etc.)</li>
@@ -137,8 +138,8 @@ const Complain = () => {
               whileTap={{ scale: 0.98 }}
               className={`w-full py-3 px-4 rounded-lg text-white font-medium flex items-center justify-center gap-2 ${
                 isSubmitting
-                  ? 'bg-gray-400 cursor-not-allowed'
-                  : 'bg-red-600 hover:bg-red-700'
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-red-600 hover:bg-red-700"
               }`}
             >
               {isSubmitting ? (
